@@ -1,9 +1,9 @@
 {
-  "name": "Next.JS Progressive Web App",
-  "short_name": "Next PWA",
+  "name": "TubeMusic - The application for listening music",
+  "short_name": "TubeMusic",
   "theme_color": "#ffffff",
   "background_color": "#004740",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",

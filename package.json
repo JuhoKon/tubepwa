@@ -1,16 +1,27 @@
 {
-  "name": "progressive-web-app",
+  "name": "tubepwa",
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@reduxjs/toolkit": "^1.5.1",
+    "axios": "^0.21.1",
     "next": "latest",
-    "next-pwa": "^3.1.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "next-pwa": "^5.2.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }

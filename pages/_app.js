@@ -1,7 +1,11 @@
-import Head from 'next/head'
-import '../styles/globals.css'
+import Head from "next/head";
+import { Provider } from "react-redux";
+import { useStore } from "../src/store/store";
+import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
+
   return (
     <>
       <Head>
@@ -13,7 +17,7 @@ export default function MyApp({ Component, pageProps }) {
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>Next.js PWA Example</title>
+        <title>TubeMusic</title>
 
         <link rel="manifest" href="/manifest.json" />
         <link
@@ -31,7 +35,9 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
-  )
+  );
 }
