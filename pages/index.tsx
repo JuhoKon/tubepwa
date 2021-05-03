@@ -5,8 +5,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { useDispatch } from "react-redux";
-import { startClock } from "../src/actions/actions";
+import ReactPlayer from "react-player";
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -21,21 +20,24 @@ export default function Home() {
   const [value, setValue] = React.useState(0);
 
   return (
-    <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-      showLabels
-      className={classes.stickToBottom}
-    >
-      <BottomNavigationAction
-        label="Home"
-        icon={<HomeIcon />}
-        onClick={() => {}}
-      />
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-      <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
-    </BottomNavigation>
+    <>
+      <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
+      <BottomNavigation
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        showLabels
+        className={classes.stickToBottom}
+      >
+        <BottomNavigationAction
+          label="Home"
+          icon={<HomeIcon />}
+          onClick={() => {}}
+        />
+        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
+        <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+      </BottomNavigation>
+    </>
   );
 }
