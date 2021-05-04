@@ -9,7 +9,10 @@ const initialState = {
   userPlaylists: [],
 };
 
-export const userReducer = (state = initialState, action: any): any => {
+export const userReducer = (
+  state = initialState,
+  action: any
+): typeof initialState => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
@@ -45,9 +48,9 @@ export const userReducer = (state = initialState, action: any): any => {
         loggingIn: false,
         loggedIn: true,
         error: "",
-        token: action.payload,
-        userId: action.payload.userId,
+        token: action.payload.data.token,
         userPlaylists: [],
+        user: action.payload.data.user,
       };
     case types.REGISTER_FAILURE:
       return {
@@ -57,7 +60,12 @@ export const userReducer = (state = initialState, action: any): any => {
       };
     case types.LOGOUT:
       return {
-        state,
+        loggingIn: false,
+        loggedIn: false,
+        token: "",
+        error: "",
+        user: {},
+        userPlaylists: [],
       };
 
     case types.GET_USER_INFO_REQUEST:

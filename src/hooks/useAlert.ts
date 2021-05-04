@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { HideAlert, ShowAlert } from "../actions/alertActions";
 import * as constants from "../lib/constants";
+import { RootState } from "../types/interfaces";
 /**
  *
  * @returns useAlert - hook.
@@ -13,7 +14,7 @@ function useAlert(): {
   setErrorAlert: (msg: string) => void;
   hideAlert: () => void;
 } {
-  const alerts = useSelector((state: any) => state.alerts);
+  const alerts = useSelector((state: RootState) => state.alerts);
 
   const dispatch = useDispatch();
 

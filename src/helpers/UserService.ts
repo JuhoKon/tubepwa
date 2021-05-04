@@ -106,6 +106,10 @@ class UserService {
           config
         );
         res(results);
+        this.localStorageService.setItem(
+          constants.USER_LOCAL_STORAGE_KEY,
+          results.data
+        );
       } catch (error) {
         if (error.response) {
           console.log(error.response);

@@ -6,7 +6,10 @@ const initialState = {
   severity: contants.SUCCESS_ALERT,
 };
 
-export const alertReducer = (state = initialState, action: any): any => {
+export const alertReducer = (
+  state = initialState,
+  action: any
+): typeof initialState => {
   switch (action.type) {
     case types.SHOW_ALERT:
       return {

@@ -6,6 +6,7 @@ import {
   Register,
 } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../types/interfaces";
 
 function useCurrentUser(): {
   user: any;
@@ -15,7 +16,7 @@ function useCurrentUser(): {
   register: (name: string, email: string, password: string) => Promise<void>;
   localStorageTest: () => Promise<void>;
 } {
-  const user = useSelector((state: any) => state.user);
+  const user = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
 
