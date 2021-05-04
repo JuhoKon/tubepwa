@@ -167,7 +167,7 @@ export default function Register(): React.ReactNode {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 {"Have an account? Sign In"}
               </Link>
             </Grid>
