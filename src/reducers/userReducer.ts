@@ -9,7 +9,7 @@ const initialState = {
   userPlaylists: [],
 };
 
-export const userReducer = (state = initialState, action: any) => {
+export const userReducer = (state = initialState, action: any): any => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
@@ -53,7 +53,7 @@ export const userReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loggingIn: false,
-        error: action.payload.error,
+        error: action.payload,
       };
     case types.LOGOUT:
       return {

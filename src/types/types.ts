@@ -1,8 +1,4 @@
 // REDUX ACTION TYPES
-export const TICK = "TICK";
-export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
-export const RESET = "RESET";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -17,3 +13,11 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const GET_USER_INFO_REQUEST = "USER_INFO_REQUEST";
 export const GET_USER_INFO_SUCCESS = "USER_INFO_SUCCESS";
 export const GET_USER_INFO_FAILURE = "USER_INFO_FAILURE";
+
+export const CHANGING_SCREEN = "CHANGING_SCREEN";
+
+export const SHOW_BOTTOM_BAR = "SHOW_BOTTOM_BAR";
+export const CLOSE_BOTTOM_BAR = "CLOSE_BOTTOM_BAR";
+
+export const SHOW_ALERT = "SHOW_ALERT";
+export const HIDE_ALERT = "HIDE_ALERT";

@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(): React.ReactNode {
-  const { user, login } = useCurrentUser();
+export default function Register(): React.ReactNode {
+  const { user, register } = useCurrentUser();
 
   const router = useRouter();
 
@@ -64,11 +64,18 @@ export default function SignIn(): React.ReactNode {
   const [loginObject, setLoginObject] = React.useState({
     email: "",
     password: "",
+    name: "",
   });
   const setEmail = (email: string) => {
     setLoginObject({
       ...loginObject,
       email: email,
+    });
+  };
+  const setName = (name: string) => {
+    setLoginObject({
+      ...loginObject,
+      name: name,
     });
   };
   const setPassword = (password: string) => {
@@ -86,9 +93,22 @@ export default function SignIn(): React.ReactNode {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Register
         </Typography>
         <form className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Your name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            value={loginObject.name}
+            onChange={(event) => setName(event.target.value)}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,7 +118,6 @@ export default function SignIn(): React.ReactNode {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             value={loginObject.email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -126,22 +145,30 @@ export default function SignIn(): React.ReactNode {
             color="primary"
             className={classes.submit}
             disabled={
-              !(loginObject.email.length > 0 && loginObject.password.length > 0)
+              !(
+                loginObject.email.length > 0 &&
+                loginObject.password.length > 0 &&
+                loginObject.name.length > 0
+              )
             }
             onClick={async (e) => {
               e.preventDefault();
-              await login(loginObject.email, loginObject.password);
+              await register(
+                loginObject.name,
+                loginObject.email,
+                loginObject.password
+              );
               if (user.loggedIn) {
                 router.push("/");
               }
             }}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="#" variant="body2">
+                {"Have an account? Sign In"}
               </Link>
             </Grid>
           </Grid>

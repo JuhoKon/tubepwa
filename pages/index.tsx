@@ -1,43 +1,35 @@
-import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import HomeIcon from "@material-ui/icons/Home";
-import SearchIcon from "@material-ui/icons/Search";
-import SettingsIcon from "@material-ui/icons/Settings";
+import React from "react";
+import { useRouter } from "next/router";
 import ReactPlayer from "react-player";
+import useCurrentUser from "../src/hooks/useCurrentUser";
 
-const useStyles = makeStyles({
-  stickToBottom: {
-    width: "100%",
-    position: "fixed",
-    bottom: 0,
-  },
-});
-
-export default function Home() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
+export default function Home(): React.ReactNode {
+  const { user, localStorageTest, logout } = useCurrentUser();
+  const router = useRouter();
+  React.useEffect(() => {
+    if (!user.loggedIn) {
+      router.push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.loggedIn]);
+  React.useEffect(() => {
+    localStorageTest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  if (!user.loggedIn) {
+    return null;
+  }
   return (
     <>
       <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
-      <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
+      {/*       <BottomNav /> */}
+      <button
+        onClick={() => {
+          logout();
         }}
-        showLabels
-        className={classes.stickToBottom}
       >
-        <BottomNavigationAction
-          label="Home"
-          icon={<HomeIcon />}
-          onClick={() => {}}
-        />
-        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-        <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
-      </BottomNavigation>
+        Logout
+      </button>
     </>
   );
 }

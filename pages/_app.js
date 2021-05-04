@@ -2,10 +2,24 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import { useStore } from "../src/store/store";
 import "../styles/globals.css";
+import BottomNav from "../src/components/BottomNav";
+import AlertComponent from "../src/components/Alert";
+import LoadingBackdrop from "../src/components/LoadingBackdrop";
+import React from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import theme from "../src/lib/theme";
 
 export default function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
 
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -35,8 +49,17 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
+
       <Provider store={store}>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+          <BottomNav />
+          <AlertComponent />
+          <LoadingBackdrop />
+          {/* PLAYER HERE TOO */}
+        </ThemeProvider>
       </Provider>
     </>
   );
