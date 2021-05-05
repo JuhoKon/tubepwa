@@ -19,6 +19,9 @@ class AudioService {
     // How will we manage playing next songs, and earlier songs?
     // Manage history in Redux maybe.
     // Can we call actions from here... Don't think we can.
+    // The whole setup for this (setting mediaSessionActionHandlers) should be done outside this service, somewhere in the reducer/actions for example
+    // So that we can register actions to the buttons...
+
     setMediaSessionActionHandlers(resume, pause, pause, pause, pause, pause);
   }
 
