@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { useStore } from "../src/store/store";
 import "../styles/globals.css";
 import BottomNav from "../src/components/BottomNav";
-import Player from "../src/components/AudioPlayer";
+import Player from "../src/components/audio/AudioPlayer";
 import AlertComponent from "../src/components/Alert";
 import LoadingBackdrop from "../src/components/LoadingBackdrop";
 import React from "react";
