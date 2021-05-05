@@ -3,15 +3,13 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import * as constants from "../lib/constants";
 import MediaSession from "../helpers/MediaSession";
-
-// import 'react-h5-audio-player/lib/styles.less' Use LESS
-// import 'react-h5-audio-player/src/styles.scss' Use SASS
+import useNavigation from "../hooks/useNavigation";
 
 const Player = () => {
   const [file, setFile] = React.useState("a");
+  const { nav } = useNavigation();
 
   React.useEffect(() => {
-    console.log("Mie oon navigaattori lömao: ", navigator);
     const getJutska = async () => {
       try {
         const config = {
@@ -37,6 +35,10 @@ const Player = () => {
     };
     getJutska();
   }, []);
+
+  if (!nav.showBottomNav) {
+    return null;
+  }
 
   return (
     <>

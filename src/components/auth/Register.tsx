@@ -12,8 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useRouter } from "next/router";
 import useCurrentUser from "../../hooks/useCurrentUser";
+import { useRouter } from "next/router";
 
 const Copyright = () => {
   return (
@@ -53,16 +53,9 @@ export default function Register({
 }: {
   swapToSignIn: () => void;
 }): JSX.Element {
-  const { user, register } = useCurrentUser();
-
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (user.loggedIn) {
-      router.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.loggedIn]);
+  const { user, register } = useCurrentUser();
 
   const classes = useStyles();
   const [loginObject, setLoginObject] = React.useState({
