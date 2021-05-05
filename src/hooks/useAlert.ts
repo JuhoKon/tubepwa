@@ -9,7 +9,7 @@ import { RootState } from "../types/interfaces";
  * Hook can be used to control the alerts, and get alerts current state.
  */
 function useAlert(): {
-  alerts: any;
+  alerts: RootState["alerts"];
   setSuccessAlert: (msg: string) => void;
   setErrorAlert: (msg: string) => void;
   hideAlert: () => void;

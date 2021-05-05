@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import { GenericObject } from "../types/interfaces";
 import * as types from "../types/types";
 /**

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../types/interfaces";
 
 function useCurrentUser(): {
-  user: any;
+  user: RootState["user"];
   login: (email: string, password: string) => Promise<void>;
   getUserInfo: (token: string) => void;
   logout: () => void;

@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import UserService from "../helpers/UserService";
 import * as types from "../types/types";
 import * as constants from "../lib/constants";
@@ -13,7 +12,7 @@ const userService = UserService.getInstance();
  *
  * Attempts to login, depending on the success dispatches more actions required to handle the situation. E.g. showing alerts.
  */
-export const Login = (email: string, password: string): any => {
+export const Login = (email: string, password: string): unknown => {
   return (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST });
     userService
@@ -45,7 +44,7 @@ export const Login = (email: string, password: string): any => {
  *
  * Attempts to logout the user. Dispatches more actions if successfull.
  */
-export const Logout = (): any => {
+export const Logout = (): unknown => {
   return (dispatch) => {
     userService.logout();
     dispatch({ type: types.LOGOUT });
@@ -58,7 +57,7 @@ export const Logout = (): any => {
  *
  * Gets user information from the BE with the token. Updates state with the acquired data.
  */
-export const GetUserInfo = (user_token: string): any => {
+export const GetUserInfo = (user_token: string): unknown => {
   return (dispatch) => {
     dispatch({ type: types.GET_USER_INFO_REQUEST });
     userService
@@ -83,7 +82,7 @@ export const Register = (
   name: string,
   email: string,
   password: string
-): any => {
+): unknown => {
   return (dispatch) => {
     dispatch({ type: types.REGISTER_REQUEST });
     userService
@@ -109,7 +108,7 @@ export const Register = (
  *
  * Fetches data from the localstorage, and attempts to update the Redux store. Confirms that the user has valid token.
  */
-export const GetDataFromLocalStorageToRedux = (): any => {
+export const GetDataFromLocalStorageToRedux = (): unknown => {
   return (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST });
     userService
