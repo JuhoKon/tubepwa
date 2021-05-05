@@ -25,7 +25,7 @@ const checkUser = async (
   if (user.loggedIn) {
     trulyLoggedIn = true;
   }
-  await delay(500);
+  await delay(1000);
 
   if (!user.loggedIn) {
     console.log("reference not logged in");

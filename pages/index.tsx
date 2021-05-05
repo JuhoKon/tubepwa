@@ -12,24 +12,34 @@ export default function Home(): React.ReactNode {
   const router = useRouter();
 
   const prevStatusRef = React.useRef(false);
+
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
-    if (!user.loggedIn) {
-      getUserFromLocalStorage();
+    if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
+      if (!user.loggedIn) {
+        getUserFromLocalStorage();
+      }
+    } else {
+      // User has no token nor had a one
+      router.push("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // USER.LOGGEDIN STATUS CHANGES TRIGGERS THIS
   React.useEffect(() => {
-    if (prevStatusRef.current === true && user.loggedIn === false) {
+    // Please clean
+    if (!window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       router.push("/login");
     } else {
-      const errorCB = () => setErrorAlert(constants.PLEASE_LOGIN_MSG);
-      prevStatusRef.current = user.loggedIn;
-      checkUser(user, router, errorCB);
+      if (prevStatusRef.current === true && user.loggedIn === false) {
+        router.push("/login");
+      } else {
+        const errorCB = () => setErrorAlert(constants.PLEASE_LOGIN_MSG);
+        prevStatusRef.current = user.loggedIn;
+        checkUser(user, router, errorCB);
+      }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.loggedIn]);
 
