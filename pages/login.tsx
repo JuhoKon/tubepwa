@@ -17,7 +17,7 @@ export default function Login(): React.ReactNode {
       router.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user.loggedIn]);
 
   const [screenState, setScreenState] = React.useState(0);
 
