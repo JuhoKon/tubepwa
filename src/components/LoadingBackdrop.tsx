@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
 export default function LoadingBackDrop({
   useRedux = true,
   show = false,
+}: {
+  useRedux: boolean;
+  show: boolean;
 }): JSX.Element {
   const { user } = useCurrentUser();
   const classes = useStyles();

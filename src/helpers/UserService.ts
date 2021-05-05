@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as constants from "../lib/constants";
-import { GenericObject } from "../types/interfaces";
+import { Config, GenericObject, User } from "../types/interfaces";
 import LocalStorageService from "./LocalStorageService";
 import delay from "./Sleep";
 import jwt from "jsonwebtoken";
@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
 class UserService {
   private static instance: UserService;
   private localStorageService: LocalStorageService;
-  private user: any;
+  private user: User;
   constructor() {
     const localStorageService = LocalStorageService.getInstance();
     this.localStorageService = localStorageService;
@@ -34,13 +34,12 @@ class UserService {
   public async login(email: string, password: string): Promise<GenericObject> {
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
-      const headers = await this.tokenConfig();
       const body = JSON.stringify({ email, password });
       try {
         const results = await axios.post(
           constants.BACKEND_URL + "/auth",
           body,
-          headers
+          this.tokenConfig()
         );
         res(results);
         this.localStorageService.setItem(
@@ -99,11 +98,10 @@ class UserService {
         password,
       });
       try {
-        const headers = await this.tokenConfig();
         const results = await axios.post(
           constants.BACKEND_URL + "/users/create",
           body,
-          headers
+          this.tokenConfig()
         );
         res(results);
         this.localStorageService.setItem(
@@ -139,10 +137,9 @@ class UserService {
   public async getCurrentUsersPlaylists(): Promise<GenericObject> {
     return new Promise(async (res, rej) => {
       try {
-        const headers = await this.tokenConfig();
         const results = await axios.get(
           constants.BACKEND_URL + "/auth/user",
-          headers
+          this.tokenConfig()
         );
         res(results.data.playlists);
       } catch (error) {
@@ -151,6 +148,10 @@ class UserService {
     });
   }
 
+  /**
+   *
+   * @returns Header object containing auth header, if it exists
+   */
   public tokenConfig(): Config {
     const config = {
       headers: {
@@ -159,12 +160,13 @@ class UserService {
     };
 
     const currentUser = this.user;
-    if (!currentUser) {
+    if (!currentUser && !currentUser.token) {
       return config;
     }
     config.headers["x-auth-token"] = currentUser.token;
     return config;
   }
+
   /**
    *
    * @returns A promise with the user, throws error if we did not succeed
@@ -174,9 +176,9 @@ class UserService {
   public async getCurrentUserFromLocalStorage(): Promise<any> {
     return new Promise(async (res, rej) => {
       try {
-        let user = await this.localStorageService.retrieveItem(
+        let user: User = (await this.localStorageService.retrieveItem(
           constants.USER_LOCAL_STORAGE_KEY
-        );
+        )) as User;
         const decoded: any = jwt.decode(user.token);
         if (!decoded) {
           rej(constants.INVALID_TOKEN_ERROR);
@@ -192,6 +194,7 @@ class UserService {
           user = await this.renewUsertoken(user.token);
         }
         this.user = user;
+        console.log(this.user);
         res(user);
       } catch (error) {
         rej(error);
@@ -205,7 +208,7 @@ class UserService {
    *
    * This function can be used to renew the userToken.
    */
-  public async renewUsertoken(userToken = this.user.token): Promise<any> {
+  public async renewUsertoken(userToken = this.user.token): Promise<User> {
     return new Promise(async (res, rej) => {
       try {
         const config = {
@@ -229,10 +232,5 @@ class UserService {
     });
   }
 }
-type Config = {
-  headers: {
-    "Content-Type": string;
-    "x-auth-token"?: string | undefined;
-  };
-};
+
 export default UserService;

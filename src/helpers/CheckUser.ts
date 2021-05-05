@@ -17,7 +17,7 @@ let trulyLoggedIn = false;
 const checkUser = async (
   user: { loggedIn: boolean },
   router: NextRouter,
-  errorCB: any
+  errorCB: () => void
 ): Promise<void> => {
   if (!user.loggedIn) {
     trulyLoggedIn = false;

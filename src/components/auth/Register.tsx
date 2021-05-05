@@ -48,7 +48,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register({ swapToSignIn }): JSX.Element {
+export default function Register({
+  swapToSignIn,
+}: {
+  swapToSignIn: () => void;
+}): JSX.Element {
   const { user, register } = useCurrentUser();
 
   const router = useRouter();

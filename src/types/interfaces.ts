@@ -23,3 +23,18 @@ export interface AlertState {
   alertText: string;
   severity: Color;
 }
+export type Config = {
+  headers: {
+    "Content-Type": string;
+    "x-auth-token"?: string | undefined;
+  };
+};
+export type User = {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+    _id: string;
+  };
+};

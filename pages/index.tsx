@@ -40,7 +40,6 @@ export default function Home(): React.ReactNode {
   return (
     <>
       <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
-      {/*       <BottomNav /> */}
       <button
         onClick={() => {
           logout();
