@@ -2,13 +2,16 @@ import React from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import * as constants from "../lib/constants";
+import MediaSession from "../helpers/MediaSession";
+
 // import 'react-h5-audio-player/lib/styles.less' Use LESS
 // import 'react-h5-audio-player/src/styles.scss' Use SASS
 
 const Player = () => {
-  const [file, setFile] = React.useState("");
+  const [file, setFile] = React.useState("a");
 
   React.useEffect(() => {
+    console.log("Mie oon navigaattori lömao: ", navigator);
     const getJutska = async () => {
       try {
         const config = {
@@ -28,11 +31,13 @@ const Player = () => {
         console.log(blob);
         if (blob) {
           setFile(URL.createObjectURL(blob));
+          MediaSession();
         }
       } catch (error) {}
     };
     getJutska();
   }, []);
+
   return (
     <>
       {file ? (

@@ -29,7 +29,6 @@ export default function AlertComponent(): React.ReactNode {
   if (!alerts.showAlert) {
     return null;
   }
-
   return (
     <div className={classes.root}>
       <Snackbar
