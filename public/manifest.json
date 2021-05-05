@@ -2,7 +2,7 @@
   "name": "TubeMusic - The application for listening music",
   "short_name": "TubeMusic",
   "theme_color": "#ffffff",
-  "background_color": "#004740",
+  "background_color": "#333339",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
