@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import useAlert from "../hooks/useAlert";
 import Snackbar from "@material-ui/core/Snackbar";
-
+import * as constants from "../lib/constants";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -35,7 +35,7 @@ export default function AlertComponent(): React.ReactNode {
       <Snackbar
         className={classes.alert}
         open={alerts.showAlert}
-        autoHideDuration={2000}
+        autoHideDuration={constants.ALERT_DURATION_MS}
         onClose={() => {
           hideAlert();
         }}

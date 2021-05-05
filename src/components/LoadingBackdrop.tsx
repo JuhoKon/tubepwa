@@ -12,17 +12,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 /**
  *
- * @returns Loading-backdrop element. Controlling through Redux. This is for user logging in.
+ * @returns Loading-backdrop element. Controlling through Redux or manually. This is for user logging in.
  */
-export default function SimpleBackdrop(): React.ReactNode {
+export default function LoadingBackDrop({
+  useRedux = true,
+  show = false,
+}): JSX.Element {
   const { user } = useCurrentUser();
   const classes = useStyles();
-
-  return (
-    <div>
-      <Backdrop className={classes.backdrop} open={user.loggingIn}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </div>
-  );
+  if (useRedux) {
+    return (
+      <div>
+        <Backdrop className={classes.backdrop} open={user.loggingIn}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Backdrop className={classes.backdrop} open={show}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </div>
+    );
+  }
 }

@@ -12,8 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import useCurrentUser from "../src/hooks/useCurrentUser";
 import { useRouter } from "next/router";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
 const Copyright = () => {
   return (
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Register(): React.ReactNode {
+export default function Register({ swapToSignIn }): JSX.Element {
   const { user, register } = useCurrentUser();
 
   const router = useRouter();
@@ -167,7 +167,12 @@ export default function Register(): React.ReactNode {
           </Button>
           <Grid container>
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link
+                variant="body2"
+                onClick={() => {
+                  swapToSignIn();
+                }}
+              >
                 {"Have an account? Sign In"}
               </Link>
             </Grid>

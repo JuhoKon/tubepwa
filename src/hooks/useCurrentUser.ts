@@ -11,10 +11,10 @@ import { RootState } from "../types/interfaces";
 function useCurrentUser(): {
   user: RootState["user"];
   login: (email: string, password: string) => Promise<void>;
-  getUserInfo: (token: string) => void;
+  getUserInfo: () => void;
   logout: () => void;
   register: (name: string, email: string, password: string) => Promise<void>;
-  localStorageTest: () => Promise<void>;
+  getUserFromLocalStorage: () => Promise<void>;
 } {
   const user = useSelector((state: RootState) => state.user);
 
@@ -23,8 +23,8 @@ function useCurrentUser(): {
   const login = async (email: string, password: string): Promise<void> => {
     dispatch(Login(email, password));
   };
-  const getUserInfo = (token: string): void => {
-    dispatch(GetUserInfo(token));
+  const getUserInfo = (): void => {
+    dispatch(GetUserInfo());
   };
   const logout = (): void => {
     dispatch(Logout());
@@ -36,10 +36,17 @@ function useCurrentUser(): {
   ): Promise<void> => {
     dispatch(Register(name, email, password));
   };
-  const localStorageTest = async () => {
+  const getUserFromLocalStorage = async () => {
     dispatch(GetDataFromLocalStorageToRedux());
   };
-  return { user, login, getUserInfo, logout, register, localStorageTest };
+  return {
+    user,
+    login,
+    getUserInfo,
+    logout,
+    register,
+    getUserFromLocalStorage,
+  };
 }
 
 export default useCurrentUser;

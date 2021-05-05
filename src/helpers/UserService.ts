@@ -3,18 +3,14 @@ import * as constants from "../lib/constants";
 import { GenericObject } from "../types/interfaces";
 import LocalStorageService from "./LocalStorageService";
 import delay from "./Sleep";
-
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
+import jwt from "jsonwebtoken";
 /**
  * UserService. Includes methods for acting with the BE and user operations.
  */
 class UserService {
   private static instance: UserService;
   private localStorageService: LocalStorageService;
+  private user: any;
   constructor() {
     const localStorageService = LocalStorageService.getInstance();
     this.localStorageService = localStorageService;
@@ -38,12 +34,13 @@ class UserService {
   public async login(email: string, password: string): Promise<GenericObject> {
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
+      const headers = await this.tokenConfig();
       const body = JSON.stringify({ email, password });
       try {
         const results = await axios.post(
           constants.BACKEND_URL + "/auth",
           body,
-          config
+          headers
         );
         res(results);
         this.localStorageService.setItem(
@@ -63,7 +60,9 @@ class UserService {
    * Used for getting the user's data from localstorage.
    * TODO: should also check if the token from the data is valid.
    */
-  public async checkLocalStorage(name: string): Promise<GenericObject> {
+  public async retrieveItemFromLocalStorage(
+    name: string
+  ): Promise<GenericObject> {
     try {
       const item = await this.localStorageService.retrieveItem(name);
       return item;
@@ -100,10 +99,11 @@ class UserService {
         password,
       });
       try {
+        const headers = await this.tokenConfig();
         const results = await axios.post(
           constants.BACKEND_URL + "/users/create",
           body,
-          config
+          headers
         );
         res(results);
         this.localStorageService.setItem(
@@ -132,17 +132,17 @@ class UserService {
   }
   /**
    *
-   * @param token User's auth token
    * @returns Inside a promise, the user's playlists.
    *
    * Attempts to get user's playlists.
    */
-  public async getUserPlaylists(token: string): Promise<GenericObject> {
+  public async getCurrentUsersPlaylists(): Promise<GenericObject> {
     return new Promise(async (res, rej) => {
       try {
+        const headers = await this.tokenConfig();
         const results = await axios.get(
           constants.BACKEND_URL + "/auth/user",
-          tokenConfig(token)
+          headers
         );
         res(results.data.playlists);
       } catch (error) {
@@ -150,16 +150,89 @@ class UserService {
       }
     });
   }
+
+  public tokenConfig(): Config {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const currentUser = this.user;
+    if (!currentUser) {
+      return config;
+    }
+    config.headers["x-auth-token"] = currentUser.token;
+    return config;
+  }
+  /**
+   *
+   * @returns A promise with the user, throws error if we did not succeed
+   *
+   * Checks for users in the localstorage, if found, checks if the token is OK and still valid.
+   */
+  public async getCurrentUserFromLocalStorage(): Promise<any> {
+    return new Promise(async (res, rej) => {
+      try {
+        let user = await this.localStorageService.retrieveItem(
+          constants.USER_LOCAL_STORAGE_KEY
+        );
+        const decoded: any = jwt.decode(user.token);
+        if (!decoded) {
+          rej(constants.INVALID_TOKEN_ERROR);
+        }
+        const currentDate = new Date().getTime() / 1000;
+        const diff = Math.floor(currentDate) - decoded.exp;
+        if (diff > -10) {
+          // Token will expire in 10 seconds, or has already expired
+          rej(constants.PLEASE_LOGIN_MSG);
+        }
+        if (diff > -(60 * 65 * 1) + 30 && diff < -10) {
+          //if token will expire in 1 hr 5mins 30 seconds && will not expire in 10seconds
+          user = await this.renewUsertoken(user.token);
+        }
+        this.user = user;
+        res(user);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  }
+  /**
+   *
+   * @param userToken User's token. If none is supplied, will try to get one from userInstance
+   * @returns A promise with new user information if succeeded, throws error if not.
+   *
+   * This function can be used to renew the userToken.
+   */
+  public async renewUsertoken(userToken = this.user.token): Promise<any> {
+    return new Promise(async (res, rej) => {
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        config.headers["x-auth-token"] = userToken;
+
+        const result = await axios.get(
+          constants.BACKEND_URL + "/auth/renew",
+          config
+        );
+        console.log(this.user);
+        this.user = result.data;
+        console.log(this.user);
+        res(result.data);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  }
 }
-
-const tokenConfig = (token: string) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
+type Config = {
+  headers: {
+    "Content-Type": string;
+    "x-auth-token"?: string | undefined;
   };
-  config.headers["x-auth-token"] = token;
-  return config;
 };
-
 export default UserService;

@@ -2,22 +2,40 @@ import React from "react";
 import { useRouter } from "next/router";
 import ReactPlayer from "react-player";
 import useCurrentUser from "../src/hooks/useCurrentUser";
+import checkUser from "../src/helpers/CheckUser";
+import LoadingBackDrop from "../src/components/LoadingBackdrop";
+import useAlert from "../src/hooks/useAlert";
+import * as constants from "../src/lib/constants";
 
 export default function Home(): React.ReactNode {
-  const { user, localStorageTest, logout } = useCurrentUser();
+  const { user, getUserFromLocalStorage, logout } = useCurrentUser();
+  const { setErrorAlert } = useAlert();
   const router = useRouter();
+
+  const prevStatusRef = React.useRef(false);
+  // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
     if (!user.loggedIn) {
-      router.push("/login");
+      getUserFromLocalStorage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.loggedIn]);
-  React.useEffect(() => {
-    localStorageTest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // USER.LOGGEDIN STATUS CHANGES TRIGGERS THIS
+  React.useEffect(() => {
+    if (prevStatusRef.current === true && user.loggedIn === false) {
+      router.push("/login");
+    } else {
+      const errorCB = () => setErrorAlert(constants.PLEASE_LOGIN_MSG);
+      prevStatusRef.current = user.loggedIn;
+      checkUser(user, router, errorCB);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.loggedIn]);
+
   if (!user.loggedIn) {
-    return null;
+    return <LoadingBackDrop useRedux={false} show={true} />;
   }
   return (
     <>

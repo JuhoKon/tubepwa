@@ -53,16 +53,16 @@ export const Logout = (): unknown => {
 };
 /**
  *
- * @param user_token User's auth token.
  *
  * Gets user information from the BE with the token. Updates state with the acquired data.
  */
-export const GetUserInfo = (user_token: string): unknown => {
+export const GetUserInfo = (): unknown => {
   return (dispatch) => {
     dispatch({ type: types.GET_USER_INFO_REQUEST });
     userService
-      .getUserPlaylists(user_token)
+      .getCurrentUsersPlaylists()
       .then((playlists) => {
+        console.log(playlists);
         dispatch({ type: types.GET_USER_INFO_SUCCESS, payload: { playlists } });
       })
       .catch((e) => {
@@ -112,14 +112,15 @@ export const GetDataFromLocalStorageToRedux = (): unknown => {
   return (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST });
     userService
-      .checkLocalStorage(constants.USER_LOCAL_STORAGE_KEY)
+      .getCurrentUserFromLocalStorage()
       .then((user) => {
         if (!user) {
-          dispatch({
+          return dispatch({
             type: types.LOGIN_FAILURE,
             payload: constants.NO_TOKEN_ERROR,
           });
         }
+        // We have user
         // Make sure that token is OK?
         // TODO!!
         dispatch({
