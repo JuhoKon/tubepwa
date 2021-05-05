@@ -1,7 +1,8 @@
-import withPWA from "next-pwa";
-import runtimeCaching from "next-pwa/cache";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withPWA = require("next-pwa");
+const runtimeCaching = require("next-pwa/cache");
 
-export default withPWA({
+module.exports = withPWA({
   pwa: {
     dest: "public",
     runtimeCaching,
