@@ -1,3 +1,5 @@
+import { Color } from "@material-ui/lab/Alert";
+
 export type GenericObject = { [key: string]: any };
 export interface RootState {
   user: UserState;
@@ -19,5 +21,5 @@ export interface NavState {
 export interface AlertState {
   showAlert: false;
   alertText: string;
-  severity: string;
+  severity: Color;
 }

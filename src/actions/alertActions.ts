@@ -1,3 +1,4 @@
+import { Color } from "@material-ui/lab/Alert";
 import { GenericObject } from "../types/interfaces";
 import * as types from "../types/types";
 /**
@@ -6,7 +7,7 @@ import * as types from "../types/types";
  * @param alertText To be showed text
  */
 export const ShowAlert = (
-  severity: string,
+  severity: Color,
   alertText: string
 ): GenericObject => {
   return { type: types.SHOW_ALERT, payload: { severity, alertText } };
