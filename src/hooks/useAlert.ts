@@ -19,13 +19,13 @@ function useAlert(): {
   const dispatch = useDispatch();
 
   const setSuccessAlert = (msg: string) => {
-    ShowAlert(dispatch, constants.SUCCESS_ALERT, msg);
+    dispatch(ShowAlert(constants.SUCCESS_ALERT, msg));
   };
   const setErrorAlert = (msg: string) => {
-    ShowAlert(dispatch, constants.ERROR_ALERT, msg);
+    dispatch(ShowAlert(constants.ERROR_ALERT, msg));
   };
   const hideAlert = () => {
-    HideAlert(dispatch);
+    dispatch(HideAlert());
   };
   return { alerts, setSuccessAlert, setErrorAlert, hideAlert };
 }

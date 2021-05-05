@@ -21,23 +21,23 @@ function useCurrentUser(): {
   const dispatch = useDispatch();
 
   const login = async (email: string, password: string): Promise<void> => {
-    await Login(dispatch, email, password);
+    dispatch(Login(email, password));
   };
   const getUserInfo = (token: string): void => {
-    GetUserInfo(dispatch, token);
+    dispatch(GetUserInfo(token));
   };
   const logout = (): void => {
-    Logout(dispatch);
+    dispatch(Logout());
   };
   const register = async (
     name: string,
     email: string,
     password: string
   ): Promise<void> => {
-    await Register(dispatch, name, email, password);
+    dispatch(Register(name, email, password));
   };
   const localStorageTest = async () => {
-    GetDataFromLocalStorageToRedux(dispatch);
+    dispatch(GetDataFromLocalStorageToRedux());
   };
   return { user, login, getUserInfo, logout, register, localStorageTest };
 }

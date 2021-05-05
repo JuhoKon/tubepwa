@@ -1,18 +1,17 @@
 import { Dispatch } from "redux";
+import { GenericObject } from "../types/interfaces";
 import * as types from "../types/types";
 /**
  *
- * @param dispatch Dispatch-function from Redux store
  * @param severity From Material UI alert: severity can be error, warning, info, or success
  * @param alertText To be showed text
  */
-export const ShowAlert = async (
-  dispatch: Dispatch<any>,
+export const ShowAlert = (
   severity: string,
   alertText: string
-): Promise<void> => {
-  dispatch({ type: types.SHOW_ALERT, payload: { severity, alertText } });
+): GenericObject => {
+  return { type: types.SHOW_ALERT, payload: { severity, alertText } };
 };
-export const HideAlert = async (dispatch: Dispatch<any>): Promise<void> => {
-  dispatch({ type: types.HIDE_ALERT });
+export const HideAlert = (): GenericObject => {
+  return { type: types.HIDE_ALERT };
 };

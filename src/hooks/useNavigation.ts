@@ -11,7 +11,7 @@ function useNavigation(): {
   const dispatch = useDispatch();
 
   const setScreen = (screen: number) => {
-    SwapToScreen(dispatch, screen);
+    dispatch(SwapToScreen(screen));
   };
   return { nav, setScreen };
 }
