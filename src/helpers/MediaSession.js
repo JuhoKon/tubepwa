@@ -1,40 +1,45 @@
-const abc = () => {
+export const setMetaData = (title, artist, album, thumbnailURL) => {
   if ("mediaSession" in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
-      title: "Unforgettable",
-      artist: "Nat King Cole",
-      album: "The Ultimate Collection (Remastered)",
+      title: title,
+      artist: artist,
+      album: album,
       artwork: [
         {
-          src:
-            "https://i.gyazo.com/thumb/1200/018d388bde5ddee44aea7422f383d0eb-png.jpg",
+          src: thumbnailURL,
           sizes: "",
           type: "image/png",
         },
       ],
     });
-
+  }
+};
+export const setMediaSessionActionHandlers = (
+  playCB,
+  pauseCB,
+  stopCB,
+  seekToCB,
+  previousTrackCB,
+  nextTrackCB
+) => {
+  if ("mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("play", function () {
-      console.log("PAINOIT PLAYTÄ :D");
+      playCB();
     });
     navigator.mediaSession.setActionHandler("pause", function () {
-      console.log("PAINOIT JOTAKII");
+      pauseCB();
     });
     navigator.mediaSession.setActionHandler("stop", function () {
-      console.log("PAINOIT JOTAKII");
+      stopCB();
     });
     navigator.mediaSession.setActionHandler("seekto", function () {
-      console.log("PAINOIT JOTAKII");
+      seekToCB();
     });
     navigator.mediaSession.setActionHandler("previoustrack", function () {
-      console.log("PAINOIT JOTAKII");
+      previousTrackCB();
     });
     navigator.mediaSession.setActionHandler("nexttrack", function () {
-      console.log("PAINOIT SEURAAVAA :D");
-    });
-    navigator.mediaSession.setActionHandler("skipad", function () {
-      console.log("PAINOIT JOTAKII");
+      nextTrackCB();
     });
   }
 };
-export default abc;

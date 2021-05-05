@@ -1,10 +1,10 @@
-import axios from "axios";
 import * as constants from "../lib/constants";
-import { Config, GenericObject, User } from "../types/interfaces";
-import LocalStorageService from "./LocalStorageService";
-import delay from "./Sleep";
 import UserService from "./UserService";
+import { setMetaData, setMediaSessionActionHandlers } from "./MediaSession";
 
+/**
+ * AudioService. Handles playing audio on the application. Provides methods for controlling the audio.
+ */
 class AudioService {
   private static instance: AudioService;
   private UserService: UserService;
@@ -12,9 +12,14 @@ class AudioService {
   constructor() {
     const audioElement = new Audio();
     const userService = new UserService();
-
     this.audioElement = audioElement;
     this.UserService = userService;
+    const resume = () => this.resumePlaying();
+    const pause = () => this.pauseSong();
+    // How will we manage playing next songs, and earlier songs?
+    // Manage history in Redux maybe.
+    // Can we call actions from here... Don't think we can.
+    setMediaSessionActionHandlers(resume, pause, pause, pause, pause, pause);
   }
 
   public static getInstance(): AudioService {
@@ -23,36 +28,30 @@ class AudioService {
     }
     return AudioService.instance;
   }
-  public getAudioDataStream(videoId: string) {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "x-auth-token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNGMzOWQ3NmE0N2FiNmViNGY2OTRjNSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYyMDIzNzAzOCwiZXhwIjoxNjIwMjQ0MjM4fQ._ScDV87T79czkQ_m7kgMYP9ppNKyUIRwPWtPO_XDLl8"
+  // We probably want a complete song to be thrown here
+  // with metadata etc. so we can do something with them
+  // logic like this: User wants to play something -> dispatch -> songService -> reducer -> all happy
+  public playSong(videoId: string): void {
+    this.audioElement.src = constants.STREAM_URL + `/stream/${videoId}`;
+    this.audioElement.play();
+    setMetaData(
+      "Title",
+      "Artisti X",
+      "Albumi Y",
+      "https://i.gyazo.com/thumb/1200/018d388bde5ddee44aea7422f383d0eb-png.jpg"
     );
-    const myInit: RequestInit = {
-      method: "GET",
-      headers: myHeaders,
-      mode: "cors",
-    };
-    const myRequest = new Request(
-      constants.STREAM_URL + "/stream/YlKkX38NgGo",
-      myInit
-    );
-
-    fetch(myRequest)
-      .then(function (response) {
-        return response.arrayBuffer();
-      })
-      .then(function (buffer) {
-        return buffer;
-        /* console.log("buffer", buffer);
-        audioCtx.decodeAudioData(buffer, function (decodedData) {
-          source.buffer = decodedData;
-          source.connect(audioCtx.destination);
-          source.start(0);
-        }); */
-      });
+  }
+  /**
+   * Pauses current song.
+   */
+  public pauseSong(): void {
+    this.audioElement.pause();
+  }
+  /**
+   * Resumes playing the current song.
+   */
+  public resumePlaying(): void {
+    this.audioElement.play();
   }
 }
 
