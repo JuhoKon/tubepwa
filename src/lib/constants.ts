@@ -1,4 +1,5 @@
 export const BACKEND_URL = "https://tubemusicbackend.herokuapp.com";
+export const STREAM_URL = "https://tubestream.herokuapp.com";
 export const SUCCESS_ALERT = "success";
 export const ERROR_ALERT = "error";
 export const LOGIN_ERROR_TEXT = "Please check your username and password!";

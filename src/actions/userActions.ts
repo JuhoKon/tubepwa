@@ -13,8 +13,10 @@ const userService = UserService.getInstance();
  * Attempts to login, depending on the success dispatches more actions required to handle the situation. E.g. showing alerts.
  */
 export const Login = (email: string, password: string): unknown => {
+  console.log("Hey?");
   return (dispatch) => {
     dispatch({ type: types.LOGIN_REQUEST });
+    console.log("hey2");
     userService
       .login(email, password)
       .then((user) => {

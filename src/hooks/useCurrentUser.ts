@@ -21,6 +21,7 @@ function useCurrentUser(): {
   const dispatch = useDispatch();
 
   const login = async (email: string, password: string): Promise<void> => {
+    console.log("LOGIN");
     dispatch(Login(email, password));
   };
   const getUserInfo = (): void => {

@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import ReactPlayer from "react-player";
 import useCurrentUser from "../src/hooks/useCurrentUser";
 import checkUser from "../src/helpers/CheckUser";
 import LoadingBackDrop from "../src/components/LoadingBackdrop";
@@ -39,7 +38,6 @@ export default function Home(): React.ReactNode {
   }
   return (
     <>
-      <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
       <button
         onClick={() => {
           logout();

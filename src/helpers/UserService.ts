@@ -32,6 +32,7 @@ class UserService {
    * Attempts to login the user. Also updates the localstorage, if successful.
    */
   public async login(email: string, password: string): Promise<GenericObject> {
+    console.log("HEYLO");
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
       const body = JSON.stringify({ email, password });
@@ -41,6 +42,7 @@ class UserService {
           body,
           this.tokenConfig()
         );
+
         res(results);
         this.localStorageService.setItem(
           constants.USER_LOCAL_STORAGE_KEY,
@@ -160,7 +162,7 @@ class UserService {
     };
 
     const currentUser = this.user;
-    if (!currentUser && !currentUser.token) {
+    if (!currentUser?.token) {
       return config;
     }
     config.headers["x-auth-token"] = currentUser.token;
@@ -222,9 +224,9 @@ class UserService {
           constants.BACKEND_URL + "/auth/renew",
           config
         );
-        console.log(this.user);
+
         this.user = result.data;
-        console.log(this.user);
+
         res(result.data);
       } catch (error) {
         rej(error);
