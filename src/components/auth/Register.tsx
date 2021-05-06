@@ -102,7 +102,6 @@ export default function Register({
             label="Your name"
             name="name"
             autoComplete="name"
-            autoFocus
             value={loginObject.name}
             onChange={(event) => setName(event.target.value)}
           />

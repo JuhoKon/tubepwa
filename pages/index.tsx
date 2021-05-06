@@ -17,10 +17,10 @@ export default function Home(): React.ReactNode {
   React.useEffect(() => {
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       if (!user.loggedIn) {
+        // User has token && doesn't have active session
         getUserFromLocalStorage();
       }
     } else {
-      // User has no token nor had a one
       router.push("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

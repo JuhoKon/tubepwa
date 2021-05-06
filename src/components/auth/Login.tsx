@@ -96,7 +96,6 @@ export default function SignIn({
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
             value={loginObject.email}
             onChange={(event) => setEmail(event.target.value)}
           />
