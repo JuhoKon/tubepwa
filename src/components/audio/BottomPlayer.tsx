@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    padding: "10px",
   },
   imgBox: {
     width: "56px",
