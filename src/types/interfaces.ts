@@ -26,9 +26,8 @@ export interface AlertState {
 }
 
 export interface PlayerState {
-  currentSong: any;
+  currentSong: Song;
   isPlaying: boolean;
-  currentTime: any;
 }
 
 export type Config = {

@@ -40,13 +40,13 @@ export default function Login(): React.ReactNode {
   };
 
   return (
-    <React.Fragment>
+    <div style={{ backgroundColor: "white" }}>
       <LoadingBackDrop useRedux={false} show={initialRender} />
       {screenState ? (
         <Register swapToSignIn={swapToSignIn} />
       ) : (
         <SignIn swapToRegister={swapToRegister} />
       )}
-    </React.Fragment>
+    </div>
   );
 }

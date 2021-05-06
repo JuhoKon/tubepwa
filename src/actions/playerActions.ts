@@ -1,4 +1,5 @@
 import AudioService from "../helpers/AudioService";
+import delay from "../helpers/Sleep";
 import { Song } from "../types/interfaces";
 import * as types from "../types/types";
 const audioService = AudioService.getInstance();
@@ -17,7 +18,16 @@ export const PlaySong = (song: Song): unknown => {
  */
 export const ResumePlaying = (): unknown => {
   audioService.resumePlaying();
-  return { type: types.RESUME_PLAY };
+  return (dispatch) => {
+    dispatch({ type: types.RESUME_PLAY });
+    delay(100).then(() => {
+      const isPaused = audioService.isPaused();
+      console.log(isPaused);
+      if (isPaused) {
+        dispatch({ type: types.PAUSE_SONG });
+      }
+    });
+  };
 };
 /**
  * Uses AudioService to pause a song.

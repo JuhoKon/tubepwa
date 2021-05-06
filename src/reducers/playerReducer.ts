@@ -1,12 +1,10 @@
 import * as types from "../types/types";
-import * as contants from "../lib/constants";
 const initialState = {
-  currentSong: "",
+  currentSong: null,
   isPlaying: false,
-  currentTime: 0,
 };
 
-export const alertReducer = (
+export const playerReducer = (
   state = initialState,
   action: any
 ): typeof initialState => {
@@ -15,7 +13,7 @@ export const alertReducer = (
       return {
         ...state,
         currentSong: action.payload,
-        currentTime: 0,
+        isPlaying: true,
       };
     case types.RESUME_PLAY:
       return {

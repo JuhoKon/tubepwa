@@ -6,16 +6,43 @@ import LoadingBackDrop from "../src/components/LoadingBackdrop";
 import useAlert from "../src/hooks/useAlert";
 import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
+import BottomPlayer from "../src/components/audio/BottomPlayer";
 import { Song } from "../src/types/interfaces";
 
 export default function Home(): React.ReactNode {
-  const { playSong, pausePlay, resumePlay, initNavigator } = usePlayer();
+  const { initNavigator, playSong } = usePlayer();
   const { user, getUserFromLocalStorage, logout } = useCurrentUser();
   const { setErrorAlert } = useAlert();
   const router = useRouter();
 
   const prevStatusRef = React.useRef(false);
 
+  const song1: Song = {
+    album: { id: "a", name: "Albumi 55" },
+    artists: [{ id: "d", name: "Heikki Mustonen" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://www.amateurphotographer.co.uk/wp-content/uploads/2017/11/Bliss_Copyright_preview-e1511540750271.jpeg",
+    title: "Routainen maa",
+    uniqueId: 12,
+    videoId: "AHdd65cuAIE",
+  };
+  const song2: Song = {
+    album: { id: "a", name: "Toinen albumi" },
+    artists: [{ id: "d", name: "xQc artisti vaikkapa" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGljdHVyZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    title: "GO AGANE",
+    uniqueId: 12,
+    videoId: "YlKkX38NgGo",
+  };
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
     initNavigator();
@@ -50,34 +77,10 @@ export default function Home(): React.ReactNode {
   if (!user.loggedIn) {
     return <LoadingBackDrop useRedux={false} show={true} />;
   }
-  const song1: Song = {
-    album: { id: "a", name: "Albumi 55" },
-    artists: [{ id: "d", name: "Heikki Mustonen" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://www.amateurphotographer.co.uk/wp-content/uploads/2017/11/Bliss_Copyright_preview-e1511540750271.jpeg",
-    title: "Routainen maa",
-    uniqueId: 12,
-    videoId: "AHdd65cuAIE",
-  };
-  const song2: Song = {
-    album: { id: "a", name: "Toinen albumi" },
-    artists: [{ id: "d", name: "xQc artisti vaikkapa" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGljdHVyZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    title: "GO AGANE",
-    uniqueId: 12,
-    videoId: "YlKkX38NgGo",
-  };
+
   return (
     <>
+      <BottomPlayer />
       <button
         onClick={() => {
           logout();
@@ -98,21 +101,6 @@ export default function Home(): React.ReactNode {
         }}
       >
         Song 2
-      </button>
-
-      <button
-        onClick={() => {
-          pausePlay();
-        }}
-      >
-        Pause
-      </button>
-      <button
-        onClick={() => {
-          resumePlay();
-        }}
-      >
-        Resume
       </button>
     </>
   );

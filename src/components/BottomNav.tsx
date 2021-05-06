@@ -6,13 +6,17 @@ import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
 import useNavigation from "../hooks/useNavigation";
+import { LIGHT_GREY, LIGHT, GREY } from "../lib/theme";
 
 const useStyles = makeStyles({
   stickToBottom: {
     width: "100%",
     position: "fixed",
     bottom: 0,
+    background: LIGHT_GREY,
+    borderTop: `1px solid ${GREY}`,
   },
+  navigationAction: { color: LIGHT },
 });
 /**
  *
@@ -33,9 +37,21 @@ export default function BottomNav(): React.ReactNode {
       showLabels
       className={classes.stickToBottom}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-      <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+      <BottomNavigationAction
+        label="Home"
+        icon={<HomeIcon />}
+        className={classes.navigationAction}
+      />
+      <BottomNavigationAction
+        label="Search"
+        icon={<SearchIcon />}
+        className={classes.navigationAction}
+      />
+      <BottomNavigationAction
+        label="Settings"
+        icon={<SettingsIcon />}
+        className={classes.navigationAction}
+      />
     </BottomNavigation>
   );
 }

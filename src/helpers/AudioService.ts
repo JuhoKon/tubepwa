@@ -46,11 +46,47 @@ class AudioService {
   public pauseSong(): void {
     this.audioElement.pause();
   }
+
   /**
    * Resumes playing the current song.
    */
   public resumePlaying(): void {
     this.audioElement.play();
+    if (!this.audioElement.paused) {
+      console.log("WE PLAYING");
+    }
+  }
+
+  /**
+   *
+   * @returns Current song's duration
+   */
+  public getCurrentSongDuration(): number {
+    return this.audioElement.duration;
+  }
+
+  /**
+   *
+   * @returns Current song's current time
+   */
+  public getCurrentSongTurrentTime(): number {
+    return this.audioElement.currentTime;
+  }
+
+  /**
+   *
+   * @param seekValue Seconds where to seek to.
+   *
+   * Seeks the player to x point.
+   */
+  public seekTo(seekValue: number): void {
+    this.audioElement.currentTime = seekValue;
+  }
+
+  public isPaused(): boolean {
+    return this.audioElement.paused || !this.audioElement.currentTime
+      ? true
+      : false;
   }
 }
 
