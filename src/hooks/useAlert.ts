@@ -10,20 +10,36 @@ import { RootState } from "../types/interfaces";
  */
 function useAlert(): {
   alerts: RootState["alerts"];
-  setSuccessAlert: (msg: string) => void;
-  setErrorAlert: (msg: string) => void;
-  hideAlert: () => void;
+  setSuccessAlert: typeof setSuccessAlert;
+  setErrorAlert: typeof setErrorAlert;
+  hideAlert: typeof hideAlert;
 } {
   const alerts = useSelector((state: RootState) => state.alerts);
 
   const dispatch = useDispatch();
-
+  /**
+   *
+   * @param msg String to show on the success alert.
+   *
+   * Dispatches an action to show a success alert with specific message.
+   */
   const setSuccessAlert = (msg: string) => {
     dispatch(ShowAlert(constants.SUCCESS_ALERT, msg));
   };
+
+  /**
+   *
+   * @param msg String to show on the error alert.
+   *
+   * Dispatches an action to show an error alert with a specific message.
+   */
   const setErrorAlert = (msg: string) => {
     dispatch(ShowAlert(constants.ERROR_ALERT, msg));
   };
+
+  /**
+   * Dispatches an action which attempts to hide any alerts.
+   */
   const hideAlert = () => {
     dispatch(HideAlert());
   };

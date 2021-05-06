@@ -10,19 +10,14 @@ class AudioService {
   private UserService: UserService;
   private audioElement: HTMLAudioElement;
   constructor() {
-    const audioElement = new Audio();
+    // when SSR this doesn't as we need to access the browser APIs
+    // somehow when we do this at constructor, it gets later on run on the browser...
+    if (process.browser) {
+      const audioElement = new Audio();
+      this.audioElement = audioElement;
+    }
     const userService = new UserService();
-    this.audioElement = audioElement;
     this.UserService = userService;
-    const resume = () => this.resumePlaying();
-    const pause = () => this.pauseSong();
-    // How will we manage playing next songs, and earlier songs?
-    // Manage history in Redux maybe.
-    // Can we call actions from here... Don't think we can.
-    // The whole setup for this (setting mediaSessionActionHandlers) should be done outside this service, somewhere in the reducer/actions for example
-    // So that we can register actions to the buttons...
-
-    setMediaSessionActionHandlers(resume, pause, pause, pause, pause, pause);
   }
 
   public static getInstance(): AudioService {
