@@ -1,4 +1,9 @@
-export const setMetaData = (title, artist, album, thumbnailURL) => {
+export const setMetaData = (
+  title: string,
+  artist: string,
+  album: string,
+  thumbnailURL: string
+): void => {
   if ("mediaSession" in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: title,
@@ -15,13 +20,13 @@ export const setMetaData = (title, artist, album, thumbnailURL) => {
   }
 };
 export const setMediaSessionActionHandlers = (
-  playCB,
-  pauseCB,
-  stopCB,
-  seekToCB,
-  previousTrackCB,
-  nextTrackCB
-) => {
+  playCB: () => void,
+  pauseCB: () => void,
+  stopCB: () => void,
+  seekToCB: () => void,
+  previousTrackCB: () => void,
+  nextTrackCB: () => void
+): void => {
   if ("mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("play", function () {
       playCB();

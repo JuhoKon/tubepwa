@@ -1,6 +1,7 @@
 import * as constants from "../lib/constants";
 import UserService from "./UserService";
-import { setMetaData, setMediaSessionActionHandlers } from "./MediaSession";
+import { setMetaData } from "./MediaSession";
+import { Song } from "../types/interfaces";
 
 /**
  * AudioService. Handles playing audio on the application. Provides methods for controlling the audio.
@@ -29,14 +30,14 @@ class AudioService {
   // We probably want a complete song to be thrown here
   // with metadata etc. so we can do something with them
   // logic like this: User wants to play something -> dispatch -> songService -> reducer -> all happy
-  public playSong(videoId: string): void {
-    this.audioElement.src = constants.STREAM_URL + `/stream/${videoId}`;
+  public playSong(song: Song): void {
+    this.audioElement.src = constants.STREAM_URL + `/stream/${song.videoId}`;
     this.audioElement.play();
     setMetaData(
-      "Title",
-      "Artisti X",
-      "Albumi Y",
-      "https://i.gyazo.com/thumb/1200/018d388bde5ddee44aea7422f383d0eb-png.jpg"
+      song.title,
+      song.artists[0].name,
+      song.album.name,
+      song.thumbnail
     );
   }
   /**

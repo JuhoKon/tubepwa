@@ -5,7 +5,7 @@ import {
   ResumePlaying,
 } from "../actions/playerActions";
 import { setMediaSessionActionHandlers } from "../helpers/MediaSession";
-import { RootState } from "../types/interfaces";
+import { RootState, Song } from "../types/interfaces";
 
 function usePlayer(): {
   player: RootState["player"];
@@ -18,7 +18,7 @@ function usePlayer(): {
 
   const dispatch = useDispatch();
 
-  const playSong = (song: any) => {
+  const playSong = (song: Song) => {
     dispatch(PlaySong(song));
   };
   const resumePlay = () => {

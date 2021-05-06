@@ -6,6 +6,7 @@ import LoadingBackDrop from "../src/components/LoadingBackdrop";
 import useAlert from "../src/hooks/useAlert";
 import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
+import { Song } from "../src/types/interfaces";
 
 export default function Home(): React.ReactNode {
   const { playSong, pausePlay, resumePlay, initNavigator } = usePlayer();
@@ -49,6 +50,32 @@ export default function Home(): React.ReactNode {
   if (!user.loggedIn) {
     return <LoadingBackDrop useRedux={false} show={true} />;
   }
+  const song1: Song = {
+    album: { id: "a", name: "Albumi 55" },
+    artists: [{ id: "d", name: "Heikki Mustonen" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://www.amateurphotographer.co.uk/wp-content/uploads/2017/11/Bliss_Copyright_preview-e1511540750271.jpeg",
+    title: "Routainen maa",
+    uniqueId: 12,
+    videoId: "AHdd65cuAIE",
+  };
+  const song2: Song = {
+    album: { id: "a", name: "Toinen albumi" },
+    artists: [{ id: "d", name: "xQc artisti vaikkapa" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGljdHVyZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+    title: "GO AGANE",
+    uniqueId: 12,
+    videoId: "YlKkX38NgGo",
+  };
   return (
     <>
       <button
@@ -60,11 +87,19 @@ export default function Home(): React.ReactNode {
       </button>
       <button
         onClick={() => {
-          playSong("BUE8JDWsTWo");
+          playSong(song1);
         }}
       >
-        Paina tästä nii lähtee
+        Song 1
       </button>
+      <button
+        onClick={() => {
+          playSong(song2);
+        }}
+      >
+        Song 2
+      </button>
+
       <button
         onClick={() => {
           pausePlay();

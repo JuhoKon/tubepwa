@@ -1,18 +1,28 @@
 import AudioService from "../helpers/AudioService";
-import { GenericObject } from "../types/interfaces";
+import { Song } from "../types/interfaces";
 import * as types from "../types/types";
 const audioService = AudioService.getInstance();
-
-export const PlaySong = (song: any): GenericObject => {
-  audioService.playSong("AHdd65cuAIE");
+/**
+ *
+ * @param song The song to play
+ *
+ * Uses AudioService to play a song, updates everything to the redux store.
+ */
+export const PlaySong = (song: Song): unknown => {
+  audioService.playSong(song);
   return { type: types.PLAY_SONG, payload: song };
 };
-
-export const ResumePlaying = (): GenericObject => {
+/**
+ * Uses AudioSerivce to resume playing a song.
+ */
+export const ResumePlaying = (): unknown => {
   audioService.resumePlaying();
   return { type: types.RESUME_PLAY };
 };
-export const PausePlaying = (): GenericObject => {
+/**
+ * Uses AudioService to pause a song.
+ */
+export const PausePlaying = (): unknown => {
   audioService.pauseSong();
   return { type: types.PAUSE_SONG };
 };

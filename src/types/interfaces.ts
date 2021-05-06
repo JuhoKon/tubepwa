@@ -47,7 +47,7 @@ export type User = {
   };
 };
 
-export type Song = {
+export interface Song {
   album: {
     id: string;
     name: string;
@@ -64,7 +64,7 @@ export type Song = {
   title: string;
   uniqueId: number;
   videoId: string;
-};
+}
 export type PlaylistResponse = {
   createdAt: string;
   name: string;
