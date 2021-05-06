@@ -8,11 +8,11 @@ export const PlaySong = (song: any): GenericObject => {
   return { type: types.PLAY_SONG, payload: song };
 };
 
-export const ResumePlaying = () => {
+export const ResumePlaying = (): GenericObject => {
   audioService.resumePlaying();
   return { type: types.RESUME_PLAY };
 };
-export const PausePlaying = () => {
+export const PausePlaying = (): GenericObject => {
   audioService.pauseSong();
   return { type: types.PAUSE_SONG };
 };

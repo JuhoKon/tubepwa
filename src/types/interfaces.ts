@@ -46,3 +46,34 @@ export type User = {
     _id: string;
   };
 };
+
+export type Song = {
+  album: {
+    id: string;
+    name: string;
+  };
+  artists: Array<{
+    id: string;
+    name: string;
+  }>;
+  date: number;
+  duration: string;
+  resultType: string;
+  scraped: boolean;
+  thumbnail: string;
+  title: string;
+  uniqueId: number;
+  videoId: string;
+};
+export type PlaylistResponse = {
+  createdAt: string;
+  name: string;
+  owner: string;
+  playlist: Song[];
+  private: boolean;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+};
+// TODO: Album & artist request types... search types...
+// Spotify requests and types...
