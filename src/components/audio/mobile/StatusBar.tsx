@@ -29,7 +29,7 @@ export const StatusBar = (): JSX.Element => {
     if (player.isPlaying) {
       intervalRef.current = window.setInterval(() => {
         getCurrentTime();
-      }, 500);
+      }, 200);
     }
     return function cleanUp() {
       if (intervalRef.current !== 0) {
