@@ -15,3 +15,7 @@ export const SCREEN_1 = 0;
 export const SCREEN_2 = 1;
 export const SCREEN_3 = 2;
 export const ALERT_DURATION_MS = 2500;
+/* UI */
+export const bottomNavHeight = 56;
+export const playerHeight = 56;
+export const statusBarHeight = 1;

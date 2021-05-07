@@ -7,7 +7,7 @@ import { Box } from "@material-ui/core";
 import CenteredGrid from "./MobilePlayer";
 import useNavigation from "../../../hooks/useNavigation";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   modalStyle: {
     background: "white",
     height: "100%",

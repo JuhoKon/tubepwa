@@ -6,7 +6,7 @@ import LoadingBackDrop from "../src/components/LoadingBackdrop";
 import useAlert from "../src/hooks/useAlert";
 import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
-import BottomPlayer from "../src/components/audio/mobile/BottomPlayer";
+import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
 import { Song } from "../src/types/interfaces";
 import PlayerModal from "../src/components/audio/mobile/PlayerModal";
 

@@ -1,7 +1,7 @@
 import { LinearProgress, makeStyles } from "@material-ui/core";
 import React from "react";
-import usePlayer from "../../../hooks/usePlayer";
-import { LIGHT_GREY2, LIGHT } from "../../../lib/theme";
+import usePlayer from "../../../../hooks/usePlayer";
+import { LIGHT_GREY2, LIGHT } from "../../../../lib/theme";
 
 const statusBarHeight = 1;
 

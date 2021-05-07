@@ -1,12 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import useNavigation from "../../../hooks/useNavigation";
 import { Box } from "@material-ui/core";
 import { LIGHT_GREY, LIGHT } from "../../../lib/theme";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     background: LIGHT_GREY,
     color: LIGHT,
@@ -21,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+export default function CenteredGrid(): JSX.Element {
   const classes = useStyles();
-  const { nav, hideMobilePlayer } = useNavigation();
+  const { hideMobilePlayer } = useNavigation();
 
   return (
     <div className={classes.root}>
