@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import BottomNav from "../src/components/BottomNav";
 import AlertComponent from "../src/components/Alert";
 import LoadingBackdrop from "../src/components/LoadingBackdrop";
+import BackdropElement from "../src/components/Backdrop";
 import React from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -58,6 +59,7 @@ export default function MyApp({ Component, pageProps }) {
           <BottomNav />
           <AlertComponent />
           <LoadingBackdrop />
+          <BackdropElement />
         </ThemeProvider>
       </Provider>
     </>

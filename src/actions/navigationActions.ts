@@ -1,3 +1,4 @@
+import delay from "../helpers/Sleep";
 import * as types from "../types/types";
 /**
  *
@@ -19,4 +20,23 @@ export const ShowBottomBar = (): unknown => {
  */
 export const CloseBottomBar = (): unknown => {
   return { type: types.CLOSE_BOTTOM_BAR };
+};
+
+export const ShowBackdrop = (): unknown => {
+  return { type: types.SHOW_BACKDROP };
+};
+export const HideBackdrop = (): unknown => {
+  return { type: types.HIDE_BACKDROP };
+};
+export const ShowMobilePlayer = (): unknown => {
+  return (dispatch) => {
+    dispatch(ShowBackdrop());
+    dispatch({ type: types.SHOW_MOBILEPLAYER });
+    delay(250).then(() => {
+      dispatch(HideBackdrop());
+    });
+  };
+};
+export const HideMobilePlayer = (): unknown => {
+  return { type: types.HIDE_MOBILEPLAYER };
 };

@@ -3,6 +3,8 @@ import * as constants from "../lib/constants";
 const initialState = {
   currentScreen: constants.SCREEN_1,
   showBottomNav: false,
+  showBackdrop: false,
+  showMobilePlayer: false,
 };
 
 export const navigationReducer = (state = initialState, action: any): any => {
@@ -21,6 +23,26 @@ export const navigationReducer = (state = initialState, action: any): any => {
       return {
         ...state,
         showBottomNav: false,
+      };
+    case types.SHOW_BACKDROP:
+      return {
+        ...state,
+        showBackdrop: true,
+      };
+    case types.HIDE_BACKDROP:
+      return {
+        ...state,
+        showBackdrop: false,
+      };
+    case types.SHOW_MOBILEPLAYER:
+      return {
+        ...state,
+        showMobilePlayer: true,
+      };
+    case types.HIDE_MOBILEPLAYER:
+      return {
+        ...state,
+        showMobilePlayer: false,
       };
     default:
       return state;

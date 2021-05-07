@@ -227,6 +227,11 @@ class UserService {
 
         this.user = result.data;
 
+        this.localStorageService.setItem(
+          constants.USER_LOCAL_STORAGE_KEY,
+          result.data
+        );
+
         res(result.data);
       } catch (error) {
         rej(error);

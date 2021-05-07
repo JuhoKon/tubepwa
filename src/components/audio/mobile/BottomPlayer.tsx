@@ -5,6 +5,7 @@ import { LIGHT_GREY, LIGHT, LIGHT_GREY2 } from "../../../lib/theme";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import PauseRoundedIcon from "@material-ui/icons/PauseRounded";
 import { StatusBar } from "./StatusBar";
+import useNavigation from "../../../hooks/useNavigation";
 
 const bottomNavHeight = 56;
 const playerHeight = 56;
@@ -45,7 +46,7 @@ const useStyles = makeStyles({
 export default function BottomPlayer(): JSX.Element {
   const classes = useStyles();
   const { player, pausePlay, resumePlay } = usePlayer();
-
+  const { showMobilePlayer } = useNavigation();
   if (!player.currentSong) {
     return null;
   }
@@ -64,10 +65,18 @@ export default function BottomPlayer(): JSX.Element {
             src={player.currentSong.thumbnail}
             alt="thumbnail"
             className={classes.imgBox}
+            onClick={() => {
+              showMobilePlayer();
+            }}
           />
         </Grid>
         <Grid item xs={8} className={classes.imgBox}>
-          <Box className={classes.flexBoxHorizontalMiddle}>
+          <Box
+            className={classes.flexBoxHorizontalMiddle}
+            onClick={() => {
+              showMobilePlayer();
+            }}
+          >
             <div>{player.currentSong.title}</div>
             <div
               style={{

@@ -18,6 +18,8 @@ export interface UserState {
 export interface NavState {
   currentScreen: number;
   showBottomNav: boolean;
+  showBackdrop: boolean;
+  showMobilePlayer: boolean;
 }
 export interface AlertState {
   showAlert: boolean;
