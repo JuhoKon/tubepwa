@@ -1,17 +1,21 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import React from "react";
-import usePlayer from "../../hooks/usePlayer";
-import { LIGHT_GREY, LIGHT } from "../../lib/theme";
-import { Song } from "../../types/interfaces";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PauseIcon from "@material-ui/icons/Pause";
+import usePlayer from "../../../hooks/usePlayer";
+import { LIGHT_GREY, LIGHT, LIGHT_GREY2 } from "../../../lib/theme";
+import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
+import PauseRoundedIcon from "@material-ui/icons/PauseRounded";
+import { StatusBar } from "./StatusBar";
+
+const bottomNavHeight = 56;
+const playerHeight = 56;
+const statusBarHeight = 1;
 
 const useStyles = makeStyles({
   root: {
     position: "absolute",
-    bottom: "56px",
+    bottom: `${bottomNavHeight}px`,
     background: LIGHT_GREY,
-    height: "56px",
+    height: `${playerHeight + statusBarHeight}px`,
     width: "100%",
     color: LIGHT,
   },
@@ -29,14 +33,17 @@ const useStyles = makeStyles({
     padding: "10px",
   },
   imgBox: {
-    width: "56px",
-    height: "56px",
+    width: `${playerHeight}px`,
+    height: `${playerHeight}px`,
+  },
+  statusBar: {
+    height: `${statusBarHeight}px`,
+    backgroundColor: LIGHT_GREY2,
   },
 });
 
 export default function BottomPlayer(): JSX.Element {
   const classes = useStyles();
-
   const { player, pausePlay, resumePlay } = usePlayer();
 
   if (!player.currentSong) {
@@ -49,6 +56,9 @@ export default function BottomPlayer(): JSX.Element {
       className={classes.root}
     >
       <Grid container>
+        <Grid item xs={12} className={classes.statusBar}>
+          <StatusBar />
+        </Grid>
         <Grid item xs={2} className={classes.imgBox}>
           <img
             src={player.currentSong.thumbnail}
@@ -81,9 +91,9 @@ export default function BottomPlayer(): JSX.Element {
             }}
           >
             {player.isPlaying ? (
-              <PauseIcon color="secondary" fontSize="large" />
+              <PauseRoundedIcon color="secondary" fontSize="large" />
             ) : (
-              <PlayArrowIcon color="secondary" fontSize="large" />
+              <PlayArrowRoundedIcon color="secondary" fontSize="large" />
             )}
           </Box>
         </Grid>

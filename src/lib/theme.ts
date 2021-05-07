@@ -3,10 +3,10 @@ import { red } from "@material-ui/core/colors";
 
 export const ORANGE = "#F6BA34";
 export const BLACK = "#000000";
-export const LIGHT_GREY = "#333339";
-export const GREY = "#222225";
-export const LIGHT = "#D5D5D6";
-
+export const LIGHT_GREY = "#212121";
+export const GREY = "#191414";
+export const LIGHT = "#fff";
+export const LIGHT_GREY2 = "#6b6b6b";
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {

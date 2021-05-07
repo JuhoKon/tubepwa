@@ -30,15 +30,24 @@ class AudioService {
   // We probably want a complete song to be thrown here
   // with metadata etc. so we can do something with them
   // logic like this: User wants to play something -> dispatch -> songService -> reducer -> all happy
-  public playSong(song: Song): void {
-    this.audioElement.src = constants.STREAM_URL + `/stream/${song.videoId}`;
-    this.audioElement.play();
-    setMetaData(
-      song.title,
-      song.artists[0].name,
-      song.album.name,
-      song.thumbnail
-    );
+  public playSong(song: Song): Promise<void> {
+    return new Promise((res, rej) => {
+      try {
+        this.audioElement.src =
+          constants.STREAM_URL + `/stream/${song.videoId}`;
+        this.audioElement.play().then(() => {
+          setMetaData(
+            song.title,
+            song.artists[0].name,
+            song.album.name,
+            song.thumbnail
+          );
+          res();
+        });
+      } catch (error) {
+        rej(error);
+      }
+    });
   }
   /**
    * Pauses current song.
@@ -69,7 +78,7 @@ class AudioService {
    *
    * @returns Current song's current time
    */
-  public getCurrentSongTurrentTime(): number {
+  public getCurrentSongCurrentTime(): number {
     return this.audioElement.currentTime;
   }
 

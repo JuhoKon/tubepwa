@@ -6,7 +6,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
 import useNavigation from "../hooks/useNavigation";
-import { LIGHT_GREY, LIGHT, GREY } from "../lib/theme";
+import { LIGHT_GREY, LIGHT_GREY2, GREY, LIGHT } from "../lib/theme";
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -14,9 +14,19 @@ const useStyles = makeStyles({
     position: "fixed",
     bottom: 0,
     background: LIGHT_GREY,
-    borderTop: `1px solid ${GREY}`,
+    borderTop: `2px solid ${GREY}`,
   },
-  navigationAction: { color: LIGHT },
+  navigationAction: { color: LIGHT_GREY2 },
+});
+
+const navTheme = makeStyles({
+  root: {
+    color: LIGHT_GREY2,
+    "&$selected": {
+      color: LIGHT,
+    },
+  },
+  selected: {},
 });
 /**
  *
@@ -24,6 +34,7 @@ const useStyles = makeStyles({
  */
 export default function BottomNav(): React.ReactNode {
   const classes = useStyles();
+  const navClasses = navTheme();
   const { nav, setScreen } = useNavigation();
   if (!nav.showBottomNav) {
     return null;
@@ -40,17 +51,17 @@ export default function BottomNav(): React.ReactNode {
       <BottomNavigationAction
         label="Home"
         icon={<HomeIcon />}
-        className={classes.navigationAction}
+        classes={navClasses}
       />
       <BottomNavigationAction
         label="Search"
         icon={<SearchIcon />}
-        className={classes.navigationAction}
+        classes={navClasses}
       />
       <BottomNavigationAction
         label="Settings"
         icon={<SettingsIcon />}
-        className={classes.navigationAction}
+        classes={navClasses}
       />
     </BottomNavigation>
   );

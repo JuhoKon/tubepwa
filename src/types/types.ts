@@ -31,3 +31,5 @@ export const RESUME_PLAY = "RESUME_PLAY";
 export const PAUSE_SONG = "PAUSE_SONG";
 export const PLAY_NEXT_SONG = "NEXT_SONG";
 export const PLAY_PREV_SONG = "PREV_SONG";
+export const SONG_GET_CURRENTTIME = "SONG_GET_CURRENTTIME";
+export const SONG_GET_DURATION = "SONG_GET_DURATION";

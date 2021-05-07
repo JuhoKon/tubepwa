@@ -10,8 +10,18 @@ const audioService = AudioService.getInstance();
  * Uses AudioService to play a song, updates everything to the redux store.
  */
 export const PlaySong = (song: Song): unknown => {
-  audioService.playSong(song);
-  return { type: types.PLAY_SONG, payload: song };
+  return (dispatch) => {
+    audioService
+      .playSong(song)
+      .then(() => {
+        dispatch({ type: types.PLAY_SONG, payload: song });
+        dispatch(GetCurrentSongDuration());
+      })
+      .catch((e) => {
+        console.log(e);
+        // TODO: dispatch error
+      });
+  };
 };
 /**
  * Uses AudioSerivce to resume playing a song.
@@ -35,4 +45,14 @@ export const ResumePlaying = (): unknown => {
 export const PausePlaying = (): unknown => {
   audioService.pauseSong();
   return { type: types.PAUSE_SONG };
+};
+
+export const GetCurrentTime = (): unknown => {
+  const currentTime = audioService.getCurrentSongCurrentTime();
+  return { type: types.SONG_GET_CURRENTTIME, payload: currentTime };
+};
+
+export const GetCurrentSongDuration = (): unknown => {
+  const duration = audioService.getCurrentSongDuration();
+  return { type: types.SONG_GET_DURATION, payload: duration };
 };

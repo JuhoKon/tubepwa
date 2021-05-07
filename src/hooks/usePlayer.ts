@@ -3,7 +3,10 @@ import {
   PausePlaying,
   PlaySong,
   ResumePlaying,
+  GetCurrentTime,
+  GetCurrentSongDuration,
 } from "../actions/playerActions";
+import AudioService from "../helpers/AudioService";
 import { setMediaSessionActionHandlers } from "../helpers/MediaSession";
 import { RootState, Song } from "../types/interfaces";
 
@@ -13,7 +16,12 @@ function usePlayer(): {
   resumePlay: typeof resumePlay;
   pausePlay: typeof pausePlay;
   initNavigator: typeof initNavigator;
+  getCurrentTime: typeof getCurrentTime;
+  getCurrentSongDuration: typeof getCurrentSongDuration;
+  isPaused: typeof isPaused;
 } {
+  const audioService = AudioService.getInstance();
+
   const player = useSelector((state: RootState) => state.player);
 
   const dispatch = useDispatch();
@@ -52,7 +60,26 @@ function usePlayer(): {
       playNextTrack
     );
   };
-  return { player, playSong, resumePlay, pausePlay, initNavigator };
+
+  const getCurrentTime = () => {
+    dispatch(GetCurrentTime());
+  };
+  const getCurrentSongDuration = () => {
+    dispatch(GetCurrentSongDuration());
+  };
+  const isPaused = () => {
+    return audioService.isPaused();
+  };
+  return {
+    player,
+    playSong,
+    resumePlay,
+    pausePlay,
+    initNavigator,
+    getCurrentTime,
+    getCurrentSongDuration,
+    isPaused,
+  };
 }
 
 export default usePlayer;

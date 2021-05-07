@@ -2,6 +2,8 @@ import * as types from "../types/types";
 const initialState = {
   currentSong: null,
   isPlaying: false,
+  currentTime: 0,
+  duration: 0,
 };
 
 export const playerReducer = (
@@ -14,6 +16,7 @@ export const playerReducer = (
         ...state,
         currentSong: action.payload,
         isPlaying: true,
+        currentTime: 0,
       };
     case types.RESUME_PLAY:
       return {
@@ -24,6 +27,16 @@ export const playerReducer = (
       return {
         ...state,
         isPlaying: false,
+      };
+    case types.SONG_GET_CURRENTTIME:
+      return {
+        ...state,
+        currentTime: action.payload,
+      };
+    case types.SONG_GET_DURATION:
+      return {
+        ...state,
+        duration: action.payload,
       };
     default:
       return state;
