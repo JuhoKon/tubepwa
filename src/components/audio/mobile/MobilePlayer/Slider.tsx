@@ -9,7 +9,6 @@ import delay from "../../../../helpers/Sleep";
 const useStyles = makeStyles({
   root: {
     width: "100%",
-    padding: "0px",
     margin: "0px",
   },
   smallText: {
