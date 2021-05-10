@@ -22,8 +22,8 @@ export const setMetaData = (
 export const setMediaSessionActionHandlers = (
   playCB: () => void,
   pauseCB: () => void,
+  seekToCB: any,
   stopCB: () => void,
-  seekToCB: () => void,
   previousTrackCB: () => void,
   nextTrackCB: () => void
 ): void => {
@@ -38,7 +38,7 @@ export const setMediaSessionActionHandlers = (
       stopCB();
     });
     navigator.mediaSession.setActionHandler("seekto", function () {
-      seekToCB();
+      seekToCB("");
     });
     navigator.mediaSession.setActionHandler("previoustrack", function () {
       previousTrackCB();

@@ -5,6 +5,7 @@ import {
   ResumePlaying,
   GetCurrentTime,
   GetCurrentSongDuration,
+  SeekTo,
 } from "../actions/playerActions";
 import AudioService from "../helpers/AudioService";
 import { setMediaSessionActionHandlers } from "../helpers/MediaSession";
@@ -40,8 +41,8 @@ function usePlayer(): {
     dispatch(PausePlaying());
   };
 
-  const seekTo = () => {
-    console.log("NOT IMPLEMENTED YET");
+  const seekTo = (value: number) => {
+    dispatch(SeekTo(value));
   };
   const playPrevTrack = () => {
     console.log("NOT IMPLEMENTED YET");

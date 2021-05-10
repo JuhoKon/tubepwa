@@ -57,3 +57,8 @@ export const GetCurrentSongDuration = (): unknown => {
   const duration = audioService.getCurrentSongDuration();
   return { type: types.SONG_GET_DURATION, payload: duration };
 };
+
+export const SeekTo = (value: number): unknown => {
+  audioService.seekTo(value);
+  return { type: types.SEEK_TO_REQUEST, payload: value };
+};
