@@ -19,6 +19,9 @@ function usePlayer(): {
   getCurrentTime: typeof getCurrentTime;
   getCurrentSongDuration: typeof getCurrentSongDuration;
   isPaused: typeof isPaused;
+  playPrevTrack: typeof playPrevTrack;
+  playNextTrack: typeof playNextTrack;
+  seekTo: typeof seekTo;
 } {
   const audioService = AudioService.getInstance();
 
@@ -79,7 +82,9 @@ function usePlayer(): {
     getCurrentTime,
     getCurrentSongDuration,
     isPaused,
+    playNextTrack,
+    playPrevTrack,
+    seekTo,
   };
 }
-
 export default usePlayer;

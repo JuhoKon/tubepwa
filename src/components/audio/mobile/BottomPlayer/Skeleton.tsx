@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BottomPlayerSkeleton() {
+export default function BottomPlayerSkeleton(): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container>

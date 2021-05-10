@@ -26,23 +26,23 @@ export default function Home(): React.ReactNode {
     resultType: "s",
     scraped: true,
     thumbnail:
-      "https://www.amateurphotographer.co.uk/wp-content/uploads/2017/11/Bliss_Copyright_preview-e1511540750271.jpeg",
+      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
     title: "Routainen maa",
     uniqueId: 12,
     videoId: "AHdd65cuAIE",
   };
   const song2: Song = {
     album: { id: "a", name: "Toinen albumi" },
-    artists: [{ id: "d", name: "xQc artisti vaikkapa" }],
+    artists: [{ id: "d", name: "deadmau5" }],
     date: 32,
     duration: "2:23",
     resultType: "s",
     scraped: true,
     thumbnail:
-      "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGljdHVyZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    title: "GO AGANE",
+      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
+    title: "Polyphobia",
     uniqueId: 12,
-    videoId: "YlKkX38NgGo",
+    videoId: "SwE612H1WLs",
   };
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {

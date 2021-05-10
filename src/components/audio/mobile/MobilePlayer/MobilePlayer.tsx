@@ -6,6 +6,9 @@ import { Box } from "@material-ui/core";
 import { LIGHT_GREY, LIGHT } from "../../../../lib/theme";
 import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
 import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRounded";
+import usePlayer from "../../../../hooks/usePlayer";
+import SongSlider from "./Slider";
+import Controls from "./Controls";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,12 +30,32 @@ const useStyles = makeStyles(() => ({
   floatLeft: {
     float: "left",
   },
+  bigImage: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    padding: "60px 10px",
+  },
+  image: {
+    width: "100%",
+  },
+  currentSongTitleAndArtistContainer: {
+    padding: "0px 10px",
+  },
+  statusBarContainer: {
+    padding: "0px 10px",
+    paddingTop: "10px",
+  },
 }));
 
 export default function CenteredGrid(): JSX.Element {
   const classes = useStyles();
   const { hideMobilePlayer } = useNavigation();
+  const { player } = usePlayer();
 
+  const bigImage = `https://img.youtube.com/vi/${player.currentSong.videoId}/hqdefault.jpg`;
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -58,6 +81,41 @@ export default function CenteredGrid(): JSX.Element {
             <MoreVertRoundedIcon color="secondary" fontSize="large" />
           </Box>
         </Grid>
+        <Grid item xs={12}>
+          <Box className={classes.bigImage}>
+            <img src={bigImage} alt="thumbnailbig" className={classes.image} />
+          </Box>
+        </Grid>
+        <Box
+          style={{
+            width: "100%",
+            bottom: "25px",
+            position: "fixed",
+            paddingRight: "20px",
+          }}
+        >
+          <Grid item xs={12}>
+            <Box className={classes.currentSongTitleAndArtistContainer}>
+              <div>{player.currentSong.title}</div>
+              <div
+                style={{
+                  fontWeight: "lighter",
+                }}
+              >
+                {/* TODO: Multiple artists?*/}
+                {player.currentSong.artists[0].name}
+              </div>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Box className={classes.statusBarContainer}>
+              <SongSlider />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Controls />
+          </Grid>
+        </Box>
       </Grid>
     </div>
   );
