@@ -8,8 +8,7 @@ import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
 import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
 import { Song } from "../src/types/interfaces";
-import PlayerModal from "../src/components/audio/mobile/PlayerModal";
-import SimpleModal from "../src/components/audio/mobile/Testmodal";
+import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
 
 export default function Home(): React.ReactNode {
   const { initNavigator, playSong } = usePlayer();
@@ -82,7 +81,6 @@ export default function Home(): React.ReactNode {
 
   return (
     <>
-      <SimpleModal />
       <PlayerModal />
       <BottomPlayer />
       <button

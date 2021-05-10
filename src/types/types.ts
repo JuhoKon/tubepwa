@@ -18,8 +18,6 @@ export const GET_USER_INFO_FAILURE = "USER_INFO_FAILURE";
 export const CHANGING_SCREEN = "CHANGING_SCREEN";
 export const SHOW_BOTTOM_BAR = "SHOW_BOTTOM_BAR";
 export const CLOSE_BOTTOM_BAR = "CLOSE_BOTTOM_BAR";
-export const SHOW_BACKDROP = "SHOW_BACKDROP";
-export const HIDE_BACKDROP = "HIDE_BACKDROP";
 export const SHOW_MOBILEPLAYER = "SHOW_MOBILEPLAYER";
 export const HIDE_MOBILEPLAYER = "HIDE_MOBILEPLAYER";
 //
@@ -30,7 +28,9 @@ export const HIDE_ALERT = "HIDE_ALERT";
 //
 //
 // Player types
-export const PLAY_SONG = "PLAY_SONG";
+export const PLAY_SONG_REQUEST = "PLAY_SONG_REQUEST";
+export const PLAY_SONG_SUCCESS = "PLAY_SONG_REQUEST_SUCCESS";
+
 export const RESUME_PLAY = "RESUME_PLAY";
 export const PAUSE_SONG = "PAUSE_SONG";
 export const PLAY_NEXT_SONG = "NEXT_SONG";

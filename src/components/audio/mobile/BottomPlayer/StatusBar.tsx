@@ -45,6 +45,7 @@ export const StatusBar = (): JSX.Element => {
       return (player.currentTime / player.duration) * 100;
     }
   };
+
   return (
     <LinearProgress
       variant="determinate"

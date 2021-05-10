@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  HideBackdrop,
   HideMobilePlayer,
-  ShowBackdrop,
   ShowMobilePlayer,
   SwapToScreen,
 } from "../actions/navigationActions";
@@ -11,8 +9,6 @@ import { RootState } from "../types/interfaces";
 function useNavigation(): {
   nav: RootState["nav"];
   setScreen: typeof setScreen;
-  showBackdrop: typeof showBackdrop;
-  hideBackdrop: typeof hideBackdrop;
   showMobilePlayer: typeof showMobilePlayer;
   hideMobilePlayer: typeof hideMobilePlayer;
 } {
@@ -29,12 +25,6 @@ function useNavigation(): {
     dispatch(SwapToScreen(screen));
   };
 
-  const showBackdrop = () => {
-    dispatch(ShowBackdrop());
-  };
-  const hideBackdrop = () => {
-    dispatch(HideBackdrop());
-  };
   const showMobilePlayer = () => {
     dispatch(ShowMobilePlayer());
   };
@@ -44,8 +34,6 @@ function useNavigation(): {
   return {
     nav,
     setScreen,
-    showBackdrop,
-    hideBackdrop,
     showMobilePlayer,
     hideMobilePlayer,
   };

@@ -18,7 +18,6 @@ export interface UserState {
 export interface NavState {
   currentScreen: number;
   showBottomNav: boolean;
-  showBackdrop: boolean;
   showMobilePlayer: boolean;
 }
 export interface AlertState {
@@ -32,6 +31,7 @@ export interface PlayerState {
   isPlaying: boolean;
   currentTime: number;
   duration: number;
+  loadingSong: boolean;
 }
 
 export type Config = {

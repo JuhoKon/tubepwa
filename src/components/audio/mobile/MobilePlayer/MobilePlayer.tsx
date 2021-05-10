@@ -1,15 +1,18 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import useNavigation from "../../../hooks/useNavigation";
+import useNavigation from "../../../../hooks/useNavigation";
 import { Box } from "@material-ui/core";
-import { LIGHT_GREY, LIGHT } from "../../../lib/theme";
+import { LIGHT_GREY, LIGHT } from "../../../../lib/theme";
+import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
+import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRounded";
 
 const useStyles = makeStyles(() => ({
   root: {
     background: LIGHT_GREY,
     color: LIGHT,
     height: "100%",
+    padding: "10px",
   },
   flexBoxMiddle: {
     height: "100%",
@@ -17,6 +20,12 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+  },
+  floatRight: {
+    float: "right",
+  },
+  floatLeft: {
+    float: "left",
   },
 }));
 
@@ -28,7 +37,9 @@ export default function CenteredGrid(): JSX.Element {
     <div className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={2}>
-          <div>xs2</div>
+          <Box className={classes.floatLeft} onClick={hideMobilePlayer}>
+            <KeyboardArrowDownRoundedIcon color="secondary" fontSize="large" />
+          </Box>
         </Grid>
         <Grid item xs={8}>
           <Box className={classes.flexBoxMiddle}>
@@ -43,16 +54,9 @@ export default function CenteredGrid(): JSX.Element {
           </Box>
         </Grid>
         <Grid item xs={2}>
-          <div>xs2</div>
-        </Grid>
-        <Grid item xs={12}>
-          <button
-            onClick={() => {
-              hideMobilePlayer();
-            }}
-          >
-            Hide
-          </button>
+          <Box className={classes.floatRight}>
+            <MoreVertRoundedIcon color="secondary" fontSize="large" />
+          </Box>
         </Grid>
       </Grid>
     </div>

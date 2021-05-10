@@ -11,10 +11,11 @@ const audioService = AudioService.getInstance();
  */
 export const PlaySong = (song: Song): unknown => {
   return (dispatch) => {
+    dispatch({ type: types.PLAY_SONG_REQUEST });
     audioService
       .playSong(song)
       .then(() => {
-        dispatch({ type: types.PLAY_SONG, payload: song });
+        dispatch({ type: types.PLAY_SONG_SUCCESS, payload: song });
         dispatch(GetCurrentSongDuration());
       })
       .catch((e) => {

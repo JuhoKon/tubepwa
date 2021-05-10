@@ -2,6 +2,7 @@ import * as types from "../types/types";
 const initialState = {
   currentSong: null,
   isPlaying: false,
+  loadingSong: false,
   currentTime: 0,
   duration: 0,
 };
@@ -11,12 +12,18 @@ export const playerReducer = (
   action: any
 ): typeof initialState => {
   switch (action.type) {
-    case types.PLAY_SONG:
+    case types.PLAY_SONG_SUCCESS:
       return {
         ...state,
         currentSong: action.payload,
         isPlaying: true,
         currentTime: 0,
+        loadingSong: false,
+      };
+    case types.PLAY_SONG_REQUEST:
+      return {
+        ...state,
+        loadingSong: true,
       };
     case types.RESUME_PLAY:
       return {

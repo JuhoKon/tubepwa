@@ -4,9 +4,12 @@ import { red } from "@material-ui/core/colors";
 export const ORANGE = "#F6BA34";
 export const BLACK = "#000000";
 export const LIGHT_GREY = "#212121";
-export const GREY = "#191414";
+export const GREY = "#000000";
 export const LIGHT = "#fff";
 export const LIGHT_GREY2 = "#6b6b6b";
+
+export const SKELETON_COLOR = "#454545";
+
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {
