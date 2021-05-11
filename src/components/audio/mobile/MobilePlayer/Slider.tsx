@@ -34,6 +34,7 @@ export default function SongSlider(): JSX.Element {
     }
     seekTo(debouncedValue);
     delay(500).then(() => setDragging(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   const handleChange = (event, newValue) => {
@@ -75,6 +76,6 @@ export default function SongSlider(): JSX.Element {
   );
 }
 
-const formatTime = (time: any) => {
+const formatTime = (time: number) => {
   return new Date(time * 1000).toISOString().substr(14, 5);
 };

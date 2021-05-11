@@ -6,6 +6,8 @@ import {
   GetCurrentTime,
   GetCurrentSongDuration,
   SeekTo,
+  HideVisualization,
+  ShowVisualization,
 } from "../actions/playerActions";
 import AudioService from "../helpers/AudioService";
 import { setMediaSessionActionHandlers } from "../helpers/MediaSession";
@@ -23,6 +25,8 @@ function usePlayer(): {
   playPrevTrack: typeof playPrevTrack;
   playNextTrack: typeof playNextTrack;
   seekTo: typeof seekTo;
+  showVisualization: typeof showVisualization;
+  hideVisualization: typeof hideVisualization;
 } {
   const audioService = AudioService.getInstance();
 
@@ -74,6 +78,13 @@ function usePlayer(): {
   const isPaused = () => {
     return audioService.isPaused();
   };
+
+  const showVisualization = () => {
+    dispatch(ShowVisualization());
+  };
+  const hideVisualization = () => {
+    dispatch(HideVisualization());
+  };
   return {
     player,
     playSong,
@@ -86,6 +97,8 @@ function usePlayer(): {
     playNextTrack,
     playPrevTrack,
     seekTo,
+    showVisualization,
+    hideVisualization,
   };
 }
 export default usePlayer;

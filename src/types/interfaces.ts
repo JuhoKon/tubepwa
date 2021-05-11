@@ -32,6 +32,7 @@ export interface PlayerState {
   currentTime: number;
   duration: number;
   loadingSong: boolean;
+  showVisualization: boolean;
 }
 
 export type Config = {

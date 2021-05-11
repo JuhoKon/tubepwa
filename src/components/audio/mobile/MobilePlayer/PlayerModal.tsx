@@ -7,6 +7,7 @@ import { Box, Dialog } from "@material-ui/core";
 import CenteredGrid from "./MobilePlayer";
 import useNavigation from "../../../../hooks/useNavigation";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Transition: any = React.forwardRef(function Transition(props: any, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });

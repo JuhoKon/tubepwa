@@ -62,3 +62,12 @@ export const SeekTo = (value: number): unknown => {
   audioService.seekTo(value);
   return { type: types.SEEK_TO_REQUEST, payload: value };
 };
+
+export const ShowVisualization = (): unknown => {
+  audioService.setVisualizationOn();
+  return { type: types.SHOW_VISUALIZATION };
+};
+export const HideVisualization = (): unknown => {
+  audioService.setVisualizationOff();
+  return { type: types.HIDE_VISUALIZATION };
+};

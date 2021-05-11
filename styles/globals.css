@@ -13,3 +13,24 @@ a {
 * {
   box-sizing: border-box;
 }
+
+section {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+section i {
+  flex: 1 1 100%;
+  height: calc(100vh * var(--c) / 360);
+  border-radius: 55%;
+  background: hsl(var(--c), 95%, 45%);
+}
+
+audio {
+  position: fixed;
+  width: calc(100% - 2em);
+  bottom: 1em;
+  left: 1em;
+  opacity: 0.3;
+}

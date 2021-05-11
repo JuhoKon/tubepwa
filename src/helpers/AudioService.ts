@@ -10,6 +10,10 @@ class AudioService {
   private static instance: AudioService;
   private UserService: UserService;
   private audioElement: HTMLAudioElement;
+  private audioCtx: AudioContext;
+  private analyser: AnalyserNode;
+  private calculateVisualization = false;
+  private calculationInterval: NodeJS.Timeout;
   constructor() {
     // when SSR this doesn't as we need to access the browser APIs
     // somehow when we do this at constructor, it gets later on run on the browser...
@@ -32,6 +36,10 @@ class AudioService {
   // logic like this: User wants to play something -> dispatch -> songService -> reducer -> all happy
   public playSong(song: Song): Promise<void> {
     return new Promise((res, rej) => {
+      if (!this.audioCtx) {
+        this.init();
+      }
+
       try {
         this.audioElement.src =
           constants.STREAM_URL + `/stream/${song.videoId}`;
@@ -96,6 +104,56 @@ class AudioService {
     return this.audioElement.paused || !this.audioElement.currentTime
       ? true
       : false;
+  }
+
+  private init() {
+    console.log("HELLO?");
+    const audioCtx = new window.AudioContext();
+    // Get the source
+    this.audioElement.crossOrigin = "anonymous";
+
+    const source = audioCtx.createMediaElementSource(this.audioElement);
+    // Create an analyser
+    const analyser = audioCtx.createAnalyser();
+
+    // Connect parts
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    this.audioCtx = audioCtx;
+    this.analyser = analyser;
+  }
+
+  public setVisualizationOn(): void {
+    if (!this.analyser || !this.audioCtx) {
+      return;
+    }
+    this.analyser.fftSize = 2 ** 8;
+    const bufferLength = this.analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    // Visualisation
+    const section = document.querySelector("section");
+
+    const v = new Array(bufferLength)
+      .fill("")
+      .map(
+        (e) => (e = document.createElement("i")) && section.appendChild(e) && e
+      );
+    if (this.calculationInterval) {
+      clearInterval(this.calculationInterval);
+    }
+    this.calculationInterval = setInterval(() => {
+      this.analyser.getByteTimeDomainData(dataArray);
+      dataArray.forEach((d, i) =>
+        v[i].style.setProperty("--c", (Math.abs(128 - d) * 2.8125) | 0)
+      );
+      /* console.log(dataArray); */
+    }, 20);
+    /* */
+  }
+  public setVisualizationOff(): void {
+    clearInterval(this.calculationInterval);
   }
 }
 

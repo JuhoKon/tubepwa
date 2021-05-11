@@ -59,7 +59,6 @@ export default function CenteredGrid(): JSX.Element {
   const classes = useStyles();
   const { hideMobilePlayer } = useNavigation();
   const { player } = usePlayer();
-
   const bigImage = `https://img.youtube.com/vi/${player.currentSong.videoId}/hqdefault.jpg`;
   return (
     <div className={classes.root}>

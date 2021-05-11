@@ -11,7 +11,8 @@ import { Song } from "../src/types/interfaces";
 import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
 
 export default function Home(): React.ReactNode {
-  const { initNavigator, playSong } = usePlayer();
+  const { initNavigator, playSong, showVisualization, hideVisualization } =
+    usePlayer();
   const { user, getUserFromLocalStorage, logout } = useCurrentUser();
   const { setErrorAlert } = useAlert();
   const router = useRouter();
@@ -81,15 +82,8 @@ export default function Home(): React.ReactNode {
 
   return (
     <>
-      <PlayerModal />
-      <BottomPlayer />
-      <button
-        onClick={() => {
-          logout();
-        }}
-      >
-        Logout
-      </button>
+      <button onClick={showVisualization}>Show</button>
+      <button onClick={hideVisualization}>Hide</button>
       <button
         onClick={() => {
           playSong(song1);
@@ -103,6 +97,16 @@ export default function Home(): React.ReactNode {
         }}
       >
         Song 2
+      </button>
+      <section></section>
+      <PlayerModal />
+      <BottomPlayer />
+      <button
+        onClick={() => {
+          logout();
+        }}
+      >
+        Logout
       </button>
     </>
   );

@@ -5,6 +5,7 @@ const initialState = {
   loadingSong: false,
   currentTime: 0,
   duration: 0,
+  showVisualization: false,
 };
 
 export const playerReducer = (
@@ -44,6 +45,16 @@ export const playerReducer = (
       return {
         ...state,
         duration: action.payload,
+      };
+    case types.SHOW_VISUALIZATION:
+      return {
+        ...state,
+        showVisualization: true,
+      };
+    case types.HIDE_VISUALIZATION:
+      return {
+        ...state,
+        showVisualization: false,
       };
     default:
       return state;
