@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useNavigation from "../../../../hooks/useNavigation";
 import { Box } from "@material-ui/core";
-import { LIGHT_GREY, LIGHT } from "../../../../lib/theme";
+import { LIGHT_GREY, LIGHT, CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
 import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRounded";
 import usePlayer from "../../../../hooks/usePlayer";
@@ -46,7 +46,11 @@ const useStyles = makeStyles(() => ({
   },
   statusBarContainer: {
     padding: "0px 10px",
-    paddingTop: "10px",
+  },
+  button: {
+    "&:active": {
+      color: CLICKED_BUTTON_COLOR,
+    },
   },
 }));
 
@@ -61,7 +65,11 @@ export default function CenteredGrid(): JSX.Element {
       <Grid container spacing={0}>
         <Grid item xs={2}>
           <Box className={classes.floatLeft} onClick={hideMobilePlayer}>
-            <KeyboardArrowDownRoundedIcon color="secondary" fontSize="large" />
+            <KeyboardArrowDownRoundedIcon
+              color="secondary"
+              fontSize="large"
+              className={classes.button}
+            />
           </Box>
         </Grid>
         <Grid item xs={8}>
@@ -78,7 +86,11 @@ export default function CenteredGrid(): JSX.Element {
         </Grid>
         <Grid item xs={2}>
           <Box className={classes.floatRight}>
-            <MoreVertRoundedIcon color="secondary" fontSize="large" />
+            <MoreVertRoundedIcon
+              color="secondary"
+              fontSize="large"
+              className={classes.button}
+            />
           </Box>
         </Grid>
         <Grid item xs={12}>

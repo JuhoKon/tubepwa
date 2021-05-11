@@ -9,7 +9,7 @@ export const LIGHT = "#fff";
 export const LIGHT_GREY2 = "#6b6b6b";
 
 export const SKELETON_COLOR = "#454545";
-
+export const CLICKED_BUTTON_COLOR = "#a4a4a4";
 // Create a theme instance.
 const theme = createMuiTheme({
   palette: {

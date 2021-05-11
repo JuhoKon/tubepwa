@@ -1,10 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import { Box, debounce } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import usePlayer from "../../../../hooks/usePlayer";
 import { useDebounce } from "use-lodash-debounce";
 import delay from "../../../../helpers/Sleep";
+import { LIGHT_GREY2, LIGHT } from "../../../../lib/theme";
 
 const useStyles = makeStyles({
   root: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
   },
   smallText: {
     fontSize: "14px",
+    marginTop: "-15px",
   },
 });
 
@@ -59,7 +61,7 @@ export default function SongSlider() {
         className={classes.root}
         min={0}
         max={player.duration}
-        /*     step={1} */
+        color="secondary"
       />
       <Box className={classes.smallText}>
         <div style={{ float: "left" }}>{formatTime(currentTime)}</div>

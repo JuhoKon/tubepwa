@@ -3,6 +3,7 @@ import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import PauseRoundedIcon from "@material-ui/icons/PauseRounded";
+import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 
 const useStyles = makeStyles({
   flexBoxMiddle: {
@@ -10,6 +11,11 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  button: {
+    "&:active": {
+      color: CLICKED_BUTTON_COLOR,
+    },
   },
 });
 
@@ -28,9 +34,17 @@ const BottomPlayerPlayControls = (): JSX.Element => {
       }}
     >
       {player.isPlaying ? (
-        <PauseRoundedIcon color="secondary" fontSize="large" />
+        <PauseRoundedIcon
+          color="secondary"
+          fontSize="large"
+          className={classes.button}
+        />
       ) : (
-        <PlayArrowRoundedIcon color="secondary" fontSize="large" />
+        <PlayArrowRoundedIcon
+          color="secondary"
+          fontSize="large"
+          className={classes.button}
+        />
       )}
     </Box>
   );
