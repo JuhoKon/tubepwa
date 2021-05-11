@@ -3,6 +3,7 @@ import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 
 import useNavigation from "../../../../hooks/useNavigation";
+import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 
 const useStyles = makeStyles({
   flexBoxHorizontalMiddle: {
@@ -29,6 +30,7 @@ const CurrentSongTitleAndArtist = (): JSX.Element => {
       <div
         style={{
           fontWeight: "lighter",
+          color: CLICKED_BUTTON_COLOR,
         }}
       >
         {/* TODO: Multiple artists?*/}

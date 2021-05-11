@@ -9,6 +9,7 @@ import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRo
 import usePlayer from "../../../../hooks/usePlayer";
 import SongSlider from "./Slider";
 import Controls from "./Controls";
+import TitleAndArtist from "./TitleAndArtist";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -77,6 +78,7 @@ export default function CenteredGrid(): JSX.Element {
             <div
               style={{
                 fontWeight: "lighter",
+                color: CLICKED_BUTTON_COLOR,
               }}
             >
               TOISTETAAN SOITTOLISTASTA
@@ -108,15 +110,7 @@ export default function CenteredGrid(): JSX.Element {
         >
           <Grid item xs={12}>
             <Box className={classes.currentSongTitleAndArtistContainer}>
-              <div>{player.currentSong.title}</div>
-              <div
-                style={{
-                  fontWeight: "lighter",
-                }}
-              >
-                {/* TODO: Multiple artists?*/}
-                {player.currentSong.artists[0].name}
-              </div>
+              <TitleAndArtist />
             </Box>
           </Grid>
           <Grid item xs={12}>

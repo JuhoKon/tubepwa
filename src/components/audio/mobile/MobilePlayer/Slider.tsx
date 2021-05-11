@@ -5,7 +5,7 @@ import { Box } from "@material-ui/core";
 import usePlayer from "../../../../hooks/usePlayer";
 import { useDebounce } from "use-lodash-debounce";
 import delay from "../../../../helpers/Sleep";
-import { LIGHT_GREY2, LIGHT } from "../../../../lib/theme";
+import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 
 const useStyles = makeStyles({
   root: {
@@ -13,12 +13,12 @@ const useStyles = makeStyles({
     margin: "0px",
   },
   smallText: {
-    fontSize: "14px",
+    fontSize: "12px",
     marginTop: "-15px",
   },
 });
 
-export default function SongSlider() {
+export default function SongSlider(): JSX.Element {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [seekValue, setSeekValue] = React.useState(999999);
@@ -64,8 +64,12 @@ export default function SongSlider() {
         color="secondary"
       />
       <Box className={classes.smallText}>
-        <div style={{ float: "left" }}>{formatTime(currentTime)}</div>
-        <div style={{ float: "right" }}>{formatTime(player.duration)}</div>
+        <div style={{ float: "left", color: CLICKED_BUTTON_COLOR }}>
+          {formatTime(currentTime)}
+        </div>
+        <div style={{ float: "right", color: CLICKED_BUTTON_COLOR }}>
+          {formatTime(player.duration)}
+        </div>
       </Box>
     </>
   );
