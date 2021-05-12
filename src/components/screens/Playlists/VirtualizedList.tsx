@@ -62,7 +62,7 @@ const Row = memo(
                     playList.songs[0] &&
                     playList.songs[0].thumbnail
                       ? playList.songs[0].thumbnail
-                      : "/public/placeholder.png"
+                      : "/album.png"
                   }
                   width={65}
                   height={65}
