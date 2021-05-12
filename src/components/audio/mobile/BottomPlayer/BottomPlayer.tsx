@@ -90,7 +90,6 @@ export default function BottomPlayer(): JSX.Element {
           <BottomPlayerPlayControls />
         </Grid>
       </Grid>
-      )
     </Box>
   );
 }

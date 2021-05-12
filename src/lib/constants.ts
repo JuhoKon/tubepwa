@@ -14,6 +14,7 @@ export const PLEASE_LOGIN_MSG = "Session expired. Please login again!";
 export const SCREEN_1 = 0;
 export const SCREEN_2 = 1;
 export const SCREEN_3 = 2;
+export const SCREEN_4 = 3;
 export const ALERT_DURATION_MS = 2500;
 /* UI */
 export const bottomNavHeight = 56;

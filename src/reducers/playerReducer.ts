@@ -5,8 +5,6 @@ const initialState = {
   currentSong: null,
   isPlaying: false,
   loadingSong: false,
-  currentTime: 0,
-  duration: 0,
   showVisualization: false,
 };
 
@@ -20,7 +18,6 @@ export const playerReducer = (
         ...state,
         currentSong: action.payload.song,
         isPlaying: true,
-        currentTime: 0,
         loadingSong: false,
       };
     case types.PLAY_SONG_REQUEST:
@@ -37,16 +34,6 @@ export const playerReducer = (
       return {
         ...state,
         isPlaying: false,
-      };
-    case types.SONG_GET_CURRENTTIME:
-      return {
-        ...state,
-        currentTime: action.payload.currentTime,
-      };
-    case types.SONG_GET_DURATION:
-      return {
-        ...state,
-        duration: action.payload.duration,
       };
     case types.SHOW_VISUALIZATION:
       return {

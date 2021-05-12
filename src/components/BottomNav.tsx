@@ -7,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
 import useNavigation from "../hooks/useNavigation";
 import { LIGHT_GREY, LIGHT_GREY2, GREY, LIGHT } from "../lib/theme";
+import ListIcon from "@material-ui/icons/List";
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -56,6 +57,11 @@ export default function BottomNav(): React.ReactNode {
       <BottomNavigationAction
         label="Search"
         icon={<SearchIcon />}
+        classes={navClasses}
+      />
+      <BottomNavigationAction
+        label="Playlists"
+        icon={<ListIcon />}
         classes={navClasses}
       />
       <BottomNavigationAction

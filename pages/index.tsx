@@ -9,45 +9,22 @@ import usePlayer from "../src/hooks/usePlayer";
 import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
 import { Song } from "../src/types/interfaces";
 import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
+import useNavigation from "../src/hooks/useNavigation";
+import PlaylistsScreen from "../src/components/screens/Playlists/Playlists";
 
 export default function Home(): React.ReactNode {
-  const { initNavigator, playSong, showVisualization, hideVisualization } =
-    usePlayer();
-  const { user, getUserFromLocalStorage, logout } = useCurrentUser();
+  console.log("AM I BEING RE-RENDERED");
+  /*   const { initNavigator } = usePlayer(); */
+  const { user, getUserFromLocalStorage } = useCurrentUser();
   const { setErrorAlert } = useAlert();
+  const { nav } = useNavigation();
   const router = useRouter();
 
   const prevStatusRef = React.useRef(false);
 
-  const song1: Song = {
-    album: { id: "a", name: "Albumi 55" },
-    artists: [{ id: "d", name: "Heikki Mustonen" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
-    title: "Routainen maa",
-    uniqueId: 12,
-    videoId: "AHdd65cuAIE",
-  };
-  const song2: Song = {
-    album: { id: "a", name: "Toinen albumi" },
-    artists: [{ id: "d", name: "deadmau5" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
-    title: "Polyphobia",
-    uniqueId: 12,
-    videoId: "SwE612H1WLs",
-  };
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
-    initNavigator();
+    /*   initNavigator(); */
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       if (!user.loggedIn) {
         // User has token && doesn't have active session
@@ -79,7 +56,56 @@ export default function Home(): React.ReactNode {
   if (!user.loggedIn) {
     return <LoadingBackDrop useRedux={false} show={true} />;
   }
+  const RenderResult = () => {
+    switch (nav.currentScreen) {
+      case constants.SCREEN_1:
+        return <Screen_1 />;
 
+      case constants.SCREEN_2:
+        return <PlaylistsScreen />;
+
+      case constants.SCREEN_3:
+        return <PlaylistsScreen />;
+
+      case constants.SCREEN_4:
+        return <Screen_4 />;
+
+      default:
+        return <Screen_1 />;
+    }
+  };
+  return <RenderResult />;
+}
+const Screen_1 = () => {
+  const { playSong, showVisualization, hideVisualization } = usePlayer();
+  const { logout } = useCurrentUser();
+
+  const song1: Song = {
+    album: { id: "a", name: "Albumi 55" },
+    artists: [{ id: "d", name: "Heikki Mustonen" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
+    title: "Routainen maa",
+    uniqueId: 12,
+    videoId: "AHdd65cuAIE",
+  };
+  const song2: Song = {
+    album: { id: "a", name: "Toinen albumi" },
+    artists: [{ id: "d", name: "deadmau5" }],
+    date: 32,
+    duration: "2:23",
+    resultType: "s",
+    scraped: true,
+    thumbnail:
+      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
+    title: "Polyphobia",
+    uniqueId: 12,
+    videoId: "SwE612H1WLs",
+  };
   return (
     <>
       <button onClick={showVisualization}>Show</button>
@@ -105,9 +131,18 @@ export default function Home(): React.ReactNode {
       >
         Logout
       </button>
+      <button onClick={() => {}}> Lataa soittolista: </button>
       <section></section>
-      <PlayerModal />
-      <BottomPlayer />
     </>
   );
-}
+};
+const Screen_2 = () => {
+  console.log("I AM BEING RE_RENDERED");
+  return <button>Screen 2</button>;
+};
+const Screen_3 = () => {
+  return <button>Screen 3</button>;
+};
+const Screen_4 = () => {
+  return <button>Screen 4</button>;
+};

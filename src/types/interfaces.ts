@@ -14,6 +14,7 @@ export interface RootState {
   nav: NavState;
   alerts: AlertState;
   player: PlayerState;
+  playerTime: PlayerTimeState;
 }
 export interface UserState {
   loggingIn: boolean;
@@ -37,12 +38,13 @@ export interface AlertState {
 export interface PlayerState {
   currentSong: Song;
   isPlaying: boolean;
-  currentTime: number;
-  duration: number;
   loadingSong: boolean;
   showVisualization: boolean;
 }
-
+export interface PlayerTimeState {
+  currentTime: number;
+  duration: number;
+}
 export type Config = {
   headers: {
     "Content-Type": string;

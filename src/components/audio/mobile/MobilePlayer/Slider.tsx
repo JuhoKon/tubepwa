@@ -6,6 +6,7 @@ import usePlayer from "../../../../hooks/usePlayer";
 import { useDebounce } from "use-lodash-debounce";
 import delay from "../../../../helpers/Sleep";
 import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
+import usePlayerTime from "../../../../hooks/usePlayerTime";
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +23,8 @@ export default function SongSlider(): JSX.Element {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [seekValue, setSeekValue] = React.useState(999999);
-  const { player, seekTo } = usePlayer();
+  const { seekTo } = usePlayer();
+  const { playerTime } = usePlayerTime();
   const [dragging, setDragging] = React.useState(false);
 
   const debouncedValue = useDebounce(seekValue, 750);
@@ -46,13 +48,13 @@ export default function SongSlider(): JSX.Element {
     setValue(newValue);
   };
   const getValue = (): number => {
-    if (player.duration === 0 && player.currentTime === 0) {
+    if (playerTime.duration === 0 && playerTime.currentTime === 0) {
       return 0;
     } else {
-      return player.currentTime;
+      return playerTime.currentTime;
     }
   };
-  const currentTime = dragging ? value : player.currentTime;
+  const currentTime = dragging ? value : playerTime.currentTime;
   return (
     <>
       <Slider
@@ -61,7 +63,7 @@ export default function SongSlider(): JSX.Element {
         aria-labelledby="continuous-slider"
         className={classes.root}
         min={0}
-        max={player.duration}
+        max={playerTime.duration}
         color="secondary"
       />
       <Box className={classes.smallText}>
@@ -69,7 +71,7 @@ export default function SongSlider(): JSX.Element {
           {formatTime(currentTime)}
         </div>
         <div style={{ float: "right", color: CLICKED_BUTTON_COLOR }}>
-          {formatTime(player.duration)}
+          {formatTime(playerTime.duration)}
         </div>
       </Box>
     </>

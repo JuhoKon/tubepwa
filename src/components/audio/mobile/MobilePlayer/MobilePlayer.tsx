@@ -58,8 +58,6 @@ const useStyles = makeStyles(() => ({
 export default function CenteredGrid(): JSX.Element {
   const classes = useStyles();
   const { hideMobilePlayer } = useNavigation();
-  const { player } = usePlayer();
-  const bigImage = `https://img.youtube.com/vi/${player.currentSong.videoId}/hqdefault.jpg`;
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -96,7 +94,7 @@ export default function CenteredGrid(): JSX.Element {
         </Grid>
         <Grid item xs={12}>
           <Box className={classes.bigImage}>
-            <img src={bigImage} alt="thumbnailbig" className={classes.image} />
+            <Image />
           </Box>
         </Grid>
         <Box
@@ -125,3 +123,9 @@ export default function CenteredGrid(): JSX.Element {
     </div>
   );
 }
+const Image = () => {
+  const classes = useStyles();
+  const { player } = usePlayer();
+  const bigImage = `https://img.youtube.com/vi/${player?.currentSong?.videoId}/hqdefault.jpg`;
+  return <img src={bigImage} alt="thumbnailbig" className={classes.image} />;
+};

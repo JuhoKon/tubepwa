@@ -19,8 +19,6 @@ function usePlayer(): {
   resumePlay: typeof resumePlay;
   pausePlay: typeof pausePlay;
   initNavigator: typeof initNavigator;
-  getCurrentTime: typeof getCurrentTime;
-  getCurrentSongDuration: typeof getCurrentSongDuration;
   isPaused: typeof isPaused;
   playPrevTrack: typeof playPrevTrack;
   playNextTrack: typeof playNextTrack;
@@ -68,13 +66,6 @@ function usePlayer(): {
       playNextTrack
     );
   };
-
-  const getCurrentTime = () => {
-    dispatch(GetCurrentTime());
-  };
-  const getCurrentSongDuration = () => {
-    dispatch(GetCurrentSongDuration());
-  };
   const isPaused = () => {
     return audioService.isPaused();
   };
@@ -91,8 +82,6 @@ function usePlayer(): {
     resumePlay,
     pausePlay,
     initNavigator,
-    getCurrentTime,
-    getCurrentSongDuration,
     isPaused,
     playNextTrack,
     playPrevTrack,

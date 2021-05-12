@@ -1,6 +1,7 @@
 import { LinearProgress, makeStyles } from "@material-ui/core";
 import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
+import usePlayerTime from "../../../../hooks/usePlayerTime";
 import { LIGHT_GREY2, LIGHT } from "../../../../lib/theme";
 
 const statusBarHeight = 1;
@@ -20,8 +21,8 @@ const statusBarTheme = makeStyles({
 export const StatusBar = (): JSX.Element => {
   const intervalRef = React.useRef(0);
   const statusBarClasses = statusBarTheme();
-  const { player, getCurrentTime } = usePlayer();
-
+  const { playerTime, getCurrentTime } = usePlayerTime();
+  const { player } = usePlayer();
   React.useEffect(() => {
     if (intervalRef.current !== 0) {
       clearInterval(intervalRef.current);
@@ -39,10 +40,10 @@ export const StatusBar = (): JSX.Element => {
   }, [getCurrentTime, player.isPlaying]);
 
   const getValue = (): number => {
-    if (player.duration === 0 && player.currentTime === 0) {
+    if (playerTime.duration === 0 && playerTime.currentTime === 0) {
       return 0;
     } else {
-      return (player.currentTime / player.duration) * 100;
+      return (playerTime.currentTime / playerTime.duration) * 100;
     }
   };
 
