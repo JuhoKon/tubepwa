@@ -1,3 +1,5 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+import { Player } from "../types/ActionTypes";
 import * as types from "../types/types";
 const initialState = {
   currentSong: null,
@@ -10,13 +12,13 @@ const initialState = {
 
 export const playerReducer = (
   state = initialState,
-  action: any
+  action: PayloadAction<Player | undefined>
 ): typeof initialState => {
   switch (action.type) {
     case types.PLAY_SONG_SUCCESS:
       return {
         ...state,
-        currentSong: action.payload,
+        currentSong: action.payload.song,
         isPlaying: true,
         currentTime: 0,
         loadingSong: false,
@@ -39,12 +41,12 @@ export const playerReducer = (
     case types.SONG_GET_CURRENTTIME:
       return {
         ...state,
-        currentTime: action.payload,
+        currentTime: action.payload.currentTime,
       };
     case types.SONG_GET_DURATION:
       return {
         ...state,
-        duration: action.payload,
+        duration: action.payload.duration,
       };
     case types.SHOW_VISUALIZATION:
       return {

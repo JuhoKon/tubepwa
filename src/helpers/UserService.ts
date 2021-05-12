@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as constants from "../lib/constants";
-import { Config, GenericObject, User } from "../types/interfaces";
+import { Config, GenericObject, User, UserPlaylist } from "../types/interfaces";
 import LocalStorageService from "./LocalStorageService";
 import delay from "./Sleep";
 import jwt from "jsonwebtoken";
@@ -27,11 +27,11 @@ class UserService {
    *
    * @param email User's email
    * @param password User's password
-   * @returns Promise<GenericObject>, return a promise of an object consisting the results from BE.
+   * @returns Promise<any>, return a promise of an object consisting the results from BE.
    *
    * Attempts to login the user. Also updates the localstorage, if successful.
    */
-  public async login(email: string, password: string): Promise<GenericObject> {
+  public async login(email: string, password: string): Promise<User> {
     console.log("HEYLO");
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
@@ -42,8 +42,7 @@ class UserService {
           body,
           this.tokenConfig()
         );
-
-        res(results);
+        res(results.data);
         this.localStorageService.setItem(
           constants.USER_LOCAL_STORAGE_KEY,
           results.data
@@ -82,7 +81,7 @@ class UserService {
    * @param name User's username
    * @param email User's email
    * @param password User's password
-   * @returns Promise<GenericObject>, returns the BE results for the registration, or throws error based on the BE answer:
+   * @returns Promise<any>, returns the BE results for the registration, or throws error based on the BE answer:
    *
    * Attempts to register a new user.
    */
@@ -90,7 +89,7 @@ class UserService {
     name: string,
     email: string,
     password: string
-  ): Promise<GenericObject> {
+  ): Promise<User> {
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
       const body = JSON.stringify({
@@ -105,7 +104,7 @@ class UserService {
           body,
           this.tokenConfig()
         );
-        res(results);
+        res(results.data);
         this.localStorageService.setItem(
           constants.USER_LOCAL_STORAGE_KEY,
           results.data
@@ -136,7 +135,7 @@ class UserService {
    *
    * Attempts to get user's playlists.
    */
-  public async getCurrentUsersPlaylists(): Promise<GenericObject> {
+  public async getCurrentUsersPlaylists(): Promise<UserPlaylist[]> {
     return new Promise(async (res, rej) => {
       try {
         const results = await axios.get(
@@ -163,6 +162,7 @@ class UserService {
 
     const currentUser = this.user;
     if (!currentUser?.token) {
+      console.log("No token lmao?");
       return config;
     }
     config.headers["x-auth-token"] = currentUser.token;
@@ -196,7 +196,6 @@ class UserService {
           user = await this.renewUsertoken(user.token);
         }
         this.user = user;
-        console.log(this.user);
         res(user);
       } catch (error) {
         rej(error);

@@ -98,9 +98,6 @@ export default function Home(): React.ReactNode {
       >
         Song 2
       </button>
-      <section></section>
-      <PlayerModal />
-      <BottomPlayer />
       <button
         onClick={() => {
           logout();
@@ -108,6 +105,9 @@ export default function Home(): React.ReactNode {
       >
         Logout
       </button>
+      <section></section>
+      <PlayerModal />
+      <BottomPlayer />
     </>
   );
 }

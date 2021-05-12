@@ -1,3 +1,5 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+import { UserAction } from "../types/ActionTypes";
 import * as types from "../types/types";
 
 const initialState = {
@@ -11,7 +13,7 @@ const initialState = {
 
 export const userReducer = (
   state = initialState,
-  action: any
+  action: PayloadAction<UserAction | undefined>
 ): typeof initialState => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
@@ -25,8 +27,8 @@ export const userReducer = (
         loggingIn: false,
         loggedIn: true,
         error: "",
-        token: action.payload.data.token,
-        user: action.payload.data.user,
+        token: action.payload.user.token,
+        user: action.payload.user.user,
       };
     case types.LOGIN_FAILURE:
       return {
@@ -48,15 +50,15 @@ export const userReducer = (
         loggingIn: false,
         loggedIn: true,
         error: "",
-        token: action.payload.data.token,
+        token: action.payload.user.token,
         userPlaylists: [],
-        user: action.payload.data.user,
+        user: action.payload.user.user,
       };
     case types.REGISTER_FAILURE:
       return {
         ...state,
         loggingIn: false,
-        error: action.payload,
+        error: action.payload.error,
       };
     case types.LOGOUT:
       return {

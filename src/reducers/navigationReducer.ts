@@ -1,17 +1,22 @@
 import * as types from "../types/types";
 import * as constants from "../lib/constants";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { Navigation } from "../types/ActionTypes";
 const initialState = {
   currentScreen: constants.SCREEN_1,
   showBottomNav: false,
   showMobilePlayer: false,
 };
 
-export const navigationReducer = (state = initialState, action: any): any => {
+export const navigationReducer = (
+  state = initialState,
+  action: PayloadAction<Navigation | undefined>
+): typeof initialState => {
   switch (action.type) {
     case types.CHANGING_SCREEN:
       return {
         ...state,
-        currentScreen: action.payload,
+        currentScreen: action.payload.screen,
       };
     case types.SHOW_BOTTOM_BAR:
       return {

@@ -1,5 +1,7 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import AudioService from "../helpers/AudioService";
 import delay from "../helpers/Sleep";
+import { Player } from "../types/ActionTypes";
 import { Song } from "../types/interfaces";
 import * as types from "../types/types";
 const audioService = AudioService.getInstance();
@@ -10,12 +12,12 @@ const audioService = AudioService.getInstance();
  * Uses AudioService to play a song, updates everything to the redux store.
  */
 export const PlaySong = (song: Song): unknown => {
-  return (dispatch) => {
-    dispatch({ type: types.PLAY_SONG_REQUEST });
+  return (dispatch: (arg0: PayloadAction<Player | undefined>) => void) => {
+    dispatch({ type: types.PLAY_SONG_REQUEST, payload: undefined });
     audioService
       .playSong(song)
       .then(() => {
-        dispatch({ type: types.PLAY_SONG_SUCCESS, payload: song });
+        dispatch({ type: types.PLAY_SONG_SUCCESS, payload: { song } });
         dispatch(GetCurrentSongDuration());
       })
       .catch((e) => {
@@ -29,13 +31,13 @@ export const PlaySong = (song: Song): unknown => {
  */
 export const ResumePlaying = (): unknown => {
   audioService.resumePlaying();
-  return (dispatch) => {
-    dispatch({ type: types.RESUME_PLAY });
+  return (dispatch: (arg0: PayloadAction<Player | undefined>) => void) => {
+    dispatch({ type: types.RESUME_PLAY, payload: undefined });
     delay(100).then(() => {
       const isPaused = audioService.isPaused();
       console.log(isPaused);
       if (isPaused) {
-        dispatch({ type: types.PAUSE_SONG });
+        dispatch({ type: types.PAUSE_SONG, payload: undefined });
       }
     });
   };
@@ -43,31 +45,31 @@ export const ResumePlaying = (): unknown => {
 /**
  * Uses AudioService to pause a song.
  */
-export const PausePlaying = (): unknown => {
+export const PausePlaying = (): PayloadAction<Player | undefined> => {
   audioService.pauseSong();
-  return { type: types.PAUSE_SONG };
+  return { type: types.PAUSE_SONG, payload: undefined };
 };
 
-export const GetCurrentTime = (): unknown => {
+export const GetCurrentTime = (): PayloadAction<Player | undefined> => {
   const currentTime = audioService.getCurrentSongCurrentTime();
-  return { type: types.SONG_GET_CURRENTTIME, payload: currentTime };
+  return { type: types.SONG_GET_CURRENTTIME, payload: { currentTime } };
 };
 
-export const GetCurrentSongDuration = (): unknown => {
+export const GetCurrentSongDuration = (): PayloadAction<Player | undefined> => {
   const duration = audioService.getCurrentSongDuration();
-  return { type: types.SONG_GET_DURATION, payload: duration };
+  return { type: types.SONG_GET_DURATION, payload: { duration } };
 };
 
-export const SeekTo = (value: number): unknown => {
-  audioService.seekTo(value);
-  return { type: types.SEEK_TO_REQUEST, payload: value };
+export const SeekTo = (seekTo: number): PayloadAction<Player | undefined> => {
+  audioService.seekTo(seekTo);
+  return { type: types.SEEK_TO_REQUEST, payload: { seekTo } };
 };
 
-export const ShowVisualization = (): unknown => {
+export const ShowVisualization = (): PayloadAction<Player | undefined> => {
   audioService.setVisualizationOn();
-  return { type: types.SHOW_VISUALIZATION };
+  return { type: types.SHOW_VISUALIZATION, payload: undefined };
 };
-export const HideVisualization = (): unknown => {
+export const HideVisualization = (): PayloadAction<Player | undefined> => {
   audioService.setVisualizationOff();
-  return { type: types.HIDE_VISUALIZATION };
+  return { type: types.HIDE_VISUALIZATION, payload: undefined };
 };

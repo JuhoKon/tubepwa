@@ -69,7 +69,7 @@ function useCurrentUser(): {
    * this concerns user information e.g. previous session token etc. Used for confirming if the user
    * needs to login again e.g. has a valid and active token.
    */
-  const getUserFromLocalStorage = async () => {
+  const getUserFromLocalStorage = () => {
     dispatch(GetDataFromLocalStorageToRedux());
   };
   return {

@@ -1,6 +1,14 @@
 import { Color } from "@material-ui/lab/Alert";
 
 export type GenericObject = { [key: string]: any };
+
+export interface UserPlaylist {
+  _id: string;
+  name: string;
+  private: boolean;
+  owner: string;
+  createdAt: string;
+}
 export interface RootState {
   user: UserState;
   nav: NavState;
@@ -13,7 +21,7 @@ export interface UserState {
   token: string;
   error: string;
   user: GenericObject;
-  userPlaylists: GenericObject[];
+  userPlaylists: UserPlaylist[];
 }
 export interface NavState {
   currentScreen: number;
