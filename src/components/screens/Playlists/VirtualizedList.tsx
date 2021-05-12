@@ -6,6 +6,7 @@ import InfiniteLoader from "react-window-infinite-loader";
 import useCurrentUser from "../../../hooks/useCurrentUser";
 import { GREY, LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
 import { UserPlaylist } from "../../../types/interfaces";
+import PlayListItemSkeleton from "./PlaylistSkeleton";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,55 +63,56 @@ const Row = memo(
     }
     return (
       <div style={style}>
-        {/*      {itemStatusMap[index] === LOADED ? "DONE" : "LOADING"} */}
-        <Grid container spacing={0} className={classes.flexBoxMiddle}>
-          <Grid item xs={3}>
-            <Box
-              style={{
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              <img
-                src="https://img.youtube.com/vi/AHdd65cuAIE/hqdefault.jpg"
-                style={{
-                  height: "65px",
-                  width: "65px",
-                }}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={9}>
-            <div style={{ width: 210, whiteSpace: "nowrap" }}>
+        {itemStatusMap[index] === LOADED ? (
+          <Grid container spacing={0} className={classes.flexBoxMiddle}>
+            <Grid item xs={3}>
               <Box
-                component="div"
-                textOverflow="ellipsis"
-                overflow="hidden"
-                style={{ fontSize: "16px" }}
+                style={{
+                  height: "100%",
+                  width: "100%",
+                }}
               >
-                {item?.name}
+                <img
+                  src="https://img.youtube.com/vi/AHdd65cuAIE/hqdefault.jpg"
+                  style={{
+                    height: "65px",
+                    width: "65px",
+                  }}
+                />
               </Box>
+            </Grid>
+            <Grid item xs={9}>
+              <div style={{ width: 210, whiteSpace: "nowrap" }}>
+                <Box
+                  component="div"
+                  textOverflow="ellipsis"
+                  overflow="hidden"
+                  style={{ fontSize: "16px" }}
+                >
+                  {item?.name}
+                </Box>
 
-              <Box
-                component="div"
-                textOverflow="ellipsis"
-                overflow="hidden"
-                style={{
-                  color: CLICKED_BUTTON_COLOR,
-                }}
-              >
-                Playlist &bull; {item?.owner}
-              </Box>
-            </div>
+                <Box
+                  component="div"
+                  textOverflow="ellipsis"
+                  overflow="hidden"
+                  style={{
+                    color: CLICKED_BUTTON_COLOR,
+                  }}
+                >
+                  Playlist &bull; {item?.owner}
+                </Box>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
+        ) : (
+          <PlayListItemSkeleton />
+        )}
       </div>
     );
   }
 );
-const PlayListItemSkeleton = () => {
-  return <div>Skeleton boy</div>;
-};
+
 export default function App() {
   const { user } = useCurrentUser();
   const playlists = user.userPlaylists;
@@ -126,7 +128,7 @@ export default function App() {
             className="List"
             height={400}
             itemCount={playlists.length}
-            itemSize={65}
+            itemSize={75}
             itemData={playlists}
             onItemsRendered={onItemsRendered}
             ref={ref}
