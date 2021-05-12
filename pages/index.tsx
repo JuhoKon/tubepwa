@@ -6,12 +6,11 @@ import LoadingBackDrop from "../src/components/LoadingBackdrop";
 import useAlert from "../src/hooks/useAlert";
 import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
-import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
+
 import { Song } from "../src/types/interfaces";
-import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
+
 import useNavigation from "../src/hooks/useNavigation";
 import PlaylistsScreen from "../src/components/screens/Playlists/Playlists";
-import { Box } from "@material-ui/core";
 
 export default function Home(): React.ReactNode {
   console.log("AM I BEING RE-RENDERED");
@@ -132,7 +131,6 @@ const Screen_1 = () => {
       >
         Logout
       </button>
-      <button onClick={() => {}}> Lataa soittolista: </button>
       <section></section>
     </>
   );

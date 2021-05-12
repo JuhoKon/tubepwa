@@ -4,7 +4,7 @@ import React, { Fragment, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 import useCurrentUser from "../../../hooks/useCurrentUser";
-import { GREY, LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
+import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
 import { UserPlaylist } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
 
@@ -113,7 +113,7 @@ const Row = memo(
   }
 );
 
-export default function App() {
+export default function App(): JSX.Element {
   const { user } = useCurrentUser();
   const playlists = user.userPlaylists;
   return (
