@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useNavigation from "../../../../hooks/useNavigation";
 import { Box } from "@material-ui/core";
-import { LIGHT_GREY, LIGHT, CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
+import { GREY, LIGHT, CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
 import KeyboardArrowDownRoundedIcon from "@material-ui/icons/KeyboardArrowDownRounded";
 import usePlayer from "../../../../hooks/usePlayer";
@@ -13,7 +13,7 @@ import TitleAndArtist from "./TitleAndArtist";
 
 const useStyles = makeStyles(() => ({
   root: {
-    background: LIGHT_GREY,
+    background: GREY,
     color: LIGHT,
     height: "100%",
     padding: "10px",

@@ -11,6 +11,7 @@ import { Song } from "../src/types/interfaces";
 import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
 import useNavigation from "../src/hooks/useNavigation";
 import PlaylistsScreen from "../src/components/screens/Playlists/Playlists";
+import { Box } from "@material-ui/core";
 
 export default function Home(): React.ReactNode {
   console.log("AM I BEING RE-RENDERED");

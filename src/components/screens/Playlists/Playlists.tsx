@@ -1,12 +1,13 @@
+import { List } from "@material-ui/core";
 import { makeStyles, Grid } from "@material-ui/core";
 import React from "react";
 import useCurrentUser from "../../../hooks/useCurrentUser";
-
+import ListItem from "@material-ui/core/ListItem";
 import { LIGHT_GREY, LIGHT } from "../../../lib/theme";
+import VirtualizedList from "./VirtualizedList";
 
 const useStyles = makeStyles(() => ({
   root: {
-    background: LIGHT_GREY,
     color: LIGHT,
     height: "100%",
     padding: "10px",
@@ -19,9 +20,15 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
     /*     fontSize: "48px", */
     padding: "0px",
+    position: "sticky",
+
+    color: LIGHT,
+    top: "0px",
   },
 }));
-
+// Virtualized?
+// Load playlists when scrolling to them?
+//
 export default function PlaylistsScreen(): JSX.Element {
   const { user } = useCurrentUser();
   const classes = useStyles();
@@ -34,9 +41,12 @@ export default function PlaylistsScreen(): JSX.Element {
         </Grid>
         <Grid item xs={2}></Grid>
       </Grid>
-      {user.userPlaylists.map((playlist, index) => (
-        <PlayListItem key={index} />
-      ))}
+      {/*       <div>
+        {user.userPlaylists.map((playlist, index) => (
+          <PlayListItem key={index} />
+        ))}
+      </div> */}
+      <VirtualizedList />
     </div>
   );
 }
