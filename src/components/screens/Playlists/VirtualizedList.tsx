@@ -7,6 +7,7 @@ import useCurrentUser from "../../../hooks/useCurrentUser";
 import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
 import { UserPlaylist } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
+import Image from "next/image";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -72,12 +73,10 @@ const Row = memo(
                   width: "100%",
                 }}
               >
-                <img
+                <Image
                   src="https://img.youtube.com/vi/AHdd65cuAIE/hqdefault.jpg"
-                  style={{
-                    height: "65px",
-                    width: "65px",
-                  }}
+                  width={65}
+                  height={65}
                 />
               </Box>
             </Grid>
