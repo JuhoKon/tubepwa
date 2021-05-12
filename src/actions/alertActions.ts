@@ -1,6 +1,6 @@
 import { Color } from "@material-ui/lab/Alert";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Alert } from "../types/ActionTypes";
+import { AlertAction } from "../types/ActionTypes";
 import * as types from "../types/types";
 /**
  *
@@ -10,9 +10,9 @@ import * as types from "../types/types";
 export const ShowAlert = (
   severity: Color,
   alertText: string
-): PayloadAction<Alert | undefined> => {
+): PayloadAction<AlertAction | undefined> => {
   return { type: types.SHOW_ALERT, payload: { severity, alertText } };
 };
-export const HideAlert = (): PayloadAction<Alert | undefined> => {
+export const HideAlert = (): PayloadAction<AlertAction | undefined> => {
   return { type: types.HIDE_ALERT, payload: undefined };
 };

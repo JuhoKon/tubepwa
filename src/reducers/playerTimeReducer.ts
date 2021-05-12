@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Player } from "../types/ActionTypes";
+import { PlayerAction } from "../types/ActionTypes";
 import * as types from "../types/types";
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 export const playerTimeReducer = (
   state = initialState,
-  action: PayloadAction<Player | undefined>
+  action: PayloadAction<PlayerAction | undefined>
 ): typeof initialState => {
   switch (action.type) {
     case types.PLAY_SONG_SUCCESS:

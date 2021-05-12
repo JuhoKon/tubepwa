@@ -3,7 +3,11 @@ import * as types from "../types/types";
 import * as constants from "../lib/constants";
 import * as AlertActions from "./alertActions";
 import * as NavigationActions from "./navigationActions";
-import { Alert, Navigation, UserAction } from "../types/ActionTypes";
+import {
+  AlertAction,
+  NavigationAction,
+  UserAction,
+} from "../types/ActionTypes";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 const userService = UserService.getInstance();
@@ -18,7 +22,9 @@ export const Login = (email: string, password: string): unknown => {
   console.log("Hey?");
   return (
     dispatch: (
-      arg0: PayloadAction<UserAction | Alert | Navigation | undefined>
+      arg0: PayloadAction<
+        UserAction | AlertAction | NavigationAction | undefined
+      >
     ) => void
   ) => {
     dispatch({ type: types.LOGIN_REQUEST, payload: undefined });
@@ -53,7 +59,9 @@ export const Login = (email: string, password: string): unknown => {
  */
 export const Logout = (): unknown => {
   return (
-    dispatch: (arg0: PayloadAction<UserAction | Navigation | undefined>) => void
+    dispatch: (
+      arg0: PayloadAction<UserAction | NavigationAction | undefined>
+    ) => void
   ) => {
     userService.logout();
     dispatch({ type: types.LOGOUT, payload: undefined });
@@ -94,7 +102,9 @@ export const Register = (
 ): unknown => {
   return (
     dispatch: (
-      arg0: PayloadAction<UserAction | Alert | Navigation | undefined>
+      arg0: PayloadAction<
+        UserAction | AlertAction | NavigationAction | undefined
+      >
     ) => void
   ) => {
     dispatch({ type: types.REGISTER_REQUEST, payload: undefined });
@@ -124,7 +134,9 @@ export const Register = (
 export const GetDataFromLocalStorageToRedux = (): unknown => {
   return (
     dispatch: (
-      arg0: PayloadAction<UserAction | Alert | Navigation | undefined>
+      arg0: PayloadAction<
+        UserAction | AlertAction | NavigationAction | undefined
+      >
     ) => void
   ) => {
     dispatch({ type: types.LOGIN_REQUEST, payload: undefined });

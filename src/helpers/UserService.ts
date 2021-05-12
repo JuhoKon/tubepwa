@@ -1,6 +1,12 @@
 import axios from "axios";
 import * as constants from "../lib/constants";
-import { Config, GenericObject, User, UserPlaylist } from "../types/interfaces";
+import {
+  Config,
+  GenericObject,
+  PlaylistResponse,
+  User,
+  UserPlaylist,
+} from "../types/interfaces";
 import LocalStorageService from "./LocalStorageService";
 import delay from "./Sleep";
 import jwt from "jsonwebtoken";
@@ -232,6 +238,20 @@ class UserService {
         );
 
         res(result.data);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  }
+
+  public async retrievePlaylistById(id: string): Promise<PlaylistResponse> {
+    return new Promise(async (res, rej) => {
+      try {
+        const results = await axios.get(
+          constants.BACKEND_URL + `/playlists/find/${id}`,
+          this.tokenConfig()
+        );
+        res(results.data);
       } catch (error) {
         rej(error);
       }

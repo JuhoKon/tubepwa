@@ -5,9 +5,11 @@ import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 import useCurrentUser from "../../../hooks/useCurrentUser";
 import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
-import { UserPlaylist } from "../../../types/interfaces";
+import { RootState, UserPlaylist } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import usePlaylist from "../../../hooks/usePlaylist";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,38 +35,19 @@ const itemStatusMap = {};
 
 const isItemLoaded = (index) => !!itemStatusMap[index];
 
-const loadMoreItems = (startIndex, stopIndex) => {
-  for (let index = startIndex; index <= stopIndex; index++) {
-    itemStatusMap[index] = LOADING;
-  }
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      for (let index = startIndex; index <= stopIndex; index++) {
-        itemStatusMap[index] = LOADED;
-      }
-      resolve("");
-    }, 2500)
-  );
-};
-
 const Row = memo(
   ({ data, index, style }: { data: any; index: any; style: any }) => {
-    // Data passed to List as "itemData" is available as props.data
     const classes = useStyles();
 
     const item: UserPlaylist = data[index];
-    console.log(item);
-    /*     console.log(data, index, style); */
-    console.log("Row rendered");
-    let label;
-    if (itemStatusMap[index] === LOADED) {
-      label = `Row ${index}`;
-    } else {
-      label = "Loading...";
-    }
+
+    const playList = useSelector((state: RootState) =>
+      state.playlist.playlists.find((ele) => ele.id === item._id)
+    );
+
     return (
       <div style={style}>
-        {itemStatusMap[index] === LOADED ? (
+        {playList ? (
           <Grid container spacing={0} className={classes.flexBoxMiddle}>
             <Grid item xs={3}>
               <Box
@@ -74,7 +57,13 @@ const Row = memo(
                 }}
               >
                 <Image
-                  src="https://img.youtube.com/vi/AHdd65cuAIE/hqdefault.jpg"
+                  src={
+                    playList.songs &&
+                    playList.songs[0] &&
+                    playList.songs[0].thumbnail
+                      ? playList.songs[0].thumbnail
+                      : "/public/placeholder.png"
+                  }
                   width={65}
                   height={65}
                 />
@@ -99,7 +88,8 @@ const Row = memo(
                     color: CLICKED_BUTTON_COLOR,
                   }}
                 >
-                  Playlist &bull; {item?.owner}
+                  Playlist &bull; {item?.owner} &bull; {playList.songs.length}{" "}
+                  songs
                 </Box>
               </div>
             </Grid>
@@ -114,12 +104,30 @@ const Row = memo(
 
 export default function App(): JSX.Element {
   const { user } = useCurrentUser();
+  const { addPlaylist } = usePlaylist();
   const playlists = user.userPlaylists;
+
+  const loadMoreItems = (startIndex, stopIndex) => {
+    for (let index = startIndex; index <= stopIndex; index++) {
+      /*  addPlaylist(playlists[index]._id); */
+    }
+    return new Promise((resolve) => {
+      for (let index = startIndex; index <= stopIndex; index++) {
+        if (itemStatusMap[index]) {
+          return;
+        }
+        addPlaylist(playlists[index]._id);
+        itemStatusMap[index] = LOADED;
+      }
+      resolve("");
+    });
+  };
+  console.log(playlists.length);
   return (
     <Fragment>
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
-        itemCount={1000}
+        itemCount={playlists.length}
         loadMoreItems={loadMoreItems}
       >
         {({ onItemsRendered, ref }) => (

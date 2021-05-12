@@ -2,7 +2,7 @@ import * as types from "../types/types";
 import * as contants from "../lib/constants";
 import { Color } from "@material-ui/lab/Alert";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Alert } from "../types/ActionTypes";
+import { AlertAction } from "../types/ActionTypes";
 
 const initialState = {
   showAlert: false,
@@ -12,7 +12,7 @@ const initialState = {
 
 export const alertReducer = (
   state = initialState,
-  action: PayloadAction<Alert | undefined>
+  action: PayloadAction<AlertAction | undefined>
 ): typeof initialState => {
   switch (action.type) {
     case types.SHOW_ALERT:

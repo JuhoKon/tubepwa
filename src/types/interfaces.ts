@@ -1,4 +1,5 @@
 import { Color } from "@material-ui/lab/Alert";
+import { PlaylistAction } from "./ActionTypes";
 
 export type GenericObject = { [key: string]: any };
 
@@ -15,6 +16,7 @@ export interface RootState {
   alerts: AlertState;
   player: PlayerState;
   playerTime: PlayerTimeState;
+  playlist: PlaylistState;
 }
 export interface UserState {
   loggingIn: boolean;
@@ -34,7 +36,9 @@ export interface AlertState {
   alertText: string;
   severity: Color;
 }
-
+export interface PlaylistState {
+  playlists: [PlaylistAction | null];
+}
 export interface PlayerState {
   currentSong: Song;
   isPlaying: boolean;
@@ -80,14 +84,14 @@ export interface Song {
   videoId: string;
 }
 export type PlaylistResponse = {
-  createdAt: string;
-  name: string;
-  owner: string;
-  playlist: Song[];
-  private: boolean;
-  updatedAt: string;
-  __v: number;
-  _id: string;
+  createdAt?: string;
+  name?: string;
+  owner?: string;
+  playlist?: Song[];
+  private?: boolean;
+  updatedAt?: string;
+  __v?: number;
+  _id?: string;
 };
 // TODO: Album & artist request types... search types...
 // Spotify requests and types...

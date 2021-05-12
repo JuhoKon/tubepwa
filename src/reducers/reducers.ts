@@ -4,6 +4,7 @@ import { navigationReducer } from "./navigationReducer";
 import { alertReducer } from "./alertReducer";
 import { playerReducer } from "./playerReducer";
 import { playerTimeReducer } from "./playerTimeReducer";
+import { playListReducer } from "./playlistReducer";
 
 const reducers = {
   user: userReducer,
@@ -11,6 +12,7 @@ const reducers = {
   alerts: alertReducer,
   player: playerReducer,
   playerTime: playerTimeReducer,
+  playlist: playListReducer,
 };
 
 export default combineReducers(reducers);

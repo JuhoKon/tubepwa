@@ -11,6 +11,6 @@ module.exports = withPWA({
     webpack5: true,
   }, */
   images: {
-    domains: ["img.youtube.com"],
+    domains: ["img.youtube.com", "lh3.googleusercontent.com"],
   },
 });

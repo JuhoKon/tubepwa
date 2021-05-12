@@ -1,7 +1,7 @@
 import * as types from "../types/types";
 import * as constants from "../lib/constants";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Navigation } from "../types/ActionTypes";
+import { NavigationAction } from "../types/ActionTypes";
 const initialState = {
   currentScreen: constants.SCREEN_1,
   showBottomNav: false,
@@ -10,7 +10,7 @@ const initialState = {
 
 export const navigationReducer = (
   state = initialState,
-  action: PayloadAction<Navigation | undefined>
+  action: PayloadAction<NavigationAction | undefined>
 ): typeof initialState => {
   switch (action.type) {
     case types.CHANGING_SCREEN:
