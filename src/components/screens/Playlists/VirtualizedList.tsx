@@ -70,12 +70,18 @@ const Row = memo(
               </Box>
             </Grid>
             <Grid item xs={9}>
-              <div style={{ width: 210, whiteSpace: "nowrap" }}>
+              <div
+                style={{
+                  width: 210,
+                  whiteSpace: "nowrap",
+                  marginBottom: "5px",
+                }}
+              >
                 <Box
                   component="div"
                   textOverflow="ellipsis"
                   overflow="hidden"
-                  style={{ fontSize: "16px" }}
+                  style={{ fontSize: "16px", fontWeight: 600 }}
                 >
                   {item?.name}
                 </Box>
