@@ -56,7 +56,7 @@ const Row = memo(
                   width: "100%",
                 }}
               >
-                <Image
+                <img
                   src={
                     playList.songs &&
                     playList.songs[0] &&
@@ -66,6 +66,7 @@ const Row = memo(
                   }
                   width={65}
                   height={65}
+                  alt="abc"
                 />
               </Box>
             </Grid>
