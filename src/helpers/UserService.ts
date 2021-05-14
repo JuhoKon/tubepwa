@@ -181,7 +181,7 @@ class UserService {
    *
    * Checks for users in the localstorage, if found, checks if the token is OK and still valid.
    */
-  public async getCurrentUserFromLocalStorage(): Promise<any> {
+  public async getCurrentUserFromLocalStorage(): Promise<User> {
     return new Promise(async (res, rej) => {
       try {
         let user: User = (await this.localStorageService.retrieveItem(

@@ -1,6 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { PlaylistAction } from "../types/ActionTypes";
-import { Song } from "../types/interfaces";
 import * as types from "../types/types";
 const initialState = {
   playlists: [{} as PlaylistAction | null],

@@ -2,7 +2,7 @@ import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 
-import { LIGHT_GREY2, SKELETON_COLOR } from "../../../lib/theme";
+import { SKELETON_COLOR } from "../../../lib/theme";
 
 const useStyles = makeStyles({
   thumbnail: {

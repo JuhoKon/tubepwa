@@ -1,6 +1,5 @@
 import * as types from "../types/types";
 import * as contants from "../lib/constants";
-import { Color } from "@material-ui/lab/Alert";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AlertAction } from "../types/ActionTypes";
 

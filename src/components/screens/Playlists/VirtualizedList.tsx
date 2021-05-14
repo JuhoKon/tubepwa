@@ -7,7 +7,6 @@ import useCurrentUser from "../../../hooks/useCurrentUser";
 import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
 import { RootState, UserPlaylist } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
-import Image from "next/image";
 import { useSelector } from "react-redux";
 import usePlaylist from "../../../hooks/usePlaylist";
 
@@ -29,14 +28,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LOADING = 1;
 const LOADED = 2;
 const itemStatusMap = {};
 
 const isItemLoaded = (index) => !!itemStatusMap[index];
 
 const Row = memo(
-  ({ data, index, style }: { data: any; index: any; style: any }) => {
+  ({
+    data,
+    index,
+    style,
+  }: {
+    data: unknown;
+    index: number;
+    style: unknown;
+  }) => {
     const classes = useStyles();
 
     const item: UserPlaylist = data[index];
