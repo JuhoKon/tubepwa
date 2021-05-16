@@ -108,15 +108,19 @@ const Screen_1 = () => {
       >
         Logout
       </button>
-      <Link href="/">
-        <button>Home</button>
-      </Link>
-      <Link href="/playlists">
-        <button>Playlists</button>
-      </Link>
-      <Link href="/search">
-        <button>Search</button>
-      </Link>
+      {/* Hide these somehow? These are just for preloading stuff. Or move them to BottomNav */}
+      <div style={{ display: "none" }}>
+        <Link href="/">
+          <button>Home</button>
+        </Link>
+        <Link href="/playlists">
+          <button>Playlists</button>
+        </Link>
+        <Link href="/search">
+          <button>Search</button>
+        </Link>
+      </div>
+
       <section></section>
     </>
   );
