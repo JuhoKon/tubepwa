@@ -26,10 +26,7 @@ export default function Home(): React.ReactNode {
   React.useEffect(() => {
     /*   initNavigator(); */
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
-      if (!user.loggedIn) {
-        // User has token && doesn't have active session
-        getUserFromLocalStorage();
-      }
+      getUserFromLocalStorage();
     } else {
       router.push("/login");
     }
