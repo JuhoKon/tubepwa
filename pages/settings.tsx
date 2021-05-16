@@ -26,10 +26,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function PlaylistsScreen(): JSX.Element {
+export default function SettingsScreen(): JSX.Element {
   const { setScreen } = useNavigation();
   React.useEffect(() => {
-    setScreen(2);
+    setScreen(3);
   }, []);
   const classes = useStyles();
   return (
@@ -37,11 +37,10 @@ export default function PlaylistsScreen(): JSX.Element {
       <Grid container spacing={0} className={classes.flexBoxMiddle}>
         <Grid item xs={2}></Grid>
         <Grid item xs={8}>
-          <h3>Oma kirjasto</h3>
+          <h3>Settings</h3>
         </Grid>
         <Grid item xs={2}></Grid>
       </Grid>
-      <VirtualizedList />
     </div>
   );
 }

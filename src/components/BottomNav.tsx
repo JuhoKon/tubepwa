@@ -52,11 +52,15 @@ export default function BottomNav(): JSX.Element {
             setScreen(newValue);
             break;
           case 1:
+            router.push("/search");
             setScreen(newValue);
+            break;
           case 2:
-            setScreen(newValue);
-          case 3:
             router.push("/playlists");
+            setScreen(newValue);
+            break;
+          case 3:
+            router.push("/settings");
             setScreen(newValue);
             break;
           default:
@@ -68,7 +72,11 @@ export default function BottomNav(): JSX.Element {
     >
       <BottomNavigationAction
         label="Home"
-        icon={<HomeIcon />}
+        icon={
+          <>
+            <HomeIcon />
+          </>
+        }
         classes={navClasses}
       />
       <BottomNavigationAction

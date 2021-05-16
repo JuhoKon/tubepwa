@@ -6,24 +6,22 @@ import LoadingBackDrop from "../src/components/LoadingBackdrop";
 import useAlert from "../src/hooks/useAlert";
 import * as constants from "../src/lib/constants";
 import usePlayer from "../src/hooks/usePlayer";
-
+import Link from "next/link";
 import { Song } from "../src/types/interfaces";
 
 import useNavigation from "../src/hooks/useNavigation";
-import PlaylistsScreen from "../src/components/screens/Playlists/Playlists";
 
 export default function Home(): React.ReactNode {
-  console.log("AM I BEING RE-RENDERED");
-  /*   const { initNavigator } = usePlayer(); */
   const { user, getUserFromLocalStorage } = useCurrentUser();
   const { setErrorAlert } = useAlert();
-  const { nav } = useNavigation();
+  const { setScreen } = useNavigation();
   const router = useRouter();
 
   const prevStatusRef = React.useRef(false);
 
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
+    setScreen(0);
     /*   initNavigator(); */
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       getUserFromLocalStorage();
@@ -53,28 +51,7 @@ export default function Home(): React.ReactNode {
   if (!user.loggedIn) {
     return <LoadingBackDrop useRedux={false} show={true} />;
   }
-  const RenderResult = () => {
-    switch (nav.currentScreen) {
-      /*     case constants.SCREEN_1:
-        return <Screen_1 />;
- */
-      /*       case constants.SCREEN_2:
-        return <PlaylistsScreen />;
-
-      case constants.SCREEN_3:
-        return null; */
-
-      /* return <PlaylistsScreen />;
-       */
-      /*      case constants.SCREEN_4:
-        return null; */
-      /*        return <Screen_4 />; */
-
-      default:
-        return <Screen_1 />;
-    }
-  };
-  return <RenderResult />;
+  return <Screen_1 />;
 }
 const Screen_1 = () => {
   const { playSong, showVisualization, hideVisualization } = usePlayer();
@@ -131,17 +108,16 @@ const Screen_1 = () => {
       >
         Logout
       </button>
+      <Link href="/">
+        <button>Home</button>
+      </Link>
+      <Link href="/playlists">
+        <button>Playlists</button>
+      </Link>
+      <Link href="/search">
+        <button>Search</button>
+      </Link>
       <section></section>
     </>
   );
-};
-const Screen_2 = () => {
-  console.log("I AM BEING RE_RENDERED");
-  return <button>Screen 2</button>;
-};
-const Screen_3 = () => {
-  return <button>Screen 3</button>;
-};
-const Screen_4 = () => {
-  return <button>Screen 4</button>;
 };
