@@ -13,7 +13,7 @@ import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlay
 import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
 
 export default function MyApp({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState);
+  const store: any = useStore(pageProps.initialReduxState);
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.

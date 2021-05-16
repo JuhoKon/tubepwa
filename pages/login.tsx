@@ -15,7 +15,7 @@ export default function Login(): React.ReactNode {
     const checkLocalStorage = async () => {
       if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
         await delay(1000);
-        router.push("/");
+        router.replace("/");
       } else {
         setInitialRender(false);
       }
@@ -25,7 +25,7 @@ export default function Login(): React.ReactNode {
   }, []);
   React.useEffect(() => {
     if (user.loggedIn) {
-      router.push("/");
+      router.replace("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.loggedIn]);

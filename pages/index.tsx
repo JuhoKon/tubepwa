@@ -28,7 +28,7 @@ export default function Home(): React.ReactNode {
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       getUserFromLocalStorage();
     } else {
-      router.push("/login");
+      router.replace("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -37,10 +37,10 @@ export default function Home(): React.ReactNode {
   React.useEffect(() => {
     // Please clean
     if (!window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
-      router.push("/login");
+      router.replace("/login");
     } else {
       if (prevStatusRef.current === true && user.loggedIn === false) {
-        router.push("/login");
+        router.replace("/login");
       } else {
         const errorCB = () => setErrorAlert(constants.PLEASE_LOGIN_MSG);
         prevStatusRef.current = user.loggedIn;
@@ -55,17 +55,20 @@ export default function Home(): React.ReactNode {
   }
   const RenderResult = () => {
     switch (nav.currentScreen) {
-      case constants.SCREEN_1:
+      /*     case constants.SCREEN_1:
         return <Screen_1 />;
-
-      case constants.SCREEN_2:
+ */
+      /*       case constants.SCREEN_2:
         return <PlaylistsScreen />;
 
       case constants.SCREEN_3:
-        return <PlaylistsScreen />;
+        return null; */
 
-      case constants.SCREEN_4:
-        return <Screen_4 />;
+      /* return <PlaylistsScreen />;
+       */
+      /*      case constants.SCREEN_4:
+        return null; */
+      /*        return <Screen_4 />; */
 
       default:
         return <Screen_1 />;

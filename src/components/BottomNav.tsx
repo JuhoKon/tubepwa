@@ -8,6 +8,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import useNavigation from "../hooks/useNavigation";
 import { LIGHT_GREY, LIGHT_GREY2, GREY, LIGHT } from "../lib/theme";
 import ListIcon from "@material-ui/icons/List";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -33,7 +34,8 @@ const navTheme = makeStyles({
  *
  * @returns Bottom navigation bar. Controlling and showing the nav-bar is done via Redux.
  */
-export default function BottomNav(): React.ReactNode {
+export default function BottomNav(): JSX.Element {
+  const router = useRouter();
   const classes = useStyles();
   const navClasses = navTheme();
   const { nav, setScreen } = useNavigation();
@@ -44,7 +46,22 @@ export default function BottomNav(): React.ReactNode {
     <BottomNavigation
       value={nav.currentScreen}
       onChange={(event, newValue) => {
-        setScreen(newValue);
+        switch (newValue) {
+          case 0:
+            router.push("/");
+            setScreen(newValue);
+            break;
+          case 1:
+            setScreen(newValue);
+          case 2:
+            setScreen(newValue);
+          case 3:
+            router.push("/playlists");
+            setScreen(newValue);
+            break;
+          default:
+            break;
+        }
       }}
       showLabels
       className={classes.stickToBottom}

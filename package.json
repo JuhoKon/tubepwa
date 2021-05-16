@@ -23,7 +23,6 @@
     "react-h5-audio-player": "^3.7.0",
     "react-player": "^2.9.0",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
     "react-window": "^1.8.6",
     "react-window-infinite-loader": "^1.0.7",
     "redux-devtools-extension": "^2.13.9",

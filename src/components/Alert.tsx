@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
  *
  * @returns Snackbar - alert, which autohides after 2000ms. Severity and text to show are acquired from the Redux store, and also controlled from there.
  */
-export default function AlertComponent(): React.ReactNode {
+export default function AlertComponent(): JSX.Element {
   const { alerts, hideAlert } = useAlert();
   const classes = useStyles();
 

@@ -156,12 +156,12 @@ export const GetDataFromLocalStorageToRedux = (): unknown => {
           type: types.LOGIN_SUCCESS,
           payload: { user },
         });
-        dispatch(
+        /*         dispatch(
           AlertActions.ShowAlert(
             constants.SUCCESS_ALERT,
             constants.WELCOME_BACK_TEXT(user?.user?.name)
           )
-        );
+        ); */
         dispatch(NavigationActions.ShowBottomBar());
         dispatch(GetUserInfo());
       })
