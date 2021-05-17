@@ -7,7 +7,7 @@ const TitleAndArtist = (): JSX.Element => {
 
   return (
     <>
-      <div style={{ fontSize: "16px" }}>{player.currentSong.title}</div>
+      <div style={{ fontSize: "16px" }}>{player?.currentSong?.title}</div>
       <div
         style={{
           fontWeight: "lighter",
@@ -15,7 +15,7 @@ const TitleAndArtist = (): JSX.Element => {
         }}
       >
         {/* TODO: Multiple artists?*/}
-        {player.currentSong.artists[0].name}
+        {player?.currentSong?.artists[0]?.name}
       </div>
     </>
   );

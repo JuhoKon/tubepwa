@@ -10,6 +10,7 @@ import usePlayer from "../../../../hooks/usePlayer";
 import SongSlider from "./Slider";
 import Controls from "./Controls";
 import TitleAndArtist from "./TitleAndArtist";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,7 +63,12 @@ export default function CenteredGrid(): JSX.Element {
     <div className={classes.root}>
       <Grid container spacing={0}>
         <Grid item xs={2}>
-          <Box className={classes.floatLeft} onClick={hideMobilePlayer}>
+          <Box
+            className={classes.floatLeft}
+            onClick={() => {
+              hideMobilePlayer();
+            }}
+          >
             <KeyboardArrowDownRoundedIcon
               color="secondary"
               fontSize="large"

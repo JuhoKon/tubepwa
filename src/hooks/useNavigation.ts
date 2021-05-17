@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   HideMobilePlayer,
@@ -12,6 +13,7 @@ function useNavigation(): {
   showMobilePlayer: typeof showMobilePlayer;
   hideMobilePlayer: typeof hideMobilePlayer;
 } {
+  const router = useRouter();
   const nav = useSelector((state: RootState) => state.nav);
 
   const dispatch = useDispatch();
@@ -26,6 +28,7 @@ function useNavigation(): {
   };
 
   const showMobilePlayer = () => {
+    router.push("/mobileplayer");
     dispatch(ShowMobilePlayer());
   };
   const hideMobilePlayer = () => {

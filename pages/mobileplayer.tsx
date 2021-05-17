@@ -3,9 +3,9 @@ import Slide from "@material-ui/core/Slide";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Dialog } from "@material-ui/core";
-
-import CenteredGrid from "./MobilePlayer";
-import useNavigation from "../../../../hooks/useNavigation";
+import CenteredGrid from "../src/components/audio/mobile/MobilePlayer/MobilePlayer";
+import useNavigation from "../src/hooks/useNavigation";
+import { useRouter } from "next/router";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Transition: any = React.forwardRef(function Transition(props: any, ref) {
@@ -24,13 +24,18 @@ const useStyles = makeStyles(() => ({
 
 export default function PlayerModal(): JSX.Element {
   const classes = useStyles();
+  const router = useRouter();
   const { nav, hideMobilePlayer } = useNavigation();
+
   return (
     <Dialog
       fullScreen
       open={nav.showMobilePlayer}
       onClose={hideMobilePlayer}
       TransitionComponent={Transition}
+      onExiting={() => {
+        router.back();
+      }}
     >
       <Box className={classes.modalStyle}>
         <CenteredGrid />

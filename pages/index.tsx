@@ -110,6 +110,9 @@ const Screen_1 = () => {
       </button>
       {/* Hide these somehow? These are just for preloading stuff. Or move them to BottomNav */}
       <div style={{ display: "none" }}>
+        <Link href="/mobileplayer">
+          <button>Mobileplayer</button>
+        </Link>
         <Link href="/">
           <button>Home</button>
         </Link>
