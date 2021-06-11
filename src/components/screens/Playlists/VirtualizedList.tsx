@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
 const LOADED = 2;
 const itemStatusMap = {};
 
-const isItemLoaded = (index) => !!itemStatusMap[index];
+const isItemLoaded = (index: number) => !!itemStatusMap[index];
 
 const Row = memo(
   ({
@@ -43,9 +43,9 @@ const Row = memo(
     index,
     style,
   }: {
-    data: unknown;
+    data: UserPlaylist[];
     index: number;
-    style: unknown;
+    style: any;
   }) => {
     const router = useRouter();
     const { selectPlaylist } = usePlaylist();
@@ -54,7 +54,7 @@ const Row = memo(
     const item: UserPlaylist = data[index];
 
     const playList = useSelector((state: RootState) =>
-      state.playlist.playlists.find((ele) => ele.id === item._id)
+      state.playlist.playlists.find((ele) => ele?.id === item._id)
     );
 
     return (
@@ -65,9 +65,11 @@ const Row = memo(
             spacing={0}
             className={classes.flexBoxMiddle}
             onClick={() => {
-              console.log(`Clicked on ${playList.name}`);
-              selectPlaylist(playList.id);
-              router.push("/playlist");
+              if (playList.id) {
+                console.log(`Clicked on ${playList.name}`);
+                selectPlaylist(playList.id);
+                router.push("/playlist");
+              }
             }}
           >
             <Grid item xs={3}>
@@ -116,7 +118,7 @@ const Row = memo(
                     color: CLICKED_BUTTON_COLOR,
                   }}
                 >
-                  Playlist &bull; {item?.owner} &bull; {playList.songs.length}{" "}
+                  Playlist &bull; {item?.owner} &bull; {playList?.songs?.length}{" "}
                   songs
                 </Box>
               </div>

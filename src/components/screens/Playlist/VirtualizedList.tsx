@@ -4,11 +4,12 @@ import React, { Fragment, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 
-import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
+import { CLICKED_BUTTON_COLOR, LIGHT } from "../../../lib/theme";
 import { Song } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
 import usePlayer from "../../../hooks/usePlayer";
-import useNavigation from "../../../hooks/useNavigation";
+import TitleAndArtist from "./TitleAndArtist";
+import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -28,6 +29,14 @@ const useStyles = makeStyles(() => ({
     "&:active": {
       opacity: "0.5",
     },
+  },
+  button: {
+    "&:active": {
+      color: CLICKED_BUTTON_COLOR,
+    },
+  },
+  floatRight: {
+    float: "right",
   },
 }));
 
@@ -52,7 +61,7 @@ const Row = memo(
               playSong(song);
             }}
           >
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box
                 style={{
                   height: "100%",
@@ -61,41 +70,32 @@ const Row = memo(
               >
                 <img
                   src={song.thumbnail ? song.thumbnail : "/album.png"}
-                  width={65}
-                  height={65}
+                  width={55}
+                  height={55}
                   alt="abc"
                 />
               </Box>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={10}>
               <div
                 style={{
                   width: 210,
                   whiteSpace: "nowrap",
                   marginBottom: "5px",
+                  marginLeft: "5px",
                 }}
               >
-                <Box
-                  component="div"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                  style={{ fontSize: "16px", fontWeight: 600 }}
-                >
-                  {song?.title}
-                </Box>
-
-                <Box
-                  component="div"
-                  textOverflow="ellipsis"
-                  overflow="hidden"
-                  style={{
-                    color: CLICKED_BUTTON_COLOR,
-                  }}
-                >
-                  {/*                   Playlist &bull; {item?.owner} &bull; {playList.songs.length}{" "}
-                  songs */}
-                </Box>
+                <TitleAndArtist title={song.title} artists={song.artists} />
               </div>
+            </Grid>
+            <Grid item xs={2}>
+              <Box className={classes.floatRight}>
+                <MoreVertRoundedIcon
+                  color="secondary"
+                  fontSize="large"
+                  className={classes.button}
+                />
+              </Box>
             </Grid>
           </Grid>
         ) : (

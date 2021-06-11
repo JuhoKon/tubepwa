@@ -10,7 +10,8 @@ import usePlayer from "../../../../hooks/usePlayer";
 import SongSlider from "./Slider";
 import Controls from "./Controls";
 import TitleAndArtist from "./TitleAndArtist";
-import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../types/interfaces";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -59,6 +60,11 @@ const useStyles = makeStyles(() => ({
 export default function CenteredGrid(): JSX.Element {
   const classes = useStyles();
   const { hideMobilePlayer } = useNavigation();
+  const playList = useSelector((state: RootState) =>
+    state.playlist.playlists.find(
+      (ele) => ele.id === state.playlist.selectedPlaylistId
+    )
+  );
   return (
     <div className={classes.root}>
       <Grid container spacing={0}>
@@ -86,7 +92,7 @@ export default function CenteredGrid(): JSX.Element {
             >
               TOISTETAAN SOITTOLISTASTA
             </div>
-            <div>deadmau5 Radio</div>
+            <div>{playList.name}</div>
           </Box>
         </Grid>
         <Grid item xs={2}>

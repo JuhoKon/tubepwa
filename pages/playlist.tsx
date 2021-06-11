@@ -1,10 +1,12 @@
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Box } from "@material-ui/core";
 import React from "react";
 
-import { LIGHT } from "../src/lib/theme";
+import { CLICKED_BUTTON_COLOR, LIGHT } from "../src/lib/theme";
 import { useSelector } from "react-redux";
 import { RootState } from "../src/types/interfaces";
 import VirtualizedList from "../src/components/screens/Playlist/VirtualizedList";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,9 +27,18 @@ const useStyles = makeStyles(() => ({
     color: LIGHT,
     top: "0px",
   },
+  floatLeft: {
+    float: "left",
+  },
+  button: {
+    "&:active": {
+      color: CLICKED_BUTTON_COLOR,
+    },
+  },
 }));
 
 export default function PlaylistsScreen(): JSX.Element {
+  const router = useRouter();
   const classes = useStyles();
   const playList = useSelector((state: RootState) =>
     state.playlist.playlists.find(
@@ -38,7 +49,20 @@ export default function PlaylistsScreen(): JSX.Element {
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.flexBoxMiddle}>
-        <Grid item xs={2}></Grid>
+        <Grid item xs={2}>
+          <Box
+            className={classes.floatLeft}
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <ArrowBackIcon
+              color="secondary"
+              fontSize="small"
+              className={classes.button}
+            />
+          </Box>
+        </Grid>
         <Grid item xs={8}>
           <h3>{playList?.name}</h3>
         </Grid>
