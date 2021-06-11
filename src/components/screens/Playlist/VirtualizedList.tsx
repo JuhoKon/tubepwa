@@ -75,7 +75,7 @@ const Row = memo(
                 />
               </Box>
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={9}>
               <div
                 style={{
                   width: 210,
@@ -86,7 +86,7 @@ const Row = memo(
                 <TitleAndArtist title={song.title} artists={song.artists} />
               </div>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <Box className={classes.floatRight}>
                 <MoreVertRoundedIcon
                   color="secondary"

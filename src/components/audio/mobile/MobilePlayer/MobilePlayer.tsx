@@ -10,9 +10,9 @@ import { GREY, LIGHT, CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
 import usePlayer from '../../../../hooks/usePlayer';
 import { RootState } from '../../../../types/interfaces';
 
+import TitleAndArtist from './TitleAndArtist';
 import SongSlider from './Slider';
 import Controls from './Controls';
-import TitleAndArtist from './TitleAndArtist';
 
 const useStyles = makeStyles(() => ({
   root: {

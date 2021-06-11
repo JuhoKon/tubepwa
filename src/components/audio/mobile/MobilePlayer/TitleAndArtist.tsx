@@ -1,7 +1,8 @@
 import usePlayer from '../../../../hooks/usePlayer';
 import { CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
+import { Artists } from '../../Artists';
 
-const TitleAndArtist = (): JSX.Element => {
+const CurrentSongTitleAndArtist = (): JSX.Element => {
   const { player } = usePlayer();
 
   return (
@@ -12,11 +13,10 @@ const TitleAndArtist = (): JSX.Element => {
           fontWeight: 'lighter',
           color: CLICKED_BUTTON_COLOR
         }}>
-        {/* TODO: Multiple artists?*/}
-        {player?.currentSong?.artists[0]?.name}
+        <Artists artists={player.currentSong.artists} />
       </div>
     </>
   );
 };
 
-export default TitleAndArtist;
+export default CurrentSongTitleAndArtist;

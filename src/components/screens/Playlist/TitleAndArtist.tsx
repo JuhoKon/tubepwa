@@ -1,16 +1,17 @@
 import { CLICKED_BUTTON_COLOR } from '../../../lib/theme';
 import { Song } from '../../../types/interfaces';
+import { Artists } from '../../audio/Artists';
 
 type Props = {
   title: string;
   artists: Song['artists'];
 };
-const TitleAndArtist = ({ title, artists }: Props): JSX.Element => (
+
+const CurrentSongTitleAndArtist = ({ title, artists }: Props): JSX.Element => (
   <>
-    <div style={{ fontSize: '15px' }}>{title}</div>
+    <div style={{ fontSize: '16px' }}>{title}</div>
     <div
       style={{
-        fontSize: '15px',
         fontWeight: 'lighter',
         color: CLICKED_BUTTON_COLOR
       }}>
@@ -18,16 +19,5 @@ const TitleAndArtist = ({ title, artists }: Props): JSX.Element => (
     </div>
   </>
 );
-type Props2 = {
-  artists: Song['artists'];
-};
-const Artists = ({ artists }: Props2) => (
-  <div>
-    {artists?.map((artist, idx) => (
-      <>
-        {artist.name} {idx < artists.length - 1 ? <>&bull; &nbsp;</> : ''}
-      </>
-    ))}
-  </div>
-);
-export default TitleAndArtist;
+
+export default CurrentSongTitleAndArtist;

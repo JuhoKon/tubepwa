@@ -3,6 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import usePlayer from '../../../../hooks/usePlayer';
 import useNavigation from '../../../../hooks/useNavigation';
 import { CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
+import { Artists } from '../../Artists';
 
 const useStyles = makeStyles({
   flexBoxHorizontalMiddle: {
@@ -30,10 +31,10 @@ const CurrentSongTitleAndArtist = (): JSX.Element => {
           fontWeight: 'lighter',
           color: CLICKED_BUTTON_COLOR
         }}>
-        {/* TODO: Multiple artists?*/}
-        {player.currentSong.artists[0].name}
+        <Artists artists={player.currentSong.artists} />
       </div>
     </Box>
   );
 };
+
 export default CurrentSongTitleAndArtist;
