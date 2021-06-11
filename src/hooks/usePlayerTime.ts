@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   GetCurrentTime,
-  GetCurrentSongDuration,
-} from "../actions/playerActions";
-
-import { RootState } from "../types/interfaces";
+  GetCurrentSongDuration
+} from '../actions/playerActions';
+import { RootState } from '../types/interfaces';
 
 function usePlayerTime(): {
-  playerTime: RootState["playerTime"];
+  playerTime: RootState['playerTime'];
   getCurrentTime: typeof getCurrentTime;
   getCurrentSongDuration: typeof getCurrentSongDuration;
 } {
@@ -24,7 +24,7 @@ function usePlayerTime(): {
   return {
     playerTime,
     getCurrentTime,
-    getCurrentSongDuration,
+    getCurrentSongDuration
   };
 }
 export default usePlayerTime;

@@ -1,49 +1,50 @@
 /* eslint-disable react/display-name */
-import { Box, Grid, makeStyles } from "@material-ui/core";
-import { Fragment, memo } from "react";
-import { FixedSizeList as List } from "react-window";
-import InfiniteLoader from "react-window-infinite-loader";
+import { Box, Grid, makeStyles } from '@material-ui/core';
+import { Fragment, memo } from 'react';
+import { FixedSizeList as List } from 'react-window';
+import InfiniteLoader from 'react-window-infinite-loader';
+import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 
-import { CLICKED_BUTTON_COLOR, LIGHT } from "../../../lib/theme";
-import { Song } from "../../../types/interfaces";
-import PlayListItemSkeleton from "./PlaylistSkeleton";
-import usePlayer from "../../../hooks/usePlayer";
-import TitleAndArtist from "./TitleAndArtist";
-import MoreVertRoundedIcon from "@material-ui/icons/MoreVertRounded";
+import { CLICKED_BUTTON_COLOR, LIGHT } from '../../../lib/theme';
+import { Song } from '../../../types/interfaces';
+import usePlayer from '../../../hooks/usePlayer';
+
+import PlayListItemSkeleton from './PlaylistSkeleton';
+import TitleAndArtist from './TitleAndArtist';
 
 const useStyles = makeStyles(() => ({
   root: {
     color: LIGHT,
-    height: "100%",
-    padding: "10px",
+    height: '100%',
+    padding: '10px'
   },
   flexBoxMiddle: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "0px",
-    position: "sticky",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '0px',
+    position: 'sticky',
     color: LIGHT,
-    top: "0px",
-    "&:active": {
-      opacity: "0.5",
-    },
+    top: '0px',
+    '&:active': {
+      opacity: '0.5'
+    }
   },
   button: {
-    "&:active": {
-      color: CLICKED_BUTTON_COLOR,
-    },
+    '&:active': {
+      color: CLICKED_BUTTON_COLOR
+    }
   },
   floatRight: {
-    float: "right",
-  },
+    float: 'right'
+  }
 }));
 
 const LOADED = 2;
-const itemStatusMap = {};
+const itemStatusMap = {} as any;
 
-const isItemLoaded = (index) => !!itemStatusMap[index];
+const isItemLoaded = (index: number) => !!itemStatusMap[index];
 
 const Row = memo(
   ({ data, index, style }: { data: Song[]; index: number; style: any }) => {
@@ -59,17 +60,15 @@ const Row = memo(
             className={classes.flexBoxMiddle}
             onClick={() => {
               playSong(song);
-            }}
-          >
+            }}>
             <Grid item xs={2}>
               <Box
                 style={{
-                  height: "100%",
-                  width: "100%",
-                }}
-              >
+                  height: '100%',
+                  width: '100%'
+                }}>
                 <img
-                  src={song.thumbnail ? song.thumbnail : "/album.png"}
+                  src={song.thumbnail ? song.thumbnail : '/album.png'}
                   width={55}
                   height={55}
                   alt="abc"
@@ -80,11 +79,10 @@ const Row = memo(
               <div
                 style={{
                   width: 210,
-                  whiteSpace: "nowrap",
-                  marginBottom: "5px",
-                  marginLeft: "5px",
-                }}
-              >
+                  whiteSpace: 'nowrap',
+                  marginBottom: '5px',
+                  marginLeft: '5px'
+                }}>
                 <TitleAndArtist title={song.title} artists={song.artists} />
               </div>
             </Grid>
@@ -106,38 +104,35 @@ const Row = memo(
   }
 );
 type Props = {
-  songs: Song[];
+  songs?: Song[];
 };
 export default function App({ songs }: Props): JSX.Element {
-  const loadMoreItems = (startIndex, stopIndex) => {
-    return new Promise((resolve) => {
+  const loadMoreItems = (startIndex: number, stopIndex: number) =>
+    new Promise(resolve => {
       for (let index = startIndex; index <= stopIndex; index++) {
         if (itemStatusMap[index]) {
           return;
         }
         itemStatusMap[index] = LOADED;
       }
-      resolve("");
+      resolve('');
     });
-  };
-  console.log(songs.length);
   return (
     <Fragment>
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
-        itemCount={songs.length}
-        loadMoreItems={loadMoreItems}
-      >
-        {({ onItemsRendered, ref }) => (
+        itemCount={songs?.length ? songs.length : 0}
+        loadMoreItems={loadMoreItems}>
+        {({ onItemsRendered, ref }: any) => (
           <List
+            width="100%"
             className="List"
             height={400}
-            itemCount={songs.length}
+            itemCount={songs?.length ? songs.length : 0}
             itemSize={75}
             itemData={songs}
             onItemsRendered={onItemsRendered}
-            ref={ref}
-          >
+            ref={ref}>
             {Row}
           </List>
         )}

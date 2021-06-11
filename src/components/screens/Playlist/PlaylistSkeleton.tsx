@@ -1,21 +1,20 @@
-import Skeleton from "@material-ui/lab/Skeleton";
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import Skeleton from '@material-ui/lab/Skeleton';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 
-import { SKELETON_COLOR } from "../../../lib/theme";
+import { SKELETON_COLOR } from '../../../lib/theme';
 
 const useStyles = makeStyles({
   thumbnail: {
-    backgroundColor: SKELETON_COLOR,
+    backgroundColor: SKELETON_COLOR
   },
   imgBox: {
     width: `${65}px`,
-    height: `${50}px`,
+    height: `${50}px`
   },
   textBox: {
-    padding: "5px",
-  },
+    padding: '5px'
+  }
 });
-
 export default function PlayListItemSkeleton(): JSX.Element {
   const classes = useStyles();
   return (

@@ -1,14 +1,15 @@
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   HideMobilePlayer,
   ShowMobilePlayer,
-  SwapToScreen,
-} from "../actions/navigationActions";
-import { RootState } from "../types/interfaces";
+  SwapToScreen
+} from '../actions/navigationActions';
+import { RootState } from '../types/interfaces';
 
 function useNavigation(): {
-  nav: RootState["nav"];
+  nav: RootState['nav'];
   setScreen: typeof setScreen;
   showMobilePlayer: typeof showMobilePlayer;
   hideMobilePlayer: typeof hideMobilePlayer;
@@ -28,7 +29,7 @@ function useNavigation(): {
   };
 
   const showMobilePlayer = () => {
-    router.push("/mobileplayer");
+    router.push('/mobileplayer');
     dispatch(ShowMobilePlayer());
   };
   const hideMobilePlayer = () => {
@@ -38,7 +39,7 @@ function useNavigation(): {
     nav,
     setScreen,
     showMobilePlayer,
-    hideMobilePlayer,
+    hideMobilePlayer
   };
 }
 

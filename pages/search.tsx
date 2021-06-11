@@ -1,34 +1,35 @@
-import { makeStyles, Grid } from "@material-ui/core";
-import { useEffect } from "react";
+import { makeStyles, Grid } from '@material-ui/core';
+import { useEffect } from 'react';
 
-import { LIGHT } from "../src/lib/theme";
-import useNavigation from "../src/hooks/useNavigation";
-
+import { LIGHT } from '../src/lib/theme';
+import useNavigation from '../src/hooks/useNavigation';
+import * as constants from '../src/lib/constants';
 const useStyles = makeStyles(() => ({
   root: {
     color: LIGHT,
-    height: "100%",
-    padding: "10px",
+    height: '100%',
+    padding: '10px'
   },
   flexBoxMiddle: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
 
-    padding: "0px",
-    position: "sticky",
+    padding: '0px',
+    position: 'sticky',
 
     color: LIGHT,
-    top: "0px",
-  },
+    top: '0px'
+  }
 }));
 
 export default function SearchScreen(): JSX.Element {
   const { setScreen } = useNavigation();
   useEffect(() => {
-    setScreen(1);
+    setScreen(constants.SCREENS_ENUM.SEARCH);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const classes = useStyles();
   return (

@@ -1,33 +1,34 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
-import PlayCircleFilledRoundedIcon from "@material-ui/icons/PlayCircleFilledRounded";
-import SkipNextIcon from "@material-ui/icons/SkipNext";
-import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
-import PauseCircleFilledRoundedIcon from "@material-ui/icons/PauseCircleFilledRounded";
-import usePlayer from "../../../../hooks/usePlayer";
-import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
+import { Box, Grid, makeStyles } from '@material-ui/core';
+import PlayCircleFilledRoundedIcon from '@material-ui/icons/PlayCircleFilledRounded';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PauseCircleFilledRoundedIcon from '@material-ui/icons/PauseCircleFilledRounded';
+
+import usePlayer from '../../../../hooks/usePlayer';
+import { CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
 
 const useStyles = makeStyles({
   flexBoxMiddle: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    fontSize: "48px",
-    padding: "0px",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontSize: '48px',
+    padding: '0px'
   },
   playBox: {
-    fontSize: "68px",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    marginBottom: "-12px",
+    fontSize: '68px',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginBottom: '-12px'
   },
   button: {
-    "&:active": {
-      color: CLICKED_BUTTON_COLOR,
-    },
-  },
+    '&:active': {
+      color: CLICKED_BUTTON_COLOR
+    }
+  }
 });
 
 export default function Controls(): JSX.Element {

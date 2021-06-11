@@ -1,8 +1,10 @@
-import axios from "axios";
-import * as constants from "../lib/constants";
-import { PlaylistResponse } from "../types/interfaces";
+/* eslint-disable no-async-promise-executor */
+import axios from 'axios';
 
-import UserService from "./UserService";
+import * as constants from '../lib/constants';
+import { PlaylistResponse } from '../types/interfaces';
+
+import UserService from './UserService';
 
 /**
  * PlaylistService. Includes methods for acting with the BE and playlist operations.

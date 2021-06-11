@@ -1,10 +1,11 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { PlaylistAction } from "../types/ActionTypes";
-import * as types from "../types/types";
+import { PayloadAction } from '@reduxjs/toolkit';
+
+import { PlaylistAction } from '../types/ActionTypes';
+import * as types from '../types/types';
 
 const initialState = {
   playlists: [{} as PlaylistAction | null],
-  selectedPlaylistId: "" as PlaylistAction["selectedPlaylistId"],
+  selectedPlaylistId: '' as PlaylistAction['selectedPlaylistId']
 };
 
 export const playListReducer = (
@@ -25,14 +26,14 @@ export const playListReducer = (
             private: action.payload?.private,
             updatedAt: action.payload?.updatedAt,
             createdAt: action.payload?.createdAt,
-            __v: action.payload?.__v,
-          },
-        ],
+            __v: action.payload?.__v
+          }
+        ]
       };
     case types.SELECT_PLAYLIST:
       return {
         ...state,
-        selectedPlaylistId: action.payload?.selectedPlaylistId,
+        selectedPlaylistId: action.payload?.selectedPlaylistId
       };
     default:
       return state;

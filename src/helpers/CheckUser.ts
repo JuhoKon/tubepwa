@@ -1,6 +1,8 @@
-import { NextRouter } from "next/router";
-import delay from "./Sleep";
-import * as constants from "../lib/constants";
+import { NextRouter } from 'next/router';
+
+import * as constants from '../lib/constants';
+
+import delay from './Sleep';
 // either keep the user logged in or not.
 let trulyLoggedIn = false;
 /**
@@ -28,11 +30,11 @@ const checkUser = async (
   await delay(1000);
 
   if (!user.loggedIn) {
-    console.log("reference not logged in");
+    console.log('reference not logged in');
     if (!trulyLoggedIn) {
       errorCB();
       window.localStorage.removeItem(constants.USER_LOCAL_STORAGE_KEY);
-      router.push("/login");
+      router.push('/login');
     }
   }
 };

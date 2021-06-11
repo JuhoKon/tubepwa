@@ -1,15 +1,16 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { UserAction } from "../types/ActionTypes";
-import { User } from "../types/interfaces";
-import * as types from "../types/types";
+import { PayloadAction } from '@reduxjs/toolkit';
+
+import { User } from '../types/interfaces';
+import * as types from '../types/types';
+import { UserAction } from '../types/ActionTypes';
 
 const initialState = {
   loggingIn: false,
   loggedIn: false,
-  token: "" as User["token"],
-  error: "" as UserAction["error"],
-  user: {} as User["user"],
-  userPlaylists: [] as UserAction["playlists"],
+  token: '' as User['token'],
+  error: '' as UserAction['error'],
+  user: {} as User['user'],
+  userPlaylists: [] as UserAction['playlists']
 };
 
 export const userReducer = (
@@ -20,16 +21,16 @@ export const userReducer = (
     case types.LOGIN_REQUEST:
       return {
         ...state,
-        loggingIn: true,
+        loggingIn: true
       };
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         loggingIn: false,
         loggedIn: true,
-        error: "",
+        error: '',
         token: action.payload?.user?.token,
-        user: action.payload?.user?.user,
+        user: action.payload?.user?.user
       };
     case types.LOGIN_FAILURE:
       return {
@@ -38,52 +39,52 @@ export const userReducer = (
         loggedIn: false,
         error: action.payload?.error,
         user: undefined,
-        userPlaylists: [],
+        userPlaylists: []
       };
     case types.REGISTER_REQUEST:
       return {
         ...state,
-        loggingIn: true,
+        loggingIn: true
       };
     case types.REGISTER_SUCCESS:
       return {
         ...state,
         loggingIn: false,
         loggedIn: true,
-        error: "",
+        error: '',
         token: action.payload?.user?.token,
         userPlaylists: [],
-        user: action.payload?.user?.user,
+        user: action.payload?.user?.user
       };
     case types.REGISTER_FAILURE:
       return {
         ...state,
         loggingIn: false,
-        error: action.payload?.error,
+        error: action.payload?.error
       };
     case types.LOGOUT:
       return {
         loggingIn: false,
         loggedIn: false,
-        token: "",
-        error: "",
+        token: '',
+        error: '',
         user: undefined,
-        userPlaylists: [],
+        userPlaylists: []
       };
 
     case types.GET_USER_INFO_REQUEST:
       return {
-        ...state,
+        ...state
       };
     case types.GET_USER_INFO_SUCCESS:
       return {
         ...state,
-        userPlaylists: action.payload?.playlists,
+        userPlaylists: action.payload?.playlists
       };
     case types.GET_USER_INFO_FAILURE:
       return {
         ...state,
-        error: action.payload?.error,
+        error: action.payload?.error
       };
     default:
       return state;

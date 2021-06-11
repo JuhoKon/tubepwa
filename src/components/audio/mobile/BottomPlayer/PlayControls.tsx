@@ -1,21 +1,22 @@
-import { Box, makeStyles } from "@material-ui/core";
-import usePlayer from "../../../../hooks/usePlayer";
-import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import PauseRoundedIcon from "@material-ui/icons/PauseRounded";
-import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
+import { Box, makeStyles } from '@material-ui/core';
+import PlayArrowRoundedIcon from '@material-ui/icons/PlayArrowRounded';
+import PauseRoundedIcon from '@material-ui/icons/PauseRounded';
+
+import usePlayer from '../../../../hooks/usePlayer';
+import { CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
 
 const useStyles = makeStyles({
   flexBoxMiddle: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
-    "&:active": {
-      color: CLICKED_BUTTON_COLOR,
-    },
-  },
+    '&:active': {
+      color: CLICKED_BUTTON_COLOR
+    }
+  }
 });
 
 const BottomPlayerPlayControls = (): JSX.Element => {
@@ -30,8 +31,7 @@ const BottomPlayerPlayControls = (): JSX.Element => {
         } else {
           resumePlay();
         }
-      }}
-    >
+      }}>
       {player.isPlaying ? (
         <PauseRoundedIcon
           color="secondary"

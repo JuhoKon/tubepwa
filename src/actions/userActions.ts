@@ -1,14 +1,16 @@
-import UserService from "../helpers/UserService";
-import * as types from "../types/types";
-import * as constants from "../lib/constants";
-import * as AlertActions from "./alertActions";
-import * as NavigationActions from "./navigationActions";
+import { PayloadAction } from '@reduxjs/toolkit';
+
+import UserService from '../helpers/UserService';
+import * as types from '../types/types';
+import * as constants from '../lib/constants';
 import {
   AlertAction,
   NavigationAction,
-  UserAction,
-} from "../types/ActionTypes";
-import { PayloadAction } from "@reduxjs/toolkit";
+  UserAction
+} from '../types/ActionTypes';
+
+import * as AlertActions from './alertActions';
+import * as NavigationActions from './navigationActions';
 
 const userService = UserService.getInstance();
 /**
@@ -19,7 +21,7 @@ const userService = UserService.getInstance();
  * Attempts to login, depending on the success dispatches more actions required to handle the situation. E.g. showing alerts.
  */
 export const Login = (email: string, password: string): unknown => {
-  console.log("Hey?");
+  console.log('Hey?');
   return (
     dispatch: (
       arg0: PayloadAction<
@@ -30,7 +32,7 @@ export const Login = (email: string, password: string): unknown => {
     dispatch({ type: types.LOGIN_REQUEST, payload: undefined });
     userService
       .login(email, password)
-      .then((user) => {
+      .then(user => {
         dispatch({ type: types.LOGIN_SUCCESS, payload: { user } });
         dispatch(NavigationActions.ShowBottomBar());
         dispatch(
@@ -40,7 +42,7 @@ export const Login = (email: string, password: string): unknown => {
           )
         );
       })
-      .catch((e) => {
+      .catch(e => {
         dispatch({ type: types.LOGIN_FAILURE, payload: { error: e } });
         dispatch(NavigationActions.CloseBottomBar());
         dispatch(
@@ -57,8 +59,9 @@ export const Login = (email: string, password: string): unknown => {
  *
  * Attempts to logout the user. Dispatches more actions if successfull.
  */
-export const Logout = (): unknown => {
-  return (
+export const Logout =
+  (): unknown =>
+  (
     dispatch: (
       arg0: PayloadAction<UserAction | NavigationAction | undefined>
     ) => void
@@ -67,26 +70,25 @@ export const Logout = (): unknown => {
     dispatch({ type: types.LOGOUT, payload: undefined });
     dispatch(NavigationActions.CloseBottomBar());
   };
-};
 /**
  *
  *
  * Gets user information from the BE with the token. Updates state with the acquired data.
  */
-export const GetUserInfo = (): any => {
-  return (dispatch: (arg0: PayloadAction<UserAction | undefined>) => void) => {
+export const GetUserInfo =
+  (): any =>
+  (dispatch: (arg0: PayloadAction<UserAction | undefined>) => void) => {
     dispatch({ type: types.GET_USER_INFO_REQUEST, payload: undefined });
     userService
       .getCurrentUsersPlaylists()
-      .then((playlists) => {
+      .then(playlists => {
         console.log(playlists);
         dispatch({ type: types.GET_USER_INFO_SUCCESS, payload: { playlists } });
       })
-      .catch((e) => {
+      .catch(e => {
         dispatch({ type: types.GET_USER_INFO_FAILURE, payload: { error: e } });
       });
   };
-};
 /**
  *
  * @param name User's username
@@ -95,12 +97,9 @@ export const GetUserInfo = (): any => {
  *
  * Attempts to create a new account with the provided information. Dispatches more actions based on the success. E.g. shows alerts.
  */
-export const Register = (
-  name: string,
-  email: string,
-  password: string
-): unknown => {
-  return (
+export const Register =
+  (name: string, email: string, password: string): unknown =>
+  (
     dispatch: (
       arg0: PayloadAction<
         UserAction | AlertAction | NavigationAction | undefined
@@ -110,7 +109,7 @@ export const Register = (
     dispatch({ type: types.REGISTER_REQUEST, payload: undefined });
     userService
       .register(name, email, password)
-      .then((user) => {
+      .then(user => {
         dispatch({ type: types.REGISTER_SUCCESS, payload: { user } });
         dispatch(
           AlertActions.ShowAlert(
@@ -120,19 +119,19 @@ export const Register = (
         );
         dispatch(NavigationActions.ShowBottomBar());
       })
-      .catch((e) => {
+      .catch(e => {
         dispatch({ type: types.REGISTER_FAILURE, payload: { error: e } });
         dispatch(AlertActions.ShowAlert(constants.ERROR_ALERT, e));
       });
   };
-};
 /**
  *
  *
  * Fetches data from the localstorage, and attempts to update the Redux store. Confirms that the user has valid token.
  */
-export const GetDataFromLocalStorageToRedux = (): unknown => {
-  return (
+export const GetDataFromLocalStorageToRedux =
+  (): unknown =>
+  (
     dispatch: (
       arg0: PayloadAction<
         UserAction | AlertAction | NavigationAction | undefined
@@ -142,11 +141,11 @@ export const GetDataFromLocalStorageToRedux = (): unknown => {
     dispatch({ type: types.LOGIN_REQUEST, payload: undefined });
     userService
       .getCurrentUserFromLocalStorage()
-      .then((user) => {
+      .then(user => {
         if (!user) {
           return dispatch({
             type: types.LOGIN_FAILURE,
-            payload: { error: constants.NO_TOKEN_ERROR },
+            payload: { error: constants.NO_TOKEN_ERROR }
           });
         }
         // We have user
@@ -154,7 +153,7 @@ export const GetDataFromLocalStorageToRedux = (): unknown => {
         // TODO!!
         dispatch({
           type: types.LOGIN_SUCCESS,
-          payload: { user },
+          payload: { user }
         });
         /*         dispatch(
           AlertActions.ShowAlert(
@@ -165,8 +164,7 @@ export const GetDataFromLocalStorageToRedux = (): unknown => {
         dispatch(NavigationActions.ShowBottomBar());
         dispatch(GetUserInfo());
       })
-      .catch((e) => {
+      .catch(e => {
         dispatch({ type: types.LOGIN_FAILURE, payload: e });
       });
   };
-};

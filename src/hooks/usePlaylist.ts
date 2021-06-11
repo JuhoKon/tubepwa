@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { AddPlaylist, SelectPlaylist } from "../actions/playlistActions";
-import { RootState } from "../types/interfaces";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { AddPlaylist, SelectPlaylist } from '../actions/playlistActions';
+import { RootState } from '../types/interfaces';
 /**
  *
  * @returns useAlert - hook.
@@ -8,7 +9,7 @@ import { RootState } from "../types/interfaces";
  * Hook can be used to control the alerts, and get alerts current state.
  */
 function usePlaylist(): {
-  playlist: RootState["playlist"];
+  playlist: RootState['playlist'];
   addPlaylist: typeof addPlaylist;
   selectPlaylist: typeof selectPlaylist;
 } {

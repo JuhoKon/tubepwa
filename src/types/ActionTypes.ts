@@ -1,5 +1,6 @@
-import { Color } from "@material-ui/lab/Alert";
-import { Song, User, UserPlaylist } from "./interfaces";
+import { Color } from '@material-ui/lab/Alert';
+
+import { Song, User, UserPlaylist } from './interfaces';
 
 export type AlertAction = {
   severity?: Color;

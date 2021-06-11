@@ -1,5 +1,6 @@
-import { Color } from "@material-ui/lab/Alert";
-import { PlaylistAction } from "./ActionTypes";
+import { Color } from '@material-ui/lab/Alert';
+
+import { PlaylistAction } from './ActionTypes';
 
 export type GenericObject = { [key: string]: any };
 
@@ -52,8 +53,8 @@ export interface PlayerTimeState {
 }
 export type Config = {
   headers: {
-    "Content-Type": string;
-    "x-auth-token"?: string | undefined;
+    'Content-Type': string;
+    'x-auth-token'?: string | undefined;
   };
 };
 export type User = {

@@ -1,15 +1,16 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   GetDataFromLocalStorageToRedux,
   GetUserInfo,
   Login,
   Logout,
-  Register,
-} from "../actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../types/interfaces";
+  Register
+} from '../actions/userActions';
+import { RootState } from '../types/interfaces';
 
 function useCurrentUser(): {
-  user: RootState["user"];
+  user: RootState['user'];
   login: typeof login;
   getUserInfo: typeof getUserInfo;
   logout: typeof logout;
@@ -30,7 +31,7 @@ function useCurrentUser(): {
    * Dispatches action for login.
    */
   const login = async (email: string, password: string): Promise<void> => {
-    console.log("LOGIN");
+    console.log('LOGIN');
     dispatch(Login(email, password));
   };
 
@@ -78,7 +79,7 @@ function useCurrentUser(): {
     getUserInfo,
     logout,
     register,
-    getUserFromLocalStorage,
+    getUserFromLocalStorage
   };
 }
 

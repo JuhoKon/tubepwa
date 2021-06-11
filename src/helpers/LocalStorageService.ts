@@ -1,4 +1,4 @@
-import { GenericObject } from "../types/interfaces";
+import { GenericObject } from '../types/interfaces';
 
 /**
  * Localstorage service for handling actions regarding the localstorage.
@@ -61,6 +61,10 @@ class LocalStorageService {
     return new Promise((res, rej) => {
       try {
         const item = window.localStorage.getItem(name);
+        if (!item) {
+          rej('No item found.');
+          return;
+        }
         const parsedItem = JSON.parse(item);
         res(parsedItem);
       } catch (e) {

@@ -1,14 +1,14 @@
-import { makeStyles } from "@material-ui/core";
-import usePlayer from "../../../../hooks/usePlayer";
+import { makeStyles } from '@material-ui/core';
 
-import useNavigation from "../../../../hooks/useNavigation";
-import { playerHeight } from "../../../../lib/constants";
+import usePlayer from '../../../../hooks/usePlayer';
+import useNavigation from '../../../../hooks/useNavigation';
+import { playerHeight } from '../../../../lib/constants';
 
 const useStyles = makeStyles({
   imgBox: {
     width: `${playerHeight}px`,
-    height: `${playerHeight}px`,
-  },
+    height: `${playerHeight}px`
+  }
 });
 
 const CurrentSongImage = (): JSX.Element => {

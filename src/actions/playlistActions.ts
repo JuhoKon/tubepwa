@@ -1,14 +1,14 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import PlaylistService from "../helpers/PlaylistService";
-import { PlaylistAction } from "../types/ActionTypes";
-import * as types from "../types/types";
+import { PayloadAction } from '@reduxjs/toolkit';
+
+import PlaylistService from '../helpers/PlaylistService';
+import { PlaylistAction } from '../types/ActionTypes';
+import * as types from '../types/types';
 const playlistService = PlaylistService.getInstance();
 
-export const AddPlaylist = (playlistid: string): unknown => {
-  return (
-    dispatch: (arg0: PayloadAction<PlaylistAction | undefined>) => void
-  ) => {
-    playlistService.retrievePlaylistById(playlistid).then((playlist) => {
+export const AddPlaylist =
+  (playlistid: string): unknown =>
+  (dispatch: (arg0: PayloadAction<PlaylistAction | undefined>) => void) => {
+    playlistService.retrievePlaylistById(playlistid).then(playlist => {
       console.log(playlist);
       dispatch({
         type: types.ADD_PLAYLIST,
@@ -19,16 +19,13 @@ export const AddPlaylist = (playlistid: string): unknown => {
           songs: playlist.playlist,
           createdAt: playlist.createdAt,
           updatedAt: playlist.updatedAt,
-          name: playlist.name,
-        },
+          name: playlist.name
+        }
       });
     });
   };
-};
 
-export const SelectPlaylist = (playlistId: string): unknown => {
-  return {
-    type: types.SELECT_PLAYLIST,
-    payload: { selectedPlaylistId: playlistId },
-  };
-};
+export const SelectPlaylist = (playlistId: string): unknown => ({
+  type: types.SELECT_PLAYLIST,
+  payload: { selectedPlaylistId: playlistId }
+});

@@ -1,39 +1,39 @@
-import { makeStyles, Grid, Box } from "@material-ui/core";
+import { makeStyles, Grid, Box } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useRouter } from 'next/router';
 
-import { CLICKED_BUTTON_COLOR, LIGHT } from "../src/lib/theme";
-import { useSelector } from "react-redux";
-import { RootState } from "../src/types/interfaces";
-import VirtualizedList from "../src/components/screens/Playlist/VirtualizedList";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { useRouter } from "next/router";
+import { CLICKED_BUTTON_COLOR, LIGHT } from '../src/lib/theme';
+import { RootState } from '../src/types/interfaces';
+import VirtualizedList from '../src/components/screens/Playlist/VirtualizedList';
 
 const useStyles = makeStyles(() => ({
   root: {
     color: LIGHT,
-    height: "100%",
-    padding: "10px",
+    height: '100%',
+    padding: '10px'
   },
   flexBoxMiddle: {
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
 
-    padding: "0px",
-    position: "sticky",
+    padding: '0px',
+    position: 'sticky',
 
     color: LIGHT,
-    top: "0px",
+    top: '0px'
   },
   floatLeft: {
-    float: "left",
+    float: 'left'
   },
   button: {
-    "&:active": {
-      color: CLICKED_BUTTON_COLOR,
-    },
-  },
+    '&:active': {
+      color: CLICKED_BUTTON_COLOR
+    }
+  }
 }));
 
 export default function PlaylistsScreen(): JSX.Element {
@@ -41,10 +41,9 @@ export default function PlaylistsScreen(): JSX.Element {
   const classes = useStyles();
   const playList = useSelector((state: RootState) =>
     state.playlist.playlists.find(
-      (ele) => ele.id === state.playlist.selectedPlaylistId
+      ele => ele?.id === state.playlist.selectedPlaylistId
     )
   );
-  console.log(playList);
   return (
     <div className={classes.root}>
       <Grid container spacing={0} className={classes.flexBoxMiddle}>
@@ -53,8 +52,7 @@ export default function PlaylistsScreen(): JSX.Element {
             className={classes.floatLeft}
             onClick={() => {
               router.back();
-            }}
-          >
+            }}>
             <ArrowBackIcon
               color="secondary"
               fontSize="small"

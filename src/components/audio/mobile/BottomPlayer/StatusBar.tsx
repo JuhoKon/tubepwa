@@ -1,5 +1,6 @@
 import { LinearProgress, makeStyles } from "@material-ui/core";
 import { useRef, useEffect } from "react";
+
 import usePlayer from "../../../../hooks/usePlayer";
 import usePlayerTime from "../../../../hooks/usePlayerTime";
 import { LIGHT_GREY2, LIGHT } from "../../../../lib/theme";

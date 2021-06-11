@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Slider from "@material-ui/core/Slider";
-import { Box } from "@material-ui/core";
-import usePlayer from "../../../../hooks/usePlayer";
-import usePlayerTime from "../../../../hooks/usePlayerTime";
-import { useDebounce } from "use-lodash-debounce";
-import delay from "../../../../helpers/Sleep";
-import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
+import { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
+import { Box } from '@material-ui/core';
+import { useDebounce } from 'use-lodash-debounce';
+
+import usePlayer from '../../../../hooks/usePlayer';
+import usePlayerTime from '../../../../hooks/usePlayerTime';
+import delay from '../../../../helpers/Sleep';
+import { CLICKED_BUTTON_COLOR } from '../../../../lib/theme';
 
 const useStyles = makeStyles({
   root: {
-    width: "100%",
-    margin: "0px",
+    width: '100%',
+    margin: '0px'
   },
   smallText: {
-    fontSize: "12px",
-    marginTop: "-15px",
-  },
+    fontSize: '12px',
+    marginTop: '-15px'
+  }
 });
 
 export default function SongSlider(): JSX.Element {
@@ -67,10 +68,10 @@ export default function SongSlider(): JSX.Element {
         color="secondary"
       />
       <Box className={classes.smallText}>
-        <div style={{ float: "left", color: CLICKED_BUTTON_COLOR }}>
+        <div style={{ float: 'left', color: CLICKED_BUTTON_COLOR }}>
           {formatTime(currentTime)}
         </div>
-        <div style={{ float: "right", color: CLICKED_BUTTON_COLOR }}>
+        <div style={{ float: 'right', color: CLICKED_BUTTON_COLOR }}>
           {formatTime(playerTime.duration)}
         </div>
       </Box>
@@ -78,6 +79,5 @@ export default function SongSlider(): JSX.Element {
   );
 }
 
-const formatTime = (time: number) => {
-  return new Date(time * 1000).toISOString().substr(14, 5);
-};
+const formatTime = (time: number) =>
+  new Date(time * 1000).toISOString().substr(14, 5);

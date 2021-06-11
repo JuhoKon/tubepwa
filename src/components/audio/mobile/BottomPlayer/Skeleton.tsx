@@ -1,24 +1,24 @@
-import Skeleton from "@material-ui/lab/Skeleton";
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import Skeleton from '@material-ui/lab/Skeleton';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 
-import { playerHeight, statusBarHeight } from "../../../../lib/constants";
-import { LIGHT_GREY2, SKELETON_COLOR } from "../../../../lib/theme";
+import { playerHeight, statusBarHeight } from '../../../../lib/constants';
+import { LIGHT_GREY2, SKELETON_COLOR } from '../../../../lib/theme';
 
 const useStyles = makeStyles({
   thumbnail: {
-    backgroundColor: SKELETON_COLOR,
+    backgroundColor: SKELETON_COLOR
   },
   imgBox: {
     width: `${playerHeight}px`,
-    height: `${playerHeight}px`,
+    height: `${playerHeight}px`
   },
   statusBar: {
     height: `${statusBarHeight}px`,
-    backgroundColor: LIGHT_GREY2,
+    backgroundColor: LIGHT_GREY2
   },
   textBox: {
-    padding: "5px",
-  },
+    padding: '5px'
+  }
 });
 
 export default function BottomPlayerSkeleton(): JSX.Element {

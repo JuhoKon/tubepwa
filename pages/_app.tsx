@@ -1,24 +1,25 @@
-import Head from "next/head";
-import { Provider } from "react-redux";
-import { useStore } from "../src/store/store";
-import "../styles/globals.css";
-import BottomNav from "../src/components/BottomNav";
-import AlertComponent from "../src/components/Alert";
-import LoadingBackdrop from "../src/components/LoadingBackdrop";
-import { useEffect } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "../src/lib/theme";
-import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
+import Head from 'next/head';
+import { Provider } from 'react-redux';
+import { useEffect } from 'react';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-export default function MyApp({ Component, pageProps }) {
+import { useStore } from '../src/store/store';
+import '../styles/globals.css';
+import BottomNav from '../src/components/BottomNav';
+import AlertComponent from '../src/components/Alert';
+import LoadingBackdrop from '../src/components/LoadingBackdrop';
+import theme from '../src/lib/theme';
+import BottomPlayer from '../src/components/audio/mobile/BottomPlayer/BottomPlayer';
+
+export default function MyApp({ Component, pageProps }: any) {
   const store: any = useStore(pageProps.initialReduxState);
 
   useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
-      jssStyles.parentElement.removeChild(jssStyles);
+      jssStyles?.parentElement?.removeChild(jssStyles);
     }
   }, []);
   return (

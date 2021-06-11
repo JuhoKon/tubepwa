@@ -1,7 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { HideAlert, ShowAlert } from "../actions/alertActions";
-import * as constants from "../lib/constants";
-import { RootState } from "../types/interfaces";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { HideAlert, ShowAlert } from '../actions/alertActions';
+import * as constants from '../lib/constants';
+import { RootState } from '../types/interfaces';
 /**
  *
  * @returns useAlert - hook.
@@ -9,7 +10,7 @@ import { RootState } from "../types/interfaces";
  * Hook can be used to control the alerts, and get alerts current state.
  */
 function useAlert(): {
-  alerts: RootState["alerts"];
+  alerts: RootState['alerts'];
   setSuccessAlert: typeof setSuccessAlert;
   setErrorAlert: typeof setErrorAlert;
   hideAlert: typeof hideAlert;

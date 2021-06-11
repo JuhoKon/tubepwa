@@ -1,11 +1,12 @@
-import { useRouter } from "next/router";
-import * as React from "react";
-import SignIn from "../src/components/auth/Login";
-import Register from "../src/components/auth/Register";
-import LoadingBackDrop from "../src/components/LoadingBackdrop";
-import delay from "../src/helpers/Sleep";
-import useCurrentUser from "../src/hooks/useCurrentUser";
-import * as constants from "../src/lib/constants";
+import { useRouter } from 'next/router';
+import * as React from 'react';
+
+import SignIn from '../src/components/auth/Login';
+import Register from '../src/components/auth/Register';
+import LoadingBackDrop from '../src/components/LoadingBackdrop';
+import delay from '../src/helpers/Sleep';
+import useCurrentUser from '../src/hooks/useCurrentUser';
+import * as constants from '../src/lib/constants';
 
 export default function Login(): React.ReactNode {
   const [initialRender, setInitialRender] = React.useState(true);
@@ -15,7 +16,7 @@ export default function Login(): React.ReactNode {
     const checkLocalStorage = async () => {
       if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
         await delay(1000);
-        router.replace("/");
+        router.replace('/');
       } else {
         setInitialRender(false);
       }
@@ -25,7 +26,7 @@ export default function Login(): React.ReactNode {
   }, []);
   React.useEffect(() => {
     if (user.loggedIn) {
-      router.replace("/");
+      router.replace('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.loggedIn]);
@@ -40,7 +41,7 @@ export default function Login(): React.ReactNode {
   };
 
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div style={{ backgroundColor: 'white' }}>
       <LoadingBackDrop useRedux={false} show={initialRender} />
       {screenState ? (
         <Register swapToSignIn={swapToSignIn} />

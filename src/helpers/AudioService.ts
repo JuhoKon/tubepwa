@@ -1,19 +1,17 @@
-import * as constants from "../lib/constants";
-import UserService from "./UserService";
-import { setMetaData } from "./MediaSession";
-import { Song } from "../types/interfaces";
+import * as constants from '../lib/constants';
+import { Song } from '../types/interfaces';
+
+import { setMetaData } from './MediaSession';
 
 /**
  * AudioService. Handles playing audio on the application. Provides methods for controlling the audio.
  */
 class AudioService {
   private static instance: AudioService;
-  private UserService: UserService;
-  private audioElement: HTMLAudioElement;
-  private audioCtx: AudioContext;
-  private analyser: AnalyserNode;
-  private calculateVisualization = false;
-  private calculationInterval: NodeJS.Timeout;
+  private audioElement!: HTMLAudioElement;
+  private audioCtx!: AudioContext;
+  private analyser!: AnalyserNode;
+  private calculationInterval!: NodeJS.Timeout;
   constructor() {
     // when SSR this doesn't as we need to access the browser APIs
     // somehow when we do this at constructor, it gets later on run on the browser...
@@ -21,8 +19,6 @@ class AudioService {
       const audioElement = new Audio();
       this.audioElement = audioElement;
     }
-    const userService = new UserService();
-    this.UserService = userService;
   }
 
   public static getInstance(): AudioService {
@@ -70,7 +66,7 @@ class AudioService {
   public resumePlaying(): void {
     this.audioElement.play();
     if (!this.audioElement.paused) {
-      console.log("WE PLAYING");
+      console.log('WE PLAYING');
     }
   }
 
@@ -107,10 +103,10 @@ class AudioService {
   }
 
   private init() {
-    console.log("HELLO?");
+    console.log('HELLO?');
     const audioCtx = new window.AudioContext();
     // Get the source
-    this.audioElement.crossOrigin = "anonymous";
+    this.audioElement.crossOrigin = 'anonymous';
 
     const source = audioCtx.createMediaElementSource(this.audioElement);
     // Create an analyser
@@ -133,12 +129,11 @@ class AudioService {
     const dataArray = new Uint8Array(bufferLength);
 
     // Visualisation
-    const section = document.querySelector("section");
-
+    const section = document.querySelector('section');
     const v = new Array(bufferLength)
-      .fill("")
+      .fill('')
       .map(
-        (e) => (e = document.createElement("i")) && section.appendChild(e) && e
+        e => (e = document.createElement('i')) && section.appendChild(e) && e
       );
     if (this.calculationInterval) {
       clearInterval(this.calculationInterval);
@@ -146,7 +141,7 @@ class AudioService {
     this.calculationInterval = setInterval(() => {
       this.analyser.getByteTimeDomainData(dataArray);
       dataArray.forEach((d, i) =>
-        v[i].style.setProperty("--c", (Math.abs(128 - d) * 2.8125) | 0)
+        v[i].style.setProperty('--c', (Math.abs(128 - d) * 2.8125) | 0)
       );
       /* console.log(dataArray); */
     }, 20);

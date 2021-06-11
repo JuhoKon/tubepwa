@@ -1,12 +1,13 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { PlayerAction } from "../types/ActionTypes";
+import { PayloadAction } from '@reduxjs/toolkit';
 
-import * as types from "../types/types";
+import { PlayerAction } from '../types/ActionTypes';
+import * as types from '../types/types';
+
 const initialState = {
-  currentSong: undefined as PlayerAction["song"],
+  currentSong: undefined as PlayerAction['song'],
   isPlaying: false,
   loadingSong: false,
-  showVisualization: false,
+  showVisualization: false
 };
 
 export const playerReducer = (
@@ -19,32 +20,32 @@ export const playerReducer = (
         ...state,
         currentSong: action.payload?.song,
         isPlaying: true,
-        loadingSong: false,
+        loadingSong: false
       };
     case types.PLAY_SONG_REQUEST:
       return {
         ...state,
-        loadingSong: true,
+        loadingSong: true
       };
     case types.RESUME_PLAY:
       return {
         ...state,
-        isPlaying: true,
+        isPlaying: true
       };
     case types.PAUSE_SONG:
       return {
         ...state,
-        isPlaying: false,
+        isPlaying: false
       };
     case types.SHOW_VISUALIZATION:
       return {
         ...state,
-        showVisualization: true,
+        showVisualization: true
       };
     case types.HIDE_VISUALIZATION:
       return {
         ...state,
-        showVisualization: false,
+        showVisualization: false
       };
     default:
       return state;

@@ -1,15 +1,14 @@
-import * as React from "react";
-import { useRouter } from "next/router";
-import useCurrentUser from "../src/hooks/useCurrentUser";
-import checkUser from "../src/helpers/CheckUser";
-import LoadingBackDrop from "../src/components/LoadingBackdrop";
-import useAlert from "../src/hooks/useAlert";
-import * as constants from "../src/lib/constants";
-import usePlayer from "../src/hooks/usePlayer";
-import Link from "next/link";
-import { Song } from "../src/types/interfaces";
+import * as React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-import useNavigation from "../src/hooks/useNavigation";
+import useCurrentUser from '../src/hooks/useCurrentUser';
+import checkUser from '../src/helpers/CheckUser';
+import LoadingBackDrop from '../src/components/LoadingBackdrop';
+import useAlert from '../src/hooks/useAlert';
+import * as constants from '../src/lib/constants';
+import usePlayer from '../src/hooks/usePlayer';
+import useNavigation from '../src/hooks/useNavigation';
 
 export default function Home(): React.ReactNode {
   const { user, getUserFromLocalStorage } = useCurrentUser();
@@ -21,12 +20,12 @@ export default function Home(): React.ReactNode {
 
   // INITIAL HIT ON THE INDEX PAGE
   React.useEffect(() => {
-    setScreen(0);
+    setScreen(constants.SCREENS_ENUM.HOME);
     /*   initNavigator(); */
     if (window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
       getUserFromLocalStorage();
     } else {
-      router.replace("/login");
+      router.replace('/login');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -35,10 +34,10 @@ export default function Home(): React.ReactNode {
   React.useEffect(() => {
     // Please clean
     if (!window.localStorage.getItem(constants.USER_LOCAL_STORAGE_KEY)) {
-      router.replace("/login");
+      router.replace('/login');
     } else {
       if (prevStatusRef.current === true && user.loggedIn === false) {
-        router.replace("/login");
+        router.replace('/login');
       } else {
         const errorCB = () => setErrorAlert(constants.PLEASE_LOGIN_MSG);
         prevStatusRef.current = user.loggedIn;
@@ -51,10 +50,10 @@ export default function Home(): React.ReactNode {
   if (!user.loggedIn) {
     return <LoadingBackDrop useRedux={false} show={true} />;
   }
-  return <Screen_1 />;
+  return <Screen1 />;
 }
-const Screen_1 = () => {
-  const { playSong, showVisualization, hideVisualization } = usePlayer();
+const Screen1 = () => {
+  const { showVisualization, hideVisualization } = usePlayer();
   const { logout } = useCurrentUser();
 
   return (
@@ -64,12 +63,11 @@ const Screen_1 = () => {
       <button
         onClick={() => {
           logout();
-        }}
-      >
+        }}>
         Logout
       </button>
       {/* Hide these somehow? These are just for preloading stuff. Or move them to BottomNav */}
-      <div style={{ display: "none" }}>
+      <div style={{ display: 'none' }}>
         <Link href="/mobileplayer">
           <button>Mobileplayer</button>
         </Link>

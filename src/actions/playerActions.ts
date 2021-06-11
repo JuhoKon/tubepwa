@@ -1,9 +1,10 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import AudioService from "../helpers/AudioService";
-import delay from "../helpers/Sleep";
-import { PlayerAction } from "../types/ActionTypes";
-import { Song } from "../types/interfaces";
-import * as types from "../types/types";
+import { PayloadAction } from '@reduxjs/toolkit';
+
+import AudioService from '../helpers/AudioService';
+import delay from '../helpers/Sleep';
+import { PlayerAction } from '../types/ActionTypes';
+import { Song } from '../types/interfaces';
+import * as types from '../types/types';
 const audioService = AudioService.getInstance();
 /**
  *
@@ -11,10 +12,9 @@ const audioService = AudioService.getInstance();
  *
  * Uses AudioService to play a song, updates everything to the redux store.
  */
-export const PlaySong = (song: Song): unknown => {
-  return (
-    dispatch: (arg0: PayloadAction<PlayerAction | undefined>) => void
-  ) => {
+export const PlaySong =
+  (song: Song): unknown =>
+  (dispatch: (arg0: PayloadAction<PlayerAction | undefined>) => void) => {
     dispatch({ type: types.PLAY_SONG_REQUEST, payload: undefined });
     audioService
       .playSong(song)
@@ -22,12 +22,11 @@ export const PlaySong = (song: Song): unknown => {
         dispatch({ type: types.PLAY_SONG_SUCCESS, payload: { song } });
         dispatch(GetCurrentSongDuration());
       })
-      .catch((e) => {
+      .catch(e => {
         console.log(e);
         // TODO: dispatch error
       });
   };
-};
 /**
  * Uses AudioSerivce to resume playing a song.
  */

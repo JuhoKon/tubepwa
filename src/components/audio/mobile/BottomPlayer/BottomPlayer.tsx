@@ -1,53 +1,55 @@
-import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
-import usePlayer from "../../../../hooks/usePlayer";
+import { Box, CircularProgress, Grid, makeStyles } from '@material-ui/core';
+
+import usePlayer from '../../../../hooks/usePlayer';
 import {
   bottomNavHeight,
   playerHeight,
-  statusBarHeight,
-} from "../../../../lib/constants";
-import { LIGHT_GREY, LIGHT, LIGHT_GREY2 } from "../../../../lib/theme";
-import CurrentSongImage from "./CurrentSongImage";
-import CurrentSongTitleAndArtist from "./CurrentSongTitleAndArtist";
-import BottomPlayerPlayControls from "./PlayControls";
-import BottomPlayerSkeleton from "./Skeleton";
-import { StatusBar } from "./StatusBar";
+  statusBarHeight
+} from '../../../../lib/constants';
+import { LIGHT_GREY, LIGHT, LIGHT_GREY2 } from '../../../../lib/theme';
+
+import CurrentSongImage from './CurrentSongImage';
+import CurrentSongTitleAndArtist from './CurrentSongTitleAndArtist';
+import BottomPlayerPlayControls from './PlayControls';
+import BottomPlayerSkeleton from './Skeleton';
+import { StatusBar } from './StatusBar';
 
 const useStyles = makeStyles({
   root: {
-    position: "absolute",
+    position: 'absolute',
     bottom: `${bottomNavHeight}px`,
     background: LIGHT_GREY,
     height: `${playerHeight + statusBarHeight}px`,
-    width: "100%",
-    color: LIGHT,
+    width: '100%',
+    color: LIGHT
   },
   imgBox: {
     width: `${playerHeight}px`,
-    height: `${playerHeight}px`,
+    height: `${playerHeight}px`
   },
   statusBar: {
     height: `${statusBarHeight}px`,
-    backgroundColor: LIGHT_GREY2,
+    backgroundColor: LIGHT_GREY2
   },
   loadingIndicator: {
-    position: "absolute",
-    left: "8px",
-    top: "8px",
+    position: 'absolute',
+    left: '8px',
+    top: '8px',
     width: `${playerHeight}px`,
-    height: `${playerHeight}px`,
+    height: `${playerHeight}px`
   },
   relativeContainer: {
-    position: "relative",
+    position: 'relative',
     width: `${playerHeight}px`,
-    height: `${playerHeight}px`,
+    height: `${playerHeight}px`
   },
   loadingIndicatorContainer: {
-    backgroundColor: "#0000008f",
+    backgroundColor: '#0000008f',
     width: `${playerHeight}px`,
     height: `${playerHeight}px`,
-    position: "absolute",
-    bottom: "0px",
-  },
+    position: 'absolute',
+    bottom: '0px'
+  }
 });
 
 export default function BottomPlayer(): JSX.Element | null {
@@ -57,9 +59,8 @@ export default function BottomPlayer(): JSX.Element | null {
   if (player?.loadingSong && !player.currentSong) {
     return (
       <Box
-        display={{ xs: "block", sm: "none", md: "none" }}
-        className={classes.root}
-      >
+        display={{ xs: 'block', sm: 'none', md: 'none' }}
+        className={classes.root}>
         <BottomPlayerSkeleton />
       </Box>
     );
@@ -69,9 +70,8 @@ export default function BottomPlayer(): JSX.Element | null {
   }
   return (
     <Box
-      display={{ xs: "block", sm: "none", md: "none" }}
-      className={classes.root}
-    >
+      display={{ xs: 'block', sm: 'none', md: 'none' }}
+      className={classes.root}>
       <Grid container>
         <Grid item xs={12} className={classes.statusBar}>
           <StatusBar />

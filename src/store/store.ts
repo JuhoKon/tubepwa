@@ -1,8 +1,9 @@
-import { useMemo } from "react";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunkMiddleware from "redux-thunk";
-import reducers from "../reducers/reducers";
+import { useMemo } from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
+
+import reducers from '../reducers/reducers';
 
 let store;
 
@@ -22,14 +23,14 @@ export const initializeStore = (preloadedState: any): void => {
   if (preloadedState && store) {
     _store = initStore({
       ...store.getState(),
-      ...preloadedState,
+      ...preloadedState
     });
     // Reset the current store
     store = undefined;
   }
 
   // For SSG and SSR always create a new store
-  if (typeof window === "undefined") return _store;
+  if (typeof window === 'undefined') return _store;
   // Create the store once in the client
   if (!store) store = _store;
 

@@ -1,22 +1,25 @@
-import axios from "axios";
-import * as constants from "../lib/constants";
+/* eslint-disable no-async-promise-executor */
+import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
+import * as constants from '../lib/constants';
 import {
   Config,
   GenericObject,
   PlaylistResponse,
   User,
-  UserPlaylist,
-} from "../types/interfaces";
-import LocalStorageService from "./LocalStorageService";
-import delay from "./Sleep";
-import jwt from "jsonwebtoken";
+  UserPlaylist
+} from '../types/interfaces';
+
+import LocalStorageService from './LocalStorageService';
+import delay from './Sleep';
 /**
  * UserService. Includes methods for acting with the BE and user operations.
  */
 class UserService {
   private static instance: UserService;
   private localStorageService: LocalStorageService;
-  private user: User;
+  private user: User | undefined;
   constructor() {
     const localStorageService = LocalStorageService.getInstance();
     this.localStorageService = localStorageService;
@@ -38,13 +41,13 @@ class UserService {
    * Attempts to login the user. Also updates the localstorage, if successful.
    */
   public async login(email: string, password: string): Promise<User> {
-    console.log("HEYLO");
+    console.log('HEYLO');
     await delay(500); // Artificial delay so we don't get "too fast" login lömao
     return new Promise(async (res, rej) => {
       const body = JSON.stringify({ email, password });
       try {
         const results = await axios.post(
-          constants.BACKEND_URL + "/auth",
+          constants.BACKEND_URL + '/auth',
           body,
           this.tokenConfig()
         );
@@ -69,12 +72,8 @@ class UserService {
   public async retrieveItemFromLocalStorage(
     name: string
   ): Promise<GenericObject> {
-    try {
-      const item = await this.localStorageService.retrieveItem(name);
-      return item;
-    } catch (error) {
-      throw error;
-    }
+    const item = await this.localStorageService.retrieveItem(name);
+    return item;
   }
   /**
    * Clears user's localstorage.
@@ -101,12 +100,12 @@ class UserService {
       const body = JSON.stringify({
         name,
         email,
-        role: "User", // We can write here whatever, BE can only create normal users (whew)
-        password,
+        role: 'User', // We can write here whatever, BE can only create normal users (whew)
+        password
       });
       try {
         const results = await axios.post(
-          constants.BACKEND_URL + "/users/create",
+          constants.BACKEND_URL + '/users/create',
           body,
           this.tokenConfig()
         );
@@ -145,7 +144,7 @@ class UserService {
     return new Promise(async (res, rej) => {
       try {
         const results = await axios.get(
-          constants.BACKEND_URL + "/auth/user",
+          constants.BACKEND_URL + '/auth/user',
           this.tokenConfig()
         );
         res(results.data.playlists);
@@ -162,16 +161,16 @@ class UserService {
   public tokenConfig(): Config {
     const config = {
       headers: {
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json'
+      }
     };
 
     const currentUser = this.user;
     if (!currentUser?.token) {
-      console.log("No token lmao?");
+      console.log('No token lmao?');
       return config;
     }
-    config.headers["x-auth-token"] = currentUser.token;
+    config.headers['x-auth-token'] = currentUser.token;
     return config;
   }
 
@@ -187,7 +186,7 @@ class UserService {
         let user: User = (await this.localStorageService.retrieveItem(
           constants.USER_LOCAL_STORAGE_KEY
         )) as User;
-        const decoded: any = jwt.decode(user.token);
+        const decoded: any = jwt.decode(user.token || 'invalid');
         if (!decoded) {
           rej(constants.INVALID_TOKEN_ERROR);
         }
@@ -215,18 +214,18 @@ class UserService {
    *
    * This function can be used to renew the userToken.
    */
-  public async renewUsertoken(userToken = this.user.token): Promise<User> {
+  public async renewUsertoken(userToken = this.user?.token): Promise<User> {
     return new Promise(async (res, rej) => {
       try {
         const config = {
           headers: {
-            "Content-Type": "application/json",
-          },
+            'Content-Type': 'application/json'
+          }
         };
-        config.headers["x-auth-token"] = userToken;
+        config.headers['x-auth-token'] = userToken;
 
         const result = await axios.get(
-          constants.BACKEND_URL + "/auth/renew",
+          constants.BACKEND_URL + '/auth/renew',
           config
         );
 
