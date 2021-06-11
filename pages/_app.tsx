@@ -10,7 +10,6 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/lib/theme";
 import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlayer";
-import PlayerModal from "../src/components/audio/mobile/MobilePlayer/PlayerModal";
 
 export default function MyApp({ Component, pageProps }) {
   const store: any = useStore(pageProps.initialReduxState);
@@ -66,7 +65,6 @@ export default function MyApp({ Component, pageProps }) {
           <BottomNav />
           <AlertComponent />
           <LoadingBackdrop />
-          <PlayerModal />
           <BottomPlayer />
         </ThemeProvider>
       </Provider>
