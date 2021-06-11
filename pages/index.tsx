@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { useRouter } from "next/router";
 import useCurrentUser from "../src/hooks/useCurrentUser";
 import checkUser from "../src/helpers/CheckUser";
@@ -57,50 +57,10 @@ const Screen_1 = () => {
   const { playSong, showVisualization, hideVisualization } = usePlayer();
   const { logout } = useCurrentUser();
 
-  const song1: Song = {
-    album: { id: "a", name: "Albumi 55" },
-    artists: [{ id: "d", name: "Heikki Mustonen" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
-    title: "Routainen maa",
-    uniqueId: 12,
-    videoId: "AHdd65cuAIE",
-  };
-  const song2: Song = {
-    album: { id: "a", name: "Toinen albumi" },
-    artists: [{ id: "d", name: "deadmau5" }],
-    date: 32,
-    duration: "2:23",
-    resultType: "s",
-    scraped: true,
-    thumbnail:
-      "https://lh3.googleusercontent.com/gGh9tG3b8AdjIveO5SrQMm3tBx5aWhh2ZD0h5Kgx6QfcqUUMKIHhltVXIGK--TgcDZlsESxKG7Z2j1Zw=w120-h120-s-l90-rj",
-    title: "Polyphobia",
-    uniqueId: 12,
-    videoId: "SwE612H1WLs",
-  };
   return (
     <>
       <button onClick={showVisualization}>Show</button>
       <button onClick={hideVisualization}>Hide</button>
-      <button
-        onClick={() => {
-          playSong(song1);
-        }}
-      >
-        Song 1
-      </button>
-      <button
-        onClick={() => {
-          playSong(song2);
-        }}
-      >
-        Song 2
-      </button>
       <button
         onClick={() => {
           logout();

@@ -5,8 +5,8 @@ import { AlertAction } from "../types/ActionTypes";
 
 const initialState = {
   showAlert: false,
-  alertText: "",
-  severity: contants.SUCCESS_ALERT,
+  alertText: "" as AlertAction["alertText"],
+  severity: contants.SUCCESS_ALERT as AlertAction["severity"],
 };
 
 export const alertReducer = (
@@ -18,8 +18,8 @@ export const alertReducer = (
       return {
         ...state,
         showAlert: true,
-        alertText: action.payload.alertText,
-        severity: action.payload.severity,
+        alertText: action.payload?.alertText,
+        severity: action.payload?.severity,
       };
     case types.HIDE_ALERT:
       return {

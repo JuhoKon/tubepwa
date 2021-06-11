@@ -1,5 +1,4 @@
 import { makeStyles, Grid, Box } from "@material-ui/core";
-import React from "react";
 
 import { CLICKED_BUTTON_COLOR, LIGHT } from "../src/lib/theme";
 import { useSelector } from "react-redux";

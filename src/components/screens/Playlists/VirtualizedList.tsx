@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Box, Grid, makeStyles } from "@material-ui/core";
-import React, { Fragment, memo } from "react";
+import { Fragment, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 import useCurrentUser from "../../../hooks/useCurrentUser";
@@ -152,7 +152,6 @@ export default function App(): JSX.Element {
       resolve("");
     });
   };
-  console.log(playlists.length);
   return (
     <Fragment>
       <InfiniteLoader

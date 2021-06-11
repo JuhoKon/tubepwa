@@ -1,5 +1,4 @@
 import { Box, makeStyles } from "@material-ui/core";
-import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import PauseRoundedIcon from "@material-ui/icons/PauseRounded";

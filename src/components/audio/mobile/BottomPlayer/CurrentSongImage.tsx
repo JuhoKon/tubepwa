@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 
 import useNavigation from "../../../../hooks/useNavigation";

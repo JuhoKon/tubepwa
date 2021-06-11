@@ -1,14 +1,15 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { UserAction } from "../types/ActionTypes";
+import { User } from "../types/interfaces";
 import * as types from "../types/types";
 
 const initialState = {
   loggingIn: false,
   loggedIn: false,
-  token: "",
-  error: "",
-  user: {},
-  userPlaylists: [],
+  token: "" as User["token"],
+  error: "" as UserAction["error"],
+  user: {} as User["user"],
+  userPlaylists: [] as UserAction["playlists"],
 };
 
 export const userReducer = (
@@ -27,16 +28,16 @@ export const userReducer = (
         loggingIn: false,
         loggedIn: true,
         error: "",
-        token: action.payload.user.token,
-        user: action.payload.user.user,
+        token: action.payload?.user?.token,
+        user: action.payload?.user?.user,
       };
     case types.LOGIN_FAILURE:
       return {
         ...state,
         loggingIn: false,
         loggedIn: false,
-        error: action.payload.error,
-        user: "",
+        error: action.payload?.error,
+        user: undefined,
         userPlaylists: [],
       };
     case types.REGISTER_REQUEST:
@@ -50,15 +51,15 @@ export const userReducer = (
         loggingIn: false,
         loggedIn: true,
         error: "",
-        token: action.payload.user.token,
+        token: action.payload?.user?.token,
         userPlaylists: [],
-        user: action.payload.user.user,
+        user: action.payload?.user?.user,
       };
     case types.REGISTER_FAILURE:
       return {
         ...state,
         loggingIn: false,
-        error: action.payload.error,
+        error: action.payload?.error,
       };
     case types.LOGOUT:
       return {
@@ -66,7 +67,7 @@ export const userReducer = (
         loggedIn: false,
         token: "",
         error: "",
-        user: {},
+        user: undefined,
         userPlaylists: [],
       };
 
@@ -77,12 +78,12 @@ export const userReducer = (
     case types.GET_USER_INFO_SUCCESS:
       return {
         ...state,
-        userPlaylists: action.payload.playlists,
+        userPlaylists: action.payload?.playlists,
       };
     case types.GET_USER_INFO_FAILURE:
       return {
         ...state,
-        error: action.payload.error,
+        error: action.payload?.error,
       };
     default:
       return state;

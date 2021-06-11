@@ -1,8 +1,7 @@
 import { makeStyles, Grid } from "@material-ui/core";
-import React from "react";
+import { useEffect } from "react";
 
 import { LIGHT } from "../src/lib/theme";
-import VirtualizedList from "../src/components/screens/Playlists/VirtualizedList";
 import useNavigation from "../src/hooks/useNavigation";
 
 const useStyles = makeStyles(() => ({
@@ -28,7 +27,7 @@ const useStyles = makeStyles(() => ({
 
 export default function SearchScreen(): JSX.Element {
   const { setScreen } = useNavigation();
-  React.useEffect(() => {
+  useEffect(() => {
     setScreen(1);
   }, []);
   const classes = useStyles();

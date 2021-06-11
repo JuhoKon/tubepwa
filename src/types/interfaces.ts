@@ -57,8 +57,8 @@ export type Config = {
   };
 };
 export type User = {
-  token: string;
-  user: {
+  token?: string;
+  user?: {
     id: string;
     name: string;
     role: string;

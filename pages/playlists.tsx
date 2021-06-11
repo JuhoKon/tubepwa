@@ -1,5 +1,5 @@
 import { makeStyles, Grid } from "@material-ui/core";
-import React from "react";
+import { useEffect } from "react";
 
 import { LIGHT } from "../src/lib/theme";
 import VirtualizedList from "../src/components/screens/Playlists/VirtualizedList";
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 
 export default function PlaylistsScreen(): JSX.Element {
   const { setScreen } = useNavigation();
-  React.useEffect(() => {
+  useEffect(() => {
     setScreen(2);
   }, []);
   const classes = useStyles();

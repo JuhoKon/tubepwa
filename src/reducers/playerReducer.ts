@@ -1,8 +1,9 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { PlayerAction } from "../types/ActionTypes";
+
 import * as types from "../types/types";
 const initialState = {
-  currentSong: null,
+  currentSong: undefined as PlayerAction["song"],
   isPlaying: false,
   loadingSong: false,
   showVisualization: false,
@@ -16,7 +17,7 @@ export const playerReducer = (
     case types.PLAY_SONG_SUCCESS:
       return {
         ...state,
-        currentSong: action.payload.song,
+        currentSong: action.payload?.song,
         isPlaying: true,
         loadingSong: false,
       };

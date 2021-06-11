@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef } from "react";
 import Slide from "@material-ui/core/Slide";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import useNavigation from "../src/hooks/useNavigation";
 import { useRouter } from "next/router";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Transition: any = React.forwardRef(function Transition(props: any, ref) {
+const Transition: any = forwardRef(function Transition(props: any, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 

@@ -3,7 +3,7 @@ import * as constants from "../lib/constants";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { NavigationAction } from "../types/ActionTypes";
 const initialState = {
-  currentScreen: constants.SCREEN_1,
+  currentScreen: constants.SCREEN_1 as NavigationAction["screen"],
   showBottomNav: false,
   showMobilePlayer: false,
 };
@@ -16,7 +16,7 @@ export const navigationReducer = (
     case types.CHANGING_SCREEN:
       return {
         ...state,
-        currentScreen: action.payload.screen,
+        currentScreen: action.payload?.screen,
       };
     case types.SHOW_BOTTOM_BAR:
       return {

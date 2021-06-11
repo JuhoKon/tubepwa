@@ -1,4 +1,3 @@
-import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
 

@@ -5,7 +5,7 @@ import "../styles/globals.css";
 import BottomNav from "../src/components/BottomNav";
 import AlertComponent from "../src/components/Alert";
 import LoadingBackdrop from "../src/components/LoadingBackdrop";
-import React from "react";
+import { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/lib/theme";
@@ -14,7 +14,7 @@ import BottomPlayer from "../src/components/audio/mobile/BottomPlayer/BottomPlay
 export default function MyApp({ Component, pageProps }) {
   const store: any = useStore(pageProps.initialReduxState);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import * as React from "react";
 import SignIn from "../src/components/auth/Login";
 import Register from "../src/components/auth/Register";
 import LoadingBackDrop from "../src/components/LoadingBackdrop";

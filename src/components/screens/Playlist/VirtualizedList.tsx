@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { Box, Grid, makeStyles } from "@material-ui/core";
-import React, { Fragment, memo } from "react";
+import { Fragment, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 
@@ -46,7 +46,7 @@ const itemStatusMap = {};
 const isItemLoaded = (index) => !!itemStatusMap[index];
 
 const Row = memo(
-  ({ data, index, style }: { data: Song[]; index: number; style: unknown }) => {
+  ({ data, index, style }: { data: Song[]; index: number; style: any }) => {
     const classes = useStyles();
     const song = data[index];
     const { playSong } = usePlayer();

@@ -1,4 +1,3 @@
-import React from "react";
 import { CLICKED_BUTTON_COLOR } from "../../../lib/theme";
 import { Song } from "../../../types/interfaces";
 

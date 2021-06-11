@@ -1,5 +1,4 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
 import PlayCircleFilledRoundedIcon from "@material-ui/icons/PlayCircleFilledRounded";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";

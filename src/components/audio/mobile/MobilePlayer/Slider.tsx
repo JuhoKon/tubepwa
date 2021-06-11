@@ -1,12 +1,12 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import { Box } from "@material-ui/core";
 import usePlayer from "../../../../hooks/usePlayer";
+import usePlayerTime from "../../../../hooks/usePlayerTime";
 import { useDebounce } from "use-lodash-debounce";
 import delay from "../../../../helpers/Sleep";
 import { CLICKED_BUTTON_COLOR } from "../../../../lib/theme";
-import usePlayerTime from "../../../../hooks/usePlayerTime";
 
 const useStyles = makeStyles({
   root: {
@@ -21,15 +21,15 @@ const useStyles = makeStyles({
 
 export default function SongSlider(): JSX.Element {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const [seekValue, setSeekValue] = React.useState(999999);
+  const [value, setValue] = useState(0);
+  const [seekValue, setSeekValue] = useState(999999);
   const { seekTo } = usePlayer();
   const { playerTime } = usePlayerTime();
-  const [dragging, setDragging] = React.useState(false);
+  const [dragging, setDragging] = useState(false);
 
   const debouncedValue = useDebounce(seekValue, 750);
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log(debouncedValue);
     if (debouncedValue === 999999) {
       return;

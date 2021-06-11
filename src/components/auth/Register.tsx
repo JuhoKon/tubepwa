@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -58,7 +58,7 @@ export default function Register({
   const { user, register } = useCurrentUser();
 
   const classes = useStyles();
-  const [loginObject, setLoginObject] = React.useState({
+  const [loginObject, setLoginObject] = useState({
     email: "",
     password: "",
     name: "",

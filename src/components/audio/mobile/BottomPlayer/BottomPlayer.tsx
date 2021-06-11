@@ -1,5 +1,4 @@
 import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
 import usePlayer from "../../../../hooks/usePlayer";
 import {
   bottomNavHeight,
@@ -51,7 +50,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BottomPlayer(): JSX.Element {
+export default function BottomPlayer(): JSX.Element | null {
   const classes = useStyles();
   const { player } = usePlayer();
 

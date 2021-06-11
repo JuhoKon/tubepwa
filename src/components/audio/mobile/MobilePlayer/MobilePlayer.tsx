@@ -1,4 +1,3 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import useNavigation from "../../../../hooks/useNavigation";
@@ -62,7 +61,7 @@ export default function CenteredGrid(): JSX.Element {
   const { hideMobilePlayer } = useNavigation();
   const playList = useSelector((state: RootState) =>
     state.playlist.playlists.find(
-      (ele) => ele.id === state.playlist.selectedPlaylistId
+      (ele) => ele?.id === state.playlist.selectedPlaylistId
     )
   );
   return (
@@ -92,7 +91,7 @@ export default function CenteredGrid(): JSX.Element {
             >
               TOISTETAAN SOITTOLISTASTA
             </div>
-            <div>{playList.name}</div>
+            <div>{playList?.name}</div>
           </Box>
         </Grid>
         <Grid item xs={2}>

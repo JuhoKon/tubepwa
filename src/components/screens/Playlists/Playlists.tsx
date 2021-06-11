@@ -1,5 +1,4 @@
 import { makeStyles, Grid } from "@material-ui/core";
-import React from "react";
 
 import { LIGHT } from "../../../lib/theme";
 import VirtualizedList from "./VirtualizedList";
