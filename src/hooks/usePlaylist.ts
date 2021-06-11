@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AddPlaylist } from "../actions/playlistActions";
+import { AddPlaylist, SelectPlaylist } from "../actions/playlistActions";
 import { RootState } from "../types/interfaces";
 /**
  *
@@ -10,6 +10,7 @@ import { RootState } from "../types/interfaces";
 function usePlaylist(): {
   playlist: RootState["playlist"];
   addPlaylist: typeof addPlaylist;
+  selectPlaylist: typeof selectPlaylist;
 } {
   const playlist = useSelector((state: RootState) => state.playlist);
 
@@ -18,7 +19,12 @@ function usePlaylist(): {
   const addPlaylist = (id: string) => {
     dispatch(AddPlaylist(id));
   };
-  return { playlist, addPlaylist };
+
+  const selectPlaylist = (id: string) => {
+    dispatch(SelectPlaylist(id));
+  };
+
+  return { playlist, addPlaylist, selectPlaylist };
 }
 
 export default usePlaylist;

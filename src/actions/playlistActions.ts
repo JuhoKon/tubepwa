@@ -19,8 +19,16 @@ export const AddPlaylist = (playlistid: string): unknown => {
           songs: playlist.playlist,
           createdAt: playlist.createdAt,
           updatedAt: playlist.updatedAt,
+          name: playlist.name,
         },
       });
     });
+  };
+};
+
+export const SelectPlaylist = (playlistId: string): unknown => {
+  return {
+    type: types.SELECT_PLAYLIST,
+    payload: { selectedPlaylistId: playlistId },
   };
 };

@@ -29,4 +29,5 @@ export type PlaylistAction = {
   updatedAt?: string;
   __v?: number;
   id?: string;
+  selectedPlaylistId?: string;
 };

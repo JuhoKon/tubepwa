@@ -1,8 +1,10 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { PlaylistAction } from "../types/ActionTypes";
 import * as types from "../types/types";
+
 const initialState = {
   playlists: [{} as PlaylistAction | null],
+  selectedPlaylistId: "",
 };
 
 export const playListReducer = (
@@ -17,6 +19,7 @@ export const playListReducer = (
           ...state.playlists,
           {
             id: action.payload.id,
+            name: action.payload.name,
             owner: action.payload.owner,
             songs: action.payload.songs,
             private: action.payload.private,
@@ -26,7 +29,11 @@ export const playListReducer = (
           },
         ],
       };
-
+    case types.SELECT_PLAYLIST:
+      return {
+        ...state,
+        selectedPlaylistId: action.payload.selectedPlaylistId,
+      };
     default:
       return state;
   }

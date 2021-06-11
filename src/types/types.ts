@@ -43,3 +43,4 @@ export const HIDE_VISUALIZATION = "HIDE_VISUALIZATION";
 
 // Playlist types
 export const ADD_PLAYLIST = "ADD_PLAYLIST";
+export const SELECT_PLAYLIST = "SELECT_PLAYLIST";

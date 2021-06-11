@@ -3,13 +3,12 @@ import { Box, Grid, makeStyles } from "@material-ui/core";
 import React, { Fragment, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
-import useCurrentUser from "../../../hooks/useCurrentUser";
+
 import { LIGHT, CLICKED_BUTTON_COLOR } from "../../../lib/theme";
-import { RootState, UserPlaylist } from "../../../types/interfaces";
+import { Song } from "../../../types/interfaces";
 import PlayListItemSkeleton from "./PlaylistSkeleton";
-import { useSelector } from "react-redux";
-import usePlaylist from "../../../hooks/usePlaylist";
-import { useRouter } from "next/router";
+import usePlayer from "../../../hooks/usePlayer";
+import useNavigation from "../../../hooks/useNavigation";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -38,36 +37,19 @@ const itemStatusMap = {};
 const isItemLoaded = (index) => !!itemStatusMap[index];
 
 const Row = memo(
-  ({
-    data,
-    index,
-    style,
-  }: {
-    data: unknown;
-    index: number;
-    style: unknown;
-  }) => {
-    const router = useRouter();
-    const { selectPlaylist } = usePlaylist();
+  ({ data, index, style }: { data: Song[]; index: number; style: unknown }) => {
     const classes = useStyles();
-
-    const item: UserPlaylist = data[index];
-
-    const playList = useSelector((state: RootState) =>
-      state.playlist.playlists.find((ele) => ele.id === item._id)
-    );
-
+    const song = data[index];
+    const { playSong } = usePlayer();
     return (
       <div style={style}>
-        {playList ? (
+        {data ? (
           <Grid
             container
             spacing={0}
             className={classes.flexBoxMiddle}
             onClick={() => {
-              console.log(`Clicked on ${playList.name}`);
-              selectPlaylist(playList.id);
-              router.push("/playlist");
+              playSong(song);
             }}
           >
             <Grid item xs={3}>
@@ -78,13 +60,7 @@ const Row = memo(
                 }}
               >
                 <img
-                  src={
-                    playList.songs &&
-                    playList.songs[0] &&
-                    playList.songs[0].thumbnail
-                      ? playList.songs[0].thumbnail
-                      : "/album.png"
-                  }
+                  src={song.thumbnail ? song.thumbnail : "/album.png"}
                   width={65}
                   height={65}
                   alt="abc"
@@ -105,7 +81,7 @@ const Row = memo(
                   overflow="hidden"
                   style={{ fontSize: "16px", fontWeight: 600 }}
                 >
-                  {item?.name}
+                  {song?.title}
                 </Box>
 
                 <Box
@@ -116,8 +92,8 @@ const Row = memo(
                     color: CLICKED_BUTTON_COLOR,
                   }}
                 >
-                  Playlist &bull; {item?.owner} &bull; {playList.songs.length}{" "}
-                  songs
+                  {/*                   Playlist &bull; {item?.owner} &bull; {playList.songs.length}{" "}
+                  songs */}
                 </Box>
               </div>
             </Grid>
@@ -129,42 +105,36 @@ const Row = memo(
     );
   }
 );
-
-export default function App(): JSX.Element {
-  const { user } = useCurrentUser();
-  const { addPlaylist } = usePlaylist();
-  const playlists = user.userPlaylists;
-
+type Props = {
+  songs: Song[];
+};
+export default function App({ songs }: Props): JSX.Element {
   const loadMoreItems = (startIndex, stopIndex) => {
-    for (let index = startIndex; index <= stopIndex; index++) {
-      /*  addPlaylist(playlists[index]._id); */
-    }
     return new Promise((resolve) => {
       for (let index = startIndex; index <= stopIndex; index++) {
         if (itemStatusMap[index]) {
           return;
         }
-        addPlaylist(playlists[index]._id);
         itemStatusMap[index] = LOADED;
       }
       resolve("");
     });
   };
-  console.log(playlists.length);
+  console.log(songs.length);
   return (
     <Fragment>
       <InfiniteLoader
         isItemLoaded={isItemLoaded}
-        itemCount={playlists.length}
+        itemCount={songs.length}
         loadMoreItems={loadMoreItems}
       >
         {({ onItemsRendered, ref }) => (
           <List
             className="List"
             height={400}
-            itemCount={playlists.length}
+            itemCount={songs.length}
             itemSize={75}
-            itemData={playlists}
+            itemData={songs}
             onItemsRendered={onItemsRendered}
             ref={ref}
           >

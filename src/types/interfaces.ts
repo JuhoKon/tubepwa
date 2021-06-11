@@ -38,6 +38,7 @@ export interface AlertState {
 }
 export interface PlaylistState {
   playlists: [PlaylistAction | null];
+  selectedPlaylistId: string;
 }
 export interface PlayerState {
   currentSong: Song;
