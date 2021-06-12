@@ -31,6 +31,7 @@ class AudioService {
   // with metadata etc. so we can do something with them
   // logic like this: User wants to play something -> dispatch -> songService -> reducer -> all happy
   public playSong(song: Song): Promise<void> {
+    console.log('Trying to play:', song);
     return new Promise((res, rej) => {
       if (!this.audioCtx) {
         this.init();
