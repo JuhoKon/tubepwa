@@ -4,8 +4,9 @@ export const setMetaData = (
   album: string,
   thumbnailURL: string
 ): void => {
-  if (navigator.mediaSession) {
-    navigator.mediaSession.metadata = new MediaMetadata({
+  if ('mediaSession' in navigator) {
+    console.log('MEDIA SESSION FOUND');
+    navigator.mediaSession!.metadata = new MediaMetadata({
       title: title,
       artist: artist,
       album: album,
@@ -27,23 +28,25 @@ export const setMediaSessionActionHandlers = (
   previousTrackCB: () => void,
   nextTrackCB: () => void
 ): void => {
-  if (navigator.mediaSession) {
-    navigator.mediaSession.setActionHandler('play', function () {
+  console.log('I was called lmao.');
+  if ('mediaSession' in navigator) {
+    console.log('Setting shit here.');
+    navigator.mediaSession!.setActionHandler('play', function () {
       playCB();
     });
-    navigator.mediaSession.setActionHandler('pause', function () {
+    navigator.mediaSession!.setActionHandler('pause', function () {
       pauseCB();
     });
-    navigator.mediaSession.setActionHandler('stop', function () {
+    navigator.mediaSession!.setActionHandler('stop', function () {
       stopCB();
     });
-    navigator.mediaSession.setActionHandler('seekto', function () {
+    navigator.mediaSession!.setActionHandler('seekto', function () {
       seekToCB('');
     });
-    navigator.mediaSession.setActionHandler('previoustrack', function () {
+    navigator.mediaSession!.setActionHandler('previoustrack', function () {
       previousTrackCB();
     });
-    navigator.mediaSession.setActionHandler('nexttrack', function () {
+    navigator.mediaSession!.setActionHandler('nexttrack', function () {
       nextTrackCB();
     });
   }

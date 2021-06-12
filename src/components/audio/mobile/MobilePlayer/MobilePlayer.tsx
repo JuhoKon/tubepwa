@@ -13,6 +13,7 @@ import { RootState } from '../../../../types/interfaces';
 import TitleAndArtist from './TitleAndArtist';
 import SongSlider from './Slider';
 import Controls from './Controls';
+import React from 'react';
 
 const useStyles = makeStyles(() => ({
   root: {

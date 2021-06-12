@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Grid, makeStyles } from '@material-ui/core';
+import React from 'react';
 
 import usePlayer from '../../../../hooks/usePlayer';
 import {
@@ -54,8 +55,11 @@ const useStyles = makeStyles({
 
 export default function BottomPlayer(): JSX.Element | null {
   const classes = useStyles();
-  const { player } = usePlayer();
-
+  const { player, initNavigator } = usePlayer();
+  React.useEffect(() => {
+    console.log('Calling initNavigator here.');
+    initNavigator();
+  }, []);
   if (player?.loadingSong && !player.currentSong) {
     return (
       <Box
