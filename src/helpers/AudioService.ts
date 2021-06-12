@@ -133,7 +133,7 @@ class AudioService {
     const v = new Array(bufferLength)
       .fill('')
       .map(
-        e => (e = document.createElement('i')) && section.appendChild(e) && e
+        e => (e = document.createElement('i')) && section?.appendChild(e) && e
       );
     if (this.calculationInterval) {
       clearInterval(this.calculationInterval);
