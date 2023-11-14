@@ -1,2 +1,2 @@
 # tubepwa
-PWA version of the TubeMusic application
+PWA rewrite of [tubemusic](https://github.com/JuhoKon/tubemusic)https://github.com/JuhoKon/tubemusic
